@@ -4,6 +4,7 @@ class AppLocalization {
   static const String chatsPageTitle = 'CHATS';
   static const String feedPageTitle = 'FEED';
   static const String loginPageTitle = 'USER LOGIN';
+  static const String notFoundPageTitle = 'PAGE NOT FOUND';
   static const String postDetailsPageTitle = 'COMMENTS';
   static const String profilePageTitle = 'PROFILE';
 
