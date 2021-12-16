@@ -1,4 +1,4 @@
-import 'package:fire_chat/routing/defined_routes_export.dart';
+import 'package:fire_chat/routing/router.dart';
 import 'package:fire_chat/routing/routes.dart';
 import 'package:fire_chat/theme.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fire Chat',
       theme: customAppTheme(),
+      onGenerateRoute: AppRouter.generateRoute,
       initialRoute: AppRoutes.loginPageRoute,
-      routes: {
-        AppRoutes.chatPageRoute: (context) => const ChatPage(),
-        AppRoutes.homePageRoute: (context) => const HomePage(),
-        AppRoutes.loginPageRoute: (context) => LoginPage(),
-        AppRoutes.postDetailsPageRoute: (context) => const PostDetailsPage(),
-        AppRoutes.profilePageRoute: (context) => const ProfilePage(),
-      },
       debugShowCheckedModeBanner: false,
     );
   }
