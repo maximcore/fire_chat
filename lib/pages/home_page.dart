@@ -34,7 +34,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _isFeedPage() ? AppLocalization.feedPageTitle : AppLocalization.chatsPageTitle,
+          _isFeedPage()
+              ? AppLocalization.feedPageTitle
+              : AppLocalization.chatsPageTitle,
         ),
         actions: [
           IconButton(

@@ -1,5 +1,4 @@
 import 'package:fire_chat/string_constants.dart';
-import 'package:fire_chat/widgets/models/post.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -66,10 +65,6 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            const Post(),
-            const Post(),
-            const Post(),
-            const Post(),
           ],
         ),
       ),
