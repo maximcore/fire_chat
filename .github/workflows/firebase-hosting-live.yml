@@ -21,8 +21,20 @@ jobs:
       - run: flutter pub run build_runner build
       - run: flutter build web --release  -t lib/main_web_preview.dart
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: firebase_hosting_deploy
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FIRE_CHAT_MB }}'
           channelId: live
           projectId: fire-chat-mb
+      - name: Create Awesome Badge
+        uses: schneegans/dynamic-badges-action@v1.1.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: d43c3dc56754a04dad1c8add0d7d49bd
+          filename: firebse-hosting.json
+          label: Deployed
+          message: live
+          namedLogo: Firebase
+          logoColor: orange
+          color: white
