@@ -15,8 +15,11 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
           status: PostsBlocStatus.loading,
         ),
       );
-      final posts = await processPosts();
-      emit(PostsBlocState(status: PostsBlocStatus.ready, posts: posts));
+      late final List<Post>? posts;
+      try {
+        posts = await processPosts();
+      } catch (error) {}
+      emit(PostsBlocState(status: PostsBlocStatus.ready, posts: posts ?? []));
     });
     on<ErrorEvent>((event, emit) {
       emit(
@@ -30,6 +33,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
   Future<List<Post>?> processPosts() async {
     try {
       return await _repository.fetchPosts();
-    } catch (e) {}
+    } catch (error) {
+      print(error);
+    }
   }
 }
