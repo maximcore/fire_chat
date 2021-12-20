@@ -7,59 +7,59 @@ class PostsRepository {
 
   static PostsRepository get instance => _instance;
 
-  Future<List<PostView>> fetchPosts() async {
+  Future<List<PostEntity>> fetchPosts() async {
     await Future<void>.delayed(const Duration(seconds: 1));
     return posts;
   }
 
-  final List<PostView> posts = [
-    PostView(
+  final List<PostEntity> posts = [
+    PostEntity(
       username: 'Maxim',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    PostView(
+    PostEntity(
       username: 'Yura',
       description: 'Hello my name is Yura',
     ),
-    PostView(
+    PostEntity(
       username: 'Artem',
       description: 'Hello my name is Artem',
     ),
-    PostView(
+    PostEntity(
       username: 'Boris',
       description: 'Hello my name is Boris',
     ),
-    PostView(
+    PostEntity(
       username: 'Artem',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
     ),
-    PostView(
+    PostEntity(
       username: 'Artem',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
     ),
-    PostView(
+    PostEntity(
       username: 'Boris',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    PostView(
+    PostEntity(
       username: 'Boris',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    PostView(
+    PostEntity(
       username: 'Maxim',
       description: 'Hello my name is Maxim',
     ),
-    PostView(
+    PostEntity(
       username: 'Maxim',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    PostView(
+    PostEntity(
       username: 'Yura',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',

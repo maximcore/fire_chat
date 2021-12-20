@@ -1,6 +1,8 @@
 import 'package:fire_chat/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_events.dart';
+import 'package:fire_chat/routing/routes.dart';
+import 'package:fire_chat/widgets/post_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,19 +39,24 @@ class FeedPage extends StatelessWidget {
     return ListView.builder(
       itemCount: state.posts!.length,
       itemBuilder: (_, index) {
-        if (index.isOdd) {
-          return state.posts![index];
-            // ..onDoubleTap = (context) {
-            //   context.read<PostsBloc>().add(ErrorEvent());
-            //};
-        } else {
-          return state.posts![index];
-            // ..onDoubleTap = (context) {}
-            // ..color = Colors.grey;
-        }
+        return PostWidget(
+          post: state.posts![index],
+          onTap: () {
+            _goToChatPage(context);
+          },
+          onDoubleTap: () {
+            _simulateError(context);
+          },
+        );
       },
     );
   }
+
+  void _goToChatPage(BuildContext context) =>
+      Navigator.of(context).pushNamed(AppRoutes.chatPageRoute);
+
+  void _simulateError(BuildContext context) =>
+      context.read<PostsBloc>().add(ErrorEvent());
 
   @override
   Widget build(BuildContext context) {

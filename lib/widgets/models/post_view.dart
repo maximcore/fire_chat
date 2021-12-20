@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PostView {
-  const PostView({
+class PostEntity {
+  const PostEntity({
     this.color = Colors.red,
     this.description = '',
     this.username = 'user',

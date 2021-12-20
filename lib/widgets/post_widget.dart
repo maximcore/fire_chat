@@ -5,7 +5,7 @@ class PostWidget extends StatelessWidget {
   const PostWidget({Key? key, required this.post, this.onTap, this.onDoubleTap})
       : super(key: key);
 
-  final PostView post;
+  final PostEntity post;
   final VoidCallback? onTap;
   final VoidCallback? onDoubleTap;
 
