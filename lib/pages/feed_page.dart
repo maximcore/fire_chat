@@ -45,7 +45,9 @@ class FeedPage extends StatelessWidget {
             _goToChatPage(context);
           },
           onDoubleTap: () {
-            _simulateError(context);
+            if (index.isOdd) {
+              _simulateError(context);
+            }
           },
         );
       },
@@ -53,7 +55,7 @@ class FeedPage extends StatelessWidget {
   }
 
   void _goToChatPage(BuildContext context) =>
-      Navigator.of(context).pushNamed(AppRoutes.chatPageRoute);
+      Navigator.of(context).pushNamed(AppRoutes.postDetailsPageRoute);
 
   void _simulateError(BuildContext context) =>
       context.read<PostsBloc>().add(ErrorEvent());
