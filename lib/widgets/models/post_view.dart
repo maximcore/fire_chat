@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PostEntity {
   const PostEntity({
-    this.color = Colors.red,
+    this.color = Colors.grey,
     this.description = '',
     this.username = 'user',
   });

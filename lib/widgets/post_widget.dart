@@ -12,8 +12,8 @@ class PostWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap,
-      onDoubleTap: () => onDoubleTap,
+      onTap: onTap,
+      onDoubleTap: onDoubleTap,
       child: Container(
         margin: const EdgeInsets.only(top: 8, bottom: 8, left: 32, right: 32),
         color: post.color,
