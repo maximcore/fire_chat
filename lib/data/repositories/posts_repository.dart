@@ -1,4 +1,4 @@
-import 'package:fire_chat/widgets/models/post_view.dart';
+import 'package:fire_chat/widgets/models/post_entity.dart';
 
 class PostsRepository {
   PostsRepository._();
@@ -12,7 +12,7 @@ class PostsRepository {
     return posts;
   }
 
-  final List<PostEntity> posts = [
+  final List<PostEntity> posts = const [
     PostEntity(
       username: 'Maxim',
       description:

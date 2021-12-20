@@ -1,4 +1,8 @@
 class AppLocalization {
+  // defaults
+  static const String emptyString = '';
+  static const String username = 'Username';
+
   // Page titles
   static const String chatPageTitle = 'CHAT';
   static const String chatsPageTitle = 'CHATS';
@@ -14,4 +18,9 @@ class AppLocalization {
   // Label text
   static const String loginLabelText = 'Login';
   static const String passwordLabelText = 'Password';
+
+  //
+  static const String tryAgainText = 'Something went wrong, try again';
+  static const String pageNotFoundText = 'Page not found';
+  static const String postDetailsText = 'Tap to see post details';
 }

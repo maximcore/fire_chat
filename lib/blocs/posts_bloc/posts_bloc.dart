@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_events.dart';
 import 'package:fire_chat/data/repositories/posts_repository.dart';
-import 'package:fire_chat/widgets/models/post_view.dart';
+import 'package:fire_chat/widgets/models/post_entity.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
   PostsBloc(this._repository)

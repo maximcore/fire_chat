@@ -13,8 +13,8 @@ class NotFoundPage extends StatelessWidget {
         title: const Text(AppLocalization.notFoundPageTitle),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text('Page with route $pageName not found'),
+      body: const Center(
+        child: Text(AppLocalization.pageNotFoundText),
       ),
     );
   }
