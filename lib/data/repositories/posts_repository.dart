@@ -1,4 +1,4 @@
-import 'package:fire_chat/widgets/models/post.dart';
+import 'package:fire_chat/widgets/models/post_view.dart';
 
 class PostsRepository {
   PostsRepository._();
@@ -7,59 +7,59 @@ class PostsRepository {
 
   static PostsRepository get instance => _instance;
 
-  Future<List<Post>> fetchPosts() async {
+  Future<List<PostView>> fetchPosts() async {
     await Future<void>.delayed(const Duration(seconds: 1));
     return posts;
   }
 
-  final List<Post> posts = [
-    Post(
+  final List<PostView> posts = [
+    PostView(
       username: 'Maxim',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    Post(
+    PostView(
       username: 'Yura',
       description: 'Hello my name is Yura',
     ),
-    Post(
+    PostView(
       username: 'Artem',
       description: 'Hello my name is Artem',
     ),
-    Post(
+    PostView(
       username: 'Boris',
       description: 'Hello my name is Boris',
     ),
-    Post(
+    PostView(
       username: 'Artem',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
     ),
-    Post(
+    PostView(
       username: 'Artem',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
     ),
-    Post(
+    PostView(
       username: 'Boris',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    Post(
+    PostView(
       username: 'Boris',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    Post(
+    PostView(
       username: 'Maxim',
       description: 'Hello my name is Maxim',
     ),
-    Post(
+    PostView(
       username: 'Maxim',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
-    Post(
+    PostView(
       username: 'Yura',
       description:
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',

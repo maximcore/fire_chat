@@ -1,10 +1,10 @@
-import 'package:fire_chat/widgets/models/post.dart';
+import 'package:fire_chat/widgets/post_widget.dart';
 
 enum PostsBlocStatus { initial, loading, ready, error }
 
 class PostsBlocState {
   PostsBlocState({this.posts, required this.status});
 
-  final List<Post>? posts;
+  final List<PostWidget>? posts;
   final PostsBlocStatus status;
 }

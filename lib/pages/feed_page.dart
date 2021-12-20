@@ -38,14 +38,14 @@ class FeedPage extends StatelessWidget {
       itemCount: state.posts!.length,
       itemBuilder: (_, index) {
         if (index.isOdd) {
-          return state.posts![index]
-            ..onDoubleTap = (context) {
-              context.read<PostsBloc>().add(ErrorEvent());
-            };
+          return state.posts![index];
+            // ..onDoubleTap = (context) {
+            //   context.read<PostsBloc>().add(ErrorEvent());
+            //};
         } else {
-          return state.posts![index]
-            ..onDoubleTap = (context) {}
-            ..color = Colors.grey;
+          return state.posts![index];
+            // ..onDoubleTap = (context) {}
+            // ..color = Colors.grey;
         }
       },
     );
