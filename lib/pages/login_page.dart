@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
                       height: 8,
                     ),
                     CustomElevatedButton(
-                      onPressed: () => Navigator.pushNamed(
+                      onPressed: () => Navigator.pushReplacementNamed(
                         context,
                         AppRoutes.homePageRoute,
                       ),
