@@ -1,5 +1,5 @@
 import 'package:fire_chat/string_constants.dart';
-import 'package:fire_chat/widgets/models/post_entity.dart';
+import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
 import 'package:flutter/material.dart';
 
 class PostWidget extends StatelessWidget {

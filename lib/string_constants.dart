@@ -1,5 +1,5 @@
 class AppLocalization {
-  // defaults
+  // Defaults
   static const String emptyString = '';
   static const String username = 'Username';
 
@@ -19,8 +19,9 @@ class AppLocalization {
   static const String loginLabelText = 'Login';
   static const String passwordLabelText = 'Password';
 
-  //
+  // Other text
   static const String tryAgainText = 'Something went wrong, try again';
   static const String pageNotFoundText = 'Page not found';
   static const String postDetailsText = 'Tap to see post details';
+  static const String tapToStartChat = 'Tap to start chat user';
 }

@@ -1,4 +1,5 @@
-import 'package:fire_chat/widgets/models/post_entity.dart';
+
+import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
 
 class PostsRepository {
   PostsRepository._();
