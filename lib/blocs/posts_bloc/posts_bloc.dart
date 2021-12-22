@@ -8,7 +8,7 @@ import 'package:fire_chat/data/repositories/posts_repository.dart';
 import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
-  PostsBloc(this._repository)
+  PostsBloc({required this.repository})
       : super(
           PostsBlocState(status: PostsBlocStatus.initial),
         ) {
@@ -44,11 +44,11 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
     }
   }
 
-  final PostsRepository _repository;
+  final PostsRepository repository;
 
   Future<List<PostEntity>?> processPosts() async {
     try {
-      return await _repository.fetchPosts();
+      return await repository.fetchPosts();
     } catch (error) {
       log(error.toString());
       rethrow;

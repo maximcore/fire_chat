@@ -12,7 +12,7 @@ void main() {
 
 void setup() {
   GetIt.instance.registerSingleton<PostsRepository>(
-    HardcodedPostsRepository(),
+    FakerPostsRepository(),
   );
 }
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fire Chat',
+      title: 'Faker Fire Chat',
       theme: customAppTheme(),
       onGenerateRoute: AppRouter.generateRoute,
       initialRoute: AppRoutes.loginPageRoute,

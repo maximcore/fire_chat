@@ -1,13 +1,34 @@
-
+import 'package:faker/faker.dart';
 import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
 
-class PostsRepository {
-  PostsRepository._();
+abstract class PostsRepository {
+  Future<List<PostEntity>> fetchPosts();
+}
 
-  static final PostsRepository _instance = PostsRepository._();
+class FakerPostsRepository implements PostsRepository {
+  final int maxDescriptionLength = 100;
 
-  static PostsRepository get instance => _instance;
+  @override
+  Future<List<PostEntity>> fetchPosts() async {
+    await Future<void>.delayed(const Duration(seconds: 3));
+    final list = <PostEntity>[];
+    for (var i = 0; i < maxDescriptionLength; i++) {
+      list.add(
+        PostEntity(
+          description: faker.randomGenerator.string(
+            maxDescriptionLength,
+            min: maxDescriptionLength,
+          ),
+          username: faker.internet.userName(),
+        ),
+      );
+    }
+    return list;
+  }
+}
 
+class HardcodedPostsRepository implements PostsRepository {
+  @override
   Future<List<PostEntity>> fetchPosts() async {
     await Future<void>.delayed(const Duration(seconds: 1));
     return posts;
