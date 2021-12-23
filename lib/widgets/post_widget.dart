@@ -27,7 +27,7 @@ class PostWidget extends StatelessWidget {
               children: [
                 const Icon(Icons.account_circle_rounded),
                 Text(
-                  post.username!,
+                  post.username,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -35,7 +35,7 @@ class PostWidget extends StatelessWidget {
               ],
             ),
             Text(
-              post.description!,
+              post.description,
               textAlign: TextAlign.center,
             ),
             const Text(
