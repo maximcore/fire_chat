@@ -1,37 +1,33 @@
-import 'package:fire_chat/routing/routes.dart';
+import 'package:fire_chat/string_constants.dart';
+import 'package:fire_chat/widgets/entities/chat_entity/chat_entity.dart';
 import 'package:flutter/material.dart';
 
-class Chat extends StatelessWidget {
-  const Chat({
-    Key? key,
-    required this.userId,
-  }) : super(key: key);
+class ChatWidget extends StatelessWidget {
+  const ChatWidget({Key? key, required this.chat, this.onTap})
+      : super(key: key);
 
-  final int userId;
+  final ChatEntity chat;
 
-  void _onTap(BuildContext context) => Navigator.pushNamed(
-        context,
-        AppRoutes.chatPageRoute,
-      );
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _onTap(context),
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(top: 8, bottom: 8, left: 32, right: 32),
         color: Colors.grey,
         height: 100,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Icon(
+          children: const [
+            Icon(
               Icons.account_circle_rounded,
             ),
             Text(
-              'Tap to start chat with $userId user',
+              AppLocalization.tapToStartChat,
             ),
-            const Opacity(
+            Opacity(
               opacity: 0,
               child: Icon(
                 Icons.account_circle_rounded,

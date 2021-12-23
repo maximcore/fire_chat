@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_events.dart';
 import 'package:fire_chat/data/repositories/posts_repository.dart';
-import 'package:fire_chat/widgets/models/post_view.dart';
+import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
   PostsBloc(this._repository)
@@ -21,7 +21,9 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
   }
 
   FutureOr<void> handleFetchDataEvent(
-      FetchingDataEvent event, Emitter<PostsBlocState> emit) async {
+    FetchingDataEvent event,
+    Emitter<PostsBlocState> emit,
+  ) async {
     emit(
       PostsBlocState(
         status: PostsBlocStatus.loading,

@@ -1,4 +1,5 @@
-import 'package:fire_chat/widgets/models/post_view.dart';
+import 'package:fire_chat/string_constants.dart';
+import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
 import 'package:flutter/material.dart';
 
 class PostWidget extends StatelessWidget {
@@ -16,7 +17,7 @@ class PostWidget extends StatelessWidget {
       onDoubleTap: onDoubleTap,
       child: Container(
         margin: const EdgeInsets.only(top: 8, bottom: 8, left: 32, right: 32),
-        color: post.color,
+        color: Colors.grey[300],
         height: 160,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -38,7 +39,7 @@ class PostWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const Text(
-              'Tap to see post details',
+              AppLocalization.postDetailsText,
             ),
           ],
         ),

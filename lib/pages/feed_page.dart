@@ -2,6 +2,7 @@ import 'package:fire_chat/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/blocs/posts_bloc/posts_events.dart';
 import 'package:fire_chat/routing/routes.dart';
+import 'package:fire_chat/string_constants.dart';
 import 'package:fire_chat/widgets/post_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ class FeedPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Text(
-          'Something went wrong, try again',
+          AppLocalization.tryAgainText,
           style: TextStyle(
             color: Colors.black,
           ),

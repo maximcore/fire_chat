@@ -43,7 +43,7 @@ class ProfilePage extends StatelessWidget {
                     height: 16,
                   ),
                   const Text(
-                    'Username',
+                    AppLocalization.username,
                     style: TextStyle(color: Colors.white, fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
