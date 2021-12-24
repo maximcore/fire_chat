@@ -1,20 +1,12 @@
 import 'package:fire_chat/config/routing/router.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/config/theme.dart';
-import 'package:fire_chat/domain/repositories/faker_posts_repository.dart';
-import 'package:fire_chat/domain/repositories/posts_repository.dart';
+import 'package:fire_chat/injector.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 void main() {
-  setup();
+  setupFake();
   runApp(const MyApp());
-}
-
-void setup() {
-  GetIt.instance.registerSingleton<PostsRepository>(
-    FakerPostsRepository(),
-  );
 }
 
 class MyApp extends StatelessWidget {
