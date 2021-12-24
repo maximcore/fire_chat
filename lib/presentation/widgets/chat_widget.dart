@@ -1,5 +1,5 @@
-import 'package:fire_chat/string_constants.dart';
-import 'package:fire_chat/widgets/entities/chat_entity/chat_entity.dart';
+import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/domain/entities/chat_entity/chat_entity.dart';
 import 'package:flutter/material.dart';
 
 class ChatWidget extends StatelessWidget {

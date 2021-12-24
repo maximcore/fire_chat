@@ -1,13 +1,8 @@
+import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/repositories/posts_repository.dart';
 
-import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
-
-class PostsRepository {
-  PostsRepository._();
-
-  static final PostsRepository _instance = PostsRepository._();
-
-  static PostsRepository get instance => _instance;
-
+class HardcodedPostsRepository implements PostsRepository {
+  @override
   Future<List<PostEntity>> fetchPosts() async {
     await Future<void>.delayed(const Duration(seconds: 1));
     return posts;

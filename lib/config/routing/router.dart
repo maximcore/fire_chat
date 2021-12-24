@@ -1,5 +1,5 @@
-import 'package:fire_chat/routing/defined_routes_export.dart';
-import 'package:fire_chat/routing/routes.dart';
+import 'package:fire_chat/config/routing/defined_routes_export.dart';
+import 'package:fire_chat/config/routing/routes.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {

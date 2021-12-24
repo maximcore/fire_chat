@@ -5,7 +5,7 @@ import 'package:fire_chat/injector.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  setup();
+  setupFake();
   runApp(const MyApp());
 }
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fire Chat',
+      title: 'Faker Fire Chat',
       theme: customAppTheme(),
       onGenerateRoute: AppRouter.generateRoute,
       initialRoute: AppRoutes.loginPageRoute,

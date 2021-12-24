@@ -1,4 +1,4 @@
-import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'posts_bloc_state.freezed.dart';

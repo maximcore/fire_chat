@@ -1,4 +1,4 @@
-import 'package:fire_chat/string_constants.dart';
+import 'package:fire_chat/core/string_constants.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
