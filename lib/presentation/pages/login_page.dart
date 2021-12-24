@@ -1,6 +1,6 @@
-import 'package:fire_chat/routing/routes.dart';
-import 'package:fire_chat/string_constants.dart';
-import 'package:fire_chat/widgets/common/custom_elevated_button.dart';
+import 'package:fire_chat/config/routing/routes.dart';
+import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {

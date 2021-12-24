@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:fire_chat/blocs/posts_bloc/posts_bloc_state.dart';
-import 'package:fire_chat/blocs/posts_bloc/posts_events.dart';
-import 'package:fire_chat/data/repositories/posts_repository.dart';
-import 'package:fire_chat/widgets/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/repositories/posts_repository.dart';
+import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
   PostsBloc({required this.repository})
