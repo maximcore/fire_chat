@@ -55,6 +55,9 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   Card(
                     margin: const EdgeInsets.all(16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [

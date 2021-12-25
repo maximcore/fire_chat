@@ -9,7 +9,7 @@ ThemeData customAppTheme() {
       onError: Color(0xffe33434),
       brightness: Brightness.light,
       onSecondary: Color(0xffffffff),
-      onSurface: Color(0xffffffff),
+      onSurface: Color(0xffdbd3d3),
       onPrimary: Color(0xffffffff),
       primary: Color(0xffef7f52),
       secondary: Color(0xFF8ac185),
