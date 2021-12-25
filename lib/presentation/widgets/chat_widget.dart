@@ -15,8 +15,8 @@ class ChatWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        color: Theme.of(context).cardColor,
         margin: const EdgeInsets.only(top: 8, bottom: 8, left: 32, right: 32),
-        color: Colors.grey,
         height: 100,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

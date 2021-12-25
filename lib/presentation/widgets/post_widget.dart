@@ -17,7 +17,7 @@ class PostWidget extends StatelessWidget {
       onDoubleTap: onDoubleTap,
       child: Container(
         margin: const EdgeInsets.only(top: 8, bottom: 8, left: 32, right: 32),
-        color: Colors.grey[300],
+        color: Theme.of(context).cardColor,
         height: 160,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -28,9 +28,6 @@ class PostWidget extends StatelessWidget {
                 const Icon(Icons.account_circle_rounded),
                 Text(
                   post.username,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
               ],
             ),

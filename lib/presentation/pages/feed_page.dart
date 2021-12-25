@@ -17,9 +17,6 @@ class FeedPage extends StatelessWidget {
       children: [
         const Text(
           AppLocalization.tryAgainText,
-          style: TextStyle(
-            color: Colors.black,
-          ),
           textAlign: TextAlign.center,
         ),
         Column(
