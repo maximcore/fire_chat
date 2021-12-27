@@ -2,4 +2,4 @@ abstract class ThemeEvent {}
 
 class ChangeThemeEvent extends ThemeEvent {}
 
-class ChangeSystemThemeEvent extends ThemeEvent {}
+class SwitchSystemThemeEvent extends ThemeEvent {}

@@ -1,4 +1,3 @@
-import 'package:fire_chat/config/theme.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
@@ -37,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                         ChangeThemeEvent(),
                       );
                 },
-                icon: isDarkTheme(context)
+                icon: state.isLightThemeMode
                     ? const FaIcon(
                         FontAwesomeIcons.moon,
                       )
@@ -102,7 +101,9 @@ class ProfilePage extends StatelessWidget {
                         ),
                         Switch(
                           onChanged: (bool value) {
-                            context.read<ThemeBloc>().add(ChangeSystemThemeEvent());
+                            context.read<ThemeBloc>().add(
+                                  SwitchSystemThemeEvent(),
+                                );
                           },
                           value: state.isSystemThemeMode,
                         ),

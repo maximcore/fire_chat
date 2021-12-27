@@ -1,16 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'theme_bloc_state.freezed.dart';
 
-enum ThemeBlocMode {light, dark, system}
-
 @freezed
 class ThemeBlocState with _$ThemeBlocState {
   factory ThemeBlocState({
-    required ThemeBlocMode themeMode,
+    required ThemeMode themeMode,
   }) = _ThemeBlocState;
 
   const ThemeBlocState._();
 
-  bool get isSystemThemeMode => themeMode == ThemeBlocMode.system;
+  bool get isSystemThemeMode => themeMode == ThemeMode.system;
+
+  bool get isDarkThemeMode => themeMode == ThemeMode.dark;
+
+  bool get isLightThemeMode => themeMode == ThemeMode.light;
 }

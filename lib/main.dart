@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 Future<void> main() async {
   await setup();
   runApp(
-    const FireChatAppManager(
+    const ThemeBlocWrapper(
       child: FireChatApp(),
     ),
   );
@@ -22,16 +22,14 @@ class FireChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeBlocState>(
-      bloc: BlocProvider.of<ThemeBloc>(context),
-      builder: (context, state) {
+    return BlocSelector<ThemeBloc, ThemeBlocState, ThemeMode>(
+      selector: (state) => state.themeMode,
+      builder: (context, mode) {
         return MaterialApp(
           title: 'Fire Chat',
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: state.isSystemThemeMode
-              ? ThemeMode.system
-              : (state.themeMode == ThemeBlocMode.light ? ThemeMode.light : ThemeMode.dark),
+          theme: CustomAppTheme.lightTheme,
+          darkTheme: CustomAppTheme.darkTheme,
+          themeMode: mode,
           onGenerateRoute: AppRouter.generateRoute,
           initialRoute: AppRoutes.loginPageRoute,
           debugShowCheckedModeBanner: false,
