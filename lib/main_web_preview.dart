@@ -9,33 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
-void main() {
-  setup();
+Future<void> main() async {
+  await setup();
   runApp(
     DevicePreview(
-      builder: (context) => BlocProvider<ThemeBloc>(
-        create: (context) {
-          final box = GetIt.instance.get<Box>();
-          final name = box.get(themeMode) as String;
-          late final ThemeMode mode;
-          switch (name) {
-            case 'system':
-              mode = ThemeMode.system;
-              break;
-            case 'light':
-              mode = ThemeMode.light;
-              break;
-            case 'dark':
-              mode = ThemeMode.dark;
-              break;
-            default:
-              mode = ThemeMode.system;
-          }
-          return ThemeBloc(box: box, mode: mode);
-        },
-        child: const ThemeBlocWrapper(
-          child: FireChatApp(),
-        ),
+      builder: (_) => const ThemeBlocWrapper(
+        child: FireChatApp(),
       ),
     ),
   );

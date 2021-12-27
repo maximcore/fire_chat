@@ -6,7 +6,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> setup() async {
   await Hive.initFlutter();
-
   GetIt.instance.registerSingleton<Box>(
     await Hive.openBox<String>(themeMode),
   );
