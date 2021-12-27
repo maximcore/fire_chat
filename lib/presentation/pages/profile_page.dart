@@ -1,3 +1,4 @@
+import 'package:fire_chat/config/theme.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
@@ -25,76 +26,98 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<ThemeBloc>(context);
     return BlocBuilder<ThemeBloc, ThemeBlocState>(
-        bloc: bloc,
-        builder: (_, state) {
-          return Scaffold(
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    context.read<ThemeBloc>().add(
-                          ChangeThemeEvent(),
-                        );
-                  },
-                  icon: state.status == ThemeBlocStatus.light
-                      ? const FaIcon(
-                          FontAwesomeIcons.moon,
-                        )
-                      : const FaIcon(
-                          FontAwesomeIcons.sun,
-                        ),
+      bloc: bloc,
+      builder: (_, state) {
+        return Scaffold(
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  context.read<ThemeBloc>().add(
+                        ChangeThemeEvent(),
+                      );
+                },
+                icon: isDarkTheme(context)
+                    ? const FaIcon(
+                        FontAwesomeIcons.moon,
+                      )
+                    : const FaIcon(
+                        FontAwesomeIcons.sun,
+                      ),
+              ),
+            ],
+            title: const Text(AppLocalization.profilePageTitle),
+            centerTitle: true,
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Card(
+                  margin: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Icon(
+                        Icons.person_pin,
+                        size: 128,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Text(
+                        AppLocalization.username,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      _placeholderContainer(context),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      _placeholderContainer(context),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      _placeholderContainer(context),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-              title: const Text(AppLocalization.profilePageTitle),
-              centerTitle: true,
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Card(
-                    margin: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.person_pin,
-                          size: 128,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
                         const Text(
-                          AppLocalization.username,
-                          textAlign: TextAlign.center,
+                          AppLocalization.useSystemThemeMode,
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        _placeholderContainer(context),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        _placeholderContainer(context),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        _placeholderContainer(context),
-                        const SizedBox(
-                          height: 16,
+                        Switch(
+                          onChanged: (bool value) {
+                            context.read<ThemeBloc>().add(ChangeSystemThemeEvent());
+                          },
+                          value: state.isSystemThemeMode,
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
+                    const Text(
+                      AppLocalization.useSystemThemeModeDescription,
+                    ),
+                  ],
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

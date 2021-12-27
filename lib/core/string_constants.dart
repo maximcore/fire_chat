@@ -14,6 +14,8 @@ class AppLocalization {
 
   // Button text
   static const String loginButtonText = 'LOGIN';
+  static const String loginWithGoogleButtonText = 'LOGIN WITH GOOGLE';
+  static const String loginWithAppleButtonText = 'LOGIN WITH APPLE';
 
   // Label text
   static const String loginLabelText = 'Login';
@@ -24,4 +26,6 @@ class AppLocalization {
   static const String pageNotFoundText = 'Page not found';
   static const String postDetailsText = 'Tap to see post details';
   static const String tapToStartChat = 'Tap to start chat user';
+  static const String useSystemThemeMode = 'Use system theme mode';
+  static const String useSystemThemeModeDescription = 'This will force system theme mode';
 }

@@ -7,6 +7,7 @@ class CustomElevatedButton extends StatelessWidget {
     required this.child,
     required this.padding,
     required this.radius,
+    this.color,
     this.height = 50,
   }) : super(key: key);
 
@@ -15,6 +16,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double padding;
   final double radius;
   final double height;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +25,11 @@ class CustomElevatedButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius),
+        style: ElevatedButton.styleFrom(
+          primary: color ?? Theme.of(context).primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              radius,
             ),
           ),
         ),

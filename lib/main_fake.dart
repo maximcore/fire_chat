@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Faker Fire Chat',
-      theme: customAppTheme(),
+      theme: lightTheme,
       onGenerateRoute: AppRouter.generateRoute,
       initialRoute: AppRoutes.loginPageRoute,
       debugShowCheckedModeBanner: false,
