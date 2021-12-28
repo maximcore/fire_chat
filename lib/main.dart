@@ -1,7 +1,7 @@
-import 'package:fire_chat/config/theme_bloc_wrapper.dart';
 import 'package:fire_chat/config/routing/router.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/config/theme.dart';
+import 'package:fire_chat/config/theme_bloc_wrapper.dart';
 import 'package:fire_chat/injector.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
