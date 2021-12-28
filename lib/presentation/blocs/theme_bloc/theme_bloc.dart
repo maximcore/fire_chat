@@ -26,18 +26,28 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
   ) {
     if (!state.isSystemThemeMode) {
       if (state.isLightThemeMode) {
-        box.put(
-          themeMode,
-          darkThemeMode,
-        );
+        box
+          ..put(
+            themeMode,
+            darkThemeMode,
+          )
+          ..put(
+            lastSavedNonSystemMode,
+            darkThemeMode,
+          );
         emit(
           ThemeBlocState(themeMode: ThemeMode.dark),
         );
       } else {
-        box.put(
-          themeMode,
-          lightThemeMode,
-        );
+        box
+          ..put(
+            themeMode,
+            lightThemeMode,
+          )
+          ..put(
+            lastSavedNonSystemMode,
+            lightThemeMode,
+          );
         emit(
           ThemeBlocState(themeMode: ThemeMode.light),
         );
@@ -58,12 +68,17 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
         ThemeBlocState(themeMode: ThemeMode.system),
       );
     } else {
+      final lastNonSystemMode = box.get(lastSavedNonSystemMode) as String?;
       box.put(
         themeMode,
-        lightThemeMode,
+        lastNonSystemMode ?? ThemeMode.light.name,
       );
       emit(
-        ThemeBlocState(themeMode: ThemeMode.light),
+        ThemeBlocState(
+          themeMode: ThemeMode.values.byName(
+            lastNonSystemMode ?? ThemeMode.light.name,
+          ),
+        ),
       );
     }
   }
