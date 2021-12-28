@@ -14,7 +14,7 @@ Future<void> main() async {
   runApp(
     DevicePreview(
       builder: (_) => const ThemeBlocWrapper(
-        child: FireChatApp(),
+        child: DynamicThemeApp(),
       ),
     ),
   );
