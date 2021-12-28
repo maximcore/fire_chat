@@ -9,6 +9,83 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
+  void handleChangeThemeEvent(BuildContext context) {
+    context.read<ThemeBloc>().add(
+          ChangeThemeEvent(),
+        );
+  }
+
+  void handleSwitchSystemThemeEvent(BuildContext context) {
+    context.read<ThemeBloc>().add(
+          SwitchSystemThemeEvent(),
+        );
+  }
+
+  Widget _profileCard(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Icon(
+            Icons.person_pin,
+            size: 128,
+            color: Theme.of(context).primaryColor,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const Text(
+            AppLocalization.username,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          _placeholderContainer(context),
+          const SizedBox(
+            height: 16,
+          ),
+          _placeholderContainer(context),
+          const SizedBox(
+            height: 16,
+          ),
+          _placeholderContainer(context),
+          const SizedBox(
+            height: 16,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _systemThemeSettings(BuildContext context, ThemeBlocState state) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              AppLocalization.useSystemThemeMode,
+            ),
+            Switch(
+              onChanged: (bool value) {
+                handleSwitchSystemThemeEvent(context);
+              },
+              value: state.isSystemThemeMode,
+            ),
+          ],
+        ),
+        const Text(
+          AppLocalization.useSystemThemeModeDescription,
+        ),
+      ],
+    );
+  }
+
   Widget _placeholderContainer(BuildContext context) {
     return Container(
       color: Theme.of(context).primaryColor,
@@ -32,9 +109,7 @@ class ProfilePage extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  context.read<ThemeBloc>().add(
-                        ChangeThemeEvent(),
-                      );
+                  handleChangeThemeEvent(context);
                 },
                 icon: state.isLightThemeMode
                     ? const FaIcon(
@@ -53,67 +128,8 @@ class ProfilePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Card(
-                  margin: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Icon(
-                        Icons.person_pin,
-                        size: 128,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Text(
-                        AppLocalization.username,
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      _placeholderContainer(context),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      _placeholderContainer(context),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      _placeholderContainer(context),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                    ],
-                  ),
-                ),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          AppLocalization.useSystemThemeMode,
-                        ),
-                        Switch(
-                          onChanged: (bool value) {
-                            context.read<ThemeBloc>().add(
-                                  SwitchSystemThemeEvent(),
-                                );
-                          },
-                          value: state.isSystemThemeMode,
-                        ),
-                      ],
-                    ),
-                    const Text(
-                      AppLocalization.useSystemThemeModeDescription,
-                    ),
-                  ],
-                ),
+                _profileCard(context),
+                _systemThemeSettings(context, state),
               ],
             ),
           ),
