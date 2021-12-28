@@ -28,4 +28,8 @@ class AppLocalization {
   static const String tapToStartChat = 'Tap to start chat user';
   static const String useSystemThemeMode = 'Use system theme mode';
   static const String useSystemThemeModeDescription = 'This will force system theme mode';
+
+  // Navbar button names
+  static const String feedLabel = 'Feed';
+  static const String chatsLabel = 'Chats';
 }

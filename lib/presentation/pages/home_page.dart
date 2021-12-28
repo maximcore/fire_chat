@@ -19,9 +19,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentPageIndex = 0;
 
-  final String _feedLabel = 'Feed';
-  final String _chatsLabel = 'Chats';
-
   final List<Widget> _pages = [
     const FeedPage(),
     const ChatsPage(),
@@ -69,11 +66,11 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.rss_feed_rounded),
-            label: _feedLabel,
+            label: AppLocalization.feedLabel,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.chat),
-            label: _chatsLabel,
+            label: AppLocalization.chatsLabel,
           ),
         ],
       ),
