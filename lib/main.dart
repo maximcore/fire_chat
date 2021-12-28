@@ -1,4 +1,4 @@
-import 'package:fire_chat/config/fire_chat_app_manager.dart';
+import 'package:fire_chat/config/theme_bloc_wrapper.dart';
 import 'package:fire_chat/config/routing/router.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/config/theme.dart';

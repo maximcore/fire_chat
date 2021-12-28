@@ -1,5 +1,5 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:fire_chat/config/fire_chat_app_manager.dart';
+import 'package:fire_chat/config/theme_bloc_wrapper.dart';
 import 'package:fire_chat/core/constants.dart';
 import 'package:fire_chat/injector.dart';
 import 'package:fire_chat/main.dart';
