@@ -69,14 +69,15 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
       );
     } else {
       final lastNonSystemMode = box.get(lastSavedNonSystemMode) as String?;
+      final finalSystemMode = lastNonSystemMode ?? ThemeMode.light.name;
       box.put(
         themeMode,
-        lastNonSystemMode ?? ThemeMode.light.name,
+        finalSystemMode,
       );
       emit(
         ThemeBlocState(
           themeMode: ThemeMode.values.byName(
-            lastNonSystemMode ?? ThemeMode.light.name,
+            finalSystemMode,
           ),
         ),
       );
