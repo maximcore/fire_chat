@@ -18,13 +18,13 @@ class ThemeBlocWrapper extends StatelessWidget {
         final name = box.get(themeMode) as String?;
         late final ThemeMode mode;
         switch (name) {
-          case 'system':
+          case systemThemeMode:
             mode = ThemeMode.system;
             break;
-          case 'light':
+          case lightThemeMode:
             mode = ThemeMode.light;
             break;
-          case 'dark':
+          case darkThemeMode:
             mode = ThemeMode.dark;
             break;
           default:
