@@ -9,13 +9,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
-  void handleChangeThemeEvent(BuildContext context) {
+  void _handleChangeThemeEvent(BuildContext context) {
     context.read<ThemeBloc>().add(
           ChangeThemeEvent(),
         );
   }
 
-  void handleSwitchSystemThemeEvent(BuildContext context) {
+  void _handleSwitchSystemThemeEvent(BuildContext context) {
     context.read<ThemeBloc>().add(
           SwitchSystemThemeEvent(),
         );
@@ -73,7 +73,7 @@ class ProfilePage extends StatelessWidget {
             ),
             Switch(
               onChanged: (bool value) {
-                handleSwitchSystemThemeEvent(context);
+                _handleSwitchSystemThemeEvent(context);
               },
               value: state.isSystemThemeMode,
             ),
@@ -109,7 +109,7 @@ class ProfilePage extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  handleChangeThemeEvent(context);
+                  _handleChangeThemeEvent(context);
                 },
                 icon: state.isLightThemeMode
                     ? const FaIcon(
