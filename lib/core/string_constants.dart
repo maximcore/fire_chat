@@ -29,7 +29,7 @@ class AppLocalization {
   static const String useSystemThemeMode = 'Use system theme mode';
   static const String useSystemThemeModeDescription = 'This will force system theme mode';
 
-  // Navbar button names
+  // Navbar button titles
   static const String feedLabel = 'Feed';
   static const String chatsLabel = 'Chats';
 }

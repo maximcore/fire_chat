@@ -63,13 +63,13 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentPageIndex,
         onTap: _onNavbarItemTap,
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.rss_feed_rounded),
+            icon: Icon(Icons.rss_feed_rounded),
             label: AppLocalization.feedLabel,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.chat),
+            icon: Icon(Icons.chat),
             label: AppLocalization.chatsLabel,
           ),
         ],
