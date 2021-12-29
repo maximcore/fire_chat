@@ -48,9 +48,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<ThemeBloc>(context);
     return BlocBuilder<ThemeBloc, ThemeBlocState>(
-      bloc: bloc,
       builder: (_, state) {
         return Scaffold(
           appBar: AppBar(

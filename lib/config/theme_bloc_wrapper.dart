@@ -15,7 +15,7 @@ class ThemeBlocWrapper extends StatelessWidget {
     final box = GetIt.instance.get<Box>();
     return BlocProvider<ThemeBloc>(
       create: (context) {
-        final name = box.get(themeMode) as String?;
+        final name = box.get(StorageKeys.themeModeHiveKey) as String?;
         late final ThemeMode mode;
         switch (name) {
           case systemThemeMode:

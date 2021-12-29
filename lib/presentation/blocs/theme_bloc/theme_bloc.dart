@@ -28,11 +28,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
       if (state.isLightThemeMode) {
         box
           ..put(
-            themeMode,
+            StorageKeys.themeModeHiveKey,
             darkThemeMode,
           )
           ..put(
-            lastSavedNonSystemMode,
+            StorageKeys.lastSavedNonSystemModeHiveKey,
             darkThemeMode,
           );
         emit(
@@ -41,11 +41,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
       } else {
         box
           ..put(
-            themeMode,
+            StorageKeys.themeModeHiveKey,
             lightThemeMode,
           )
           ..put(
-            lastSavedNonSystemMode,
+            StorageKeys.lastSavedNonSystemModeHiveKey,
             lightThemeMode,
           );
         emit(
@@ -61,17 +61,17 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
   ) {
     if (!state.isSystemThemeMode) {
       box.put(
-        themeMode,
+        StorageKeys.themeModeHiveKey,
         systemThemeMode,
       );
       emit(
         ThemeBlocState(themeMode: ThemeMode.system),
       );
     } else {
-      final lastNonSystemMode = box.get(lastSavedNonSystemMode) as String?;
+      final lastNonSystemMode = box.get(StorageKeys.lastSavedNonSystemModeHiveKey) as String?;
       final finalSystemMode = lastNonSystemMode ?? ThemeMode.light.name;
       box.put(
-        themeMode,
+        StorageKeys.themeModeHiveKey,
         finalSystemMode,
       );
       emit(

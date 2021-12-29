@@ -1,6 +1,8 @@
 // Hive box key for theme
-const String themeMode = 'appThemeMode';
-const String lastSavedNonSystemMode = 'lastSavedNonSystem';
+class StorageKeys {
+  static const String themeModeHiveKey = 'appThemeMode';
+  static const String lastSavedNonSystemModeHiveKey = 'lastSavedNonSystem';
+}
 
 // Theme modes
 const String lightThemeMode = 'light';
