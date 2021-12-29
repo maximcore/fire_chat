@@ -1,7 +1,6 @@
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
-import 'package:fire_chat/presentation/blocs/theme_bloc/theme_events.dart';
 import 'package:fire_chat/presentation/widgets/profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,18 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
-
-  void _handleChangeThemeEvent(BuildContext context) {
-    context.read<ThemeBloc>().add(
-          ChangeThemeEvent(),
-        );
-  }
-
-  void _handleSwitchSystemThemeEvent(BuildContext context) {
-    context.read<ThemeBloc>().add(
-          SwitchSystemThemeEvent(),
-        );
-  }
 
   Widget _systemThemeSettings(BuildContext context, ThemeBlocState state) {
     return Column(
@@ -33,7 +20,7 @@ class ProfilePage extends StatelessWidget {
             ),
             Switch(
               onChanged: (bool value) {
-                _handleSwitchSystemThemeEvent(context);
+                context.read<ThemeBloc>().toggleSystem();
               },
               value: state.isSystemThemeMode,
             ),
@@ -55,7 +42,7 @@ class ProfilePage extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  _handleChangeThemeEvent(context);
+                  context.read<ThemeBloc>().toggleBrightness();
                 },
                 icon: state.isLightThemeMode
                     ? const FaIcon(

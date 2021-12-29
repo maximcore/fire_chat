@@ -83,4 +83,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
       );
     }
   }
+
+  void toggleBrightness() => add(ChangeThemeEvent());
+
+  void toggleSystem() => add(SwitchSystemThemeEvent());
 }
