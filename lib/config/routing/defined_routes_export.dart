@@ -6,10 +6,3 @@ export 'package:fire_chat/presentation/pages/login_page.dart';
 export 'package:fire_chat/presentation/pages/not_found_page.dart';
 export 'package:fire_chat/presentation/pages/post_details_page.dart';
 export 'package:fire_chat/presentation/pages/profile_page.dart';
-
-
-
-
-
-
-

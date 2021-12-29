@@ -17,9 +17,6 @@ class FeedPage extends StatelessWidget {
       children: [
         const Text(
           AppLocalization.tryAgainText,
-          style: TextStyle(
-            color: Colors.black,
-          ),
           textAlign: TextAlign.center,
         ),
         Column(
@@ -63,7 +60,6 @@ class FeedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<PostsBloc>(context);
     return LayoutBuilder(
       builder: (_, constraints) {
         return ConstrainedBox(
@@ -71,7 +67,6 @@ class FeedPage extends StatelessWidget {
             minHeight: constraints.maxHeight,
           ),
           child: BlocBuilder<PostsBloc, PostsBlocState>(
-            bloc: bloc,
             builder: (_, state) {
               switch (state.status) {
                 case PostsBlocStatus.initial:

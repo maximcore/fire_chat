@@ -16,11 +16,6 @@ class PostDetailsPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return const Padding(
             padding: EdgeInsets.all(8),
-            child: Text(
-              'lalalalalalalalalalalalalalalalalalala',
-              style: TextStyle(fontSize: 24),
-              textAlign: TextAlign.center,
-            ),
           );
         },
       ),

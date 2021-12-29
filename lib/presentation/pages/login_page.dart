@@ -75,7 +75,9 @@ class LoginPage extends StatelessWidget {
                       ),
                       padding: 50,
                       radius: 16,
-                      child: const Text(AppLocalization.loginButtonText),
+                      child: const Text(
+                        AppLocalization.loginButtonText,
+                      ),
                     ),
                   ],
                 ),
