@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
-import 'package:fire_chat/domain/repositories/posts_repository.dart';
+import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 
 class FakerPostsRepository implements PostsRepository {
   static const int _maxDescriptionLength = 100;
