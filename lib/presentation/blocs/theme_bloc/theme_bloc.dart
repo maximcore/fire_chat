@@ -68,7 +68,9 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeBlocState> {
         ThemeBlocState(themeMode: ThemeMode.system),
       );
     } else {
-      final lastNonSystemMode = box.get(StorageKeys.lastSavedNonSystemModeHiveKey) as String?;
+      final lastNonSystemMode = box.get(
+        StorageKeys.lastSavedNonSystemModeHiveKey,
+      ) as String?;
       final finalSystemMode = lastNonSystemMode ?? ThemeMode.light.name;
       box.put(
         StorageKeys.themeModeHiveKey,
