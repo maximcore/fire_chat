@@ -4,6 +4,7 @@ class AppLocalization {
   static const String username = 'Username';
 
   // Page titles
+  static const String editProfilePageTitle = 'EDIT PROFILE';
   static const String chatPageTitle = 'CHAT';
   static const String chatsPageTitle = 'CHATS';
   static const String feedPageTitle = 'FEED';
@@ -16,6 +17,7 @@ class AppLocalization {
   static const String loginButtonText = 'LOGIN';
   static const String loginWithGoogleButtonText = 'LOGIN WITH GOOGLE';
   static const String loginWithAppleButtonText = 'LOGIN WITH APPLE';
+  static const String editProfile = 'Edit profile';
 
   // Label text
   static const String loginLabelText = 'Login';
@@ -27,9 +29,13 @@ class AppLocalization {
   static const String postDetailsText = 'Tap to see post details';
   static const String tapToStartChat = 'Tap to start chat user';
   static const String useSystemThemeMode = 'Use system theme mode';
-  static const String useSystemThemeModeDescription = 'This will force system theme mode';
+  static const String useSystemThemeModeDescription =
+      'This will force system theme mode';
 
   // Navbar button titles
   static const String feedLabel = 'Feed';
   static const String chatsLabel = 'Chats';
+
+  // Dialogs, snackbars, etc
+  static const String changesSaved = 'Saved!';
 }
