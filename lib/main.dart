@@ -1,17 +1,14 @@
+import 'package:fire_chat/config/auth_bloc_wrapper.dart';
 import 'package:fire_chat/config/routing/router.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/config/theme.dart';
 import 'package:fire_chat/config/theme_bloc_wrapper.dart';
-import 'package:fire_chat/domain/repositories/user_repository/user_repository.dart';
 import 'package:fire_chat/injector.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
-import 'package:fire_chat/presentation/blocs/user_bloc/user_bloc.dart';
-import 'package:fire_chat/presentation/blocs/user_bloc/user_bloc_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 Future<void> main() async {
   await setup();
@@ -26,7 +23,9 @@ class FireChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ThemeBlocWrapper(
-      child: DynamicThemeApp(),
+      child: AuthBlocWrapper(
+        child: DynamicThemeApp(),
+      ),
     );
   }
 }
@@ -36,24 +35,18 @@ class DynamicThemeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userRepository = GetIt.instance.get<UserRepository>();
     return BlocSelector<ThemeBloc, ThemeBlocState, ThemeMode>(
       selector: (state) => state.themeMode,
       builder: (context, mode) {
-        return BlocProvider<UserBloc>(
-          create: (context) => UserBloc(
-            repository: userRepository,
-          ),
-          child: MaterialApp(
-            title: 'Fire Chat',
-            theme: CustomAppTheme.lightTheme,
-            darkTheme: CustomAppTheme.darkTheme,
-            themeMode: mode,
-            onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: AppRoutes.loginPageRoute,
-            debugShowCheckedModeBanner: false,
-            useInheritedMediaQuery: kIsWeb,
-          ),
+        return MaterialApp(
+          title: 'Fire Chat',
+          theme: CustomAppTheme.lightTheme,
+          darkTheme: CustomAppTheme.darkTheme,
+          themeMode: mode,
+          onGenerateRoute: AppRouter.generateRoute,
+          initialRoute: AppRoutes.loginPageRoute,
+          debugShowCheckedModeBanner: false,
+          useInheritedMediaQuery: kIsWeb,
         );
       },
     );

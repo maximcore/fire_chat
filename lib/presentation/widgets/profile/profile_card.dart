@@ -1,9 +1,7 @@
-import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
-import 'package:fire_chat/domain/repositories/user_repository/user_repository.dart';
 import 'package:fire_chat/presentation/widgets/common/placeholder_container.dart';
+import 'package:fire_chat/presentation/widgets/edit_profile_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
@@ -23,8 +21,14 @@ class ProfileCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.network(
-            user!.profilePictureUrl,
+          const SizedBox(
+            height: 16,
+          ),
+          CircleAvatar(
+            radius: 100,
+            foregroundImage: Image.network(
+              user!.profilePictureUrl,
+            ).image,
           ),
           const SizedBox(
             height: 16,
@@ -45,6 +49,10 @@ class ProfileCard extends StatelessWidget {
             height: 16,
           ),
           const PlaceholderContainer(),
+          const SizedBox(
+            height: 16,
+          ),
+          const EditProfileButton(),
           const SizedBox(
             height: 16,
           ),
