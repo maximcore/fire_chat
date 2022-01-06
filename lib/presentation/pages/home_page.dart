@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
     final repository = GetIt.instance.get<PostsRepository>();
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           _isFeedPage()
               ? AppLocalization.feedPageTitle
