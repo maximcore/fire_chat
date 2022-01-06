@@ -1,24 +1,24 @@
 import 'package:fire_chat/core/constants.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/user_repository/user_repository.dart';
-import 'package:fire_chat/presentation/blocs/user_bloc/user_bloc_events.dart';
-import 'package:fire_chat/presentation/blocs/user_bloc/user_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_events.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
-class AuthBloc extends Bloc<UserBlocEvents, UserBlocState> {
+class AuthBloc extends Bloc<AuthBlocEvents, AuthBlocState> {
   AuthBloc({
     required this.repository,
+    // TODO(Maxim): Rename editedUser parameter
     UserEntity? editedUser,
   }) : super(
-          UserBlocState(user: editedUser, status: UserBlocStatus.logged),
+          AuthBlocState(user: editedUser, status: AuthBlocStatus.signedIn),
         ) {
     final box = GetIt.instance<Box>();
-    on<LoginUserEvent>((event, emit) async {
-      final fetchedUser = await repository.readUser();
-      late final UserEntity user;
-      if (fetchedUser == null) {
+    on<LoginEvent>((event, emit) async {
+      var user = await repository.readUser();
+      if (user == null) {
         user = UserEntity(
           username: 'DefaultUsername${DateTime.now()}',
           email: 'defaultuser@gmail.com',
@@ -29,39 +29,17 @@ class AuthBloc extends Bloc<UserBlocEvents, UserBlocState> {
         await box.put(StorageKeys.userHiveKey, user);
       }
       emit(
-        UserBlocState(
-          status: UserBlocStatus.logged,
+        AuthBlocState(
+          status: AuthBlocStatus.signedIn,
           user: user,
         ),
       );
     });
 
-    on<LogoutUserEvent>((event, emit) {
+    on<LogoutEvent>((event, emit) {
       emit(
-        UserBlocState(
-          status: UserBlocStatus.loggedOut,
-        ),
-      );
-    });
-
-    on<DeleteUserEvent>((event, emit) {
-      repository.deleteUser();
-      emit(
-        UserBlocState(
-          status: UserBlocStatus.loggedOut,
-        ),
-      );
-    });
-
-    on<EditUserEvent>((event, emit) async {
-      // TODO(Maxim): handle case user == null
-      await repository.editUser(editedUser!);
-      final user = await repository.readUser();
-
-      emit(
-        UserBlocState(
-          status: UserBlocStatus.logged,
-          user: user,
+        AuthBlocState(
+          status: AuthBlocStatus.signedOut,
         ),
       );
     });
@@ -69,11 +47,7 @@ class AuthBloc extends Bloc<UserBlocEvents, UserBlocState> {
 
   UserRepository repository;
 
-  void login() => add(LoginUserEvent());
+  void login() => add(LoginEvent());
 
-  void logout() => add(LogoutUserEvent());
-
-  void edit() => add(EditUserEvent());
-
-  void delete() => add(DeleteUserEvent());
+  void logout() => add(LogoutEvent());
 }

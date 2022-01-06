@@ -1,10 +1,5 @@
-abstract class UserBlocEvents {}
+abstract class AuthBlocEvents {}
 
-class LoginUserEvent extends UserBlocEvents {}
+class LoginEvent extends AuthBlocEvents {}
 
-class LogoutUserEvent extends UserBlocEvents {}
-
-class EditUserEvent extends UserBlocEvents {}
-
-class DeleteUserEvent extends UserBlocEvents {}
-
+class LogoutEvent extends AuthBlocEvents {}
