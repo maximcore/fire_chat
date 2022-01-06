@@ -9,8 +9,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> setup() async {
   await Hive.initFlutter();
+  Hive.registerAdapter(UserEntityAdapter());
   GetIt.instance.registerSingleton<Box>(
-    await Hive.openBox<String>(StorageKeys.themeModeHiveKey),
+    await Hive.openBox<dynamic>(StorageKeys.themeModeHiveKey),
   );
 
   GetIt.instance.registerSingleton<UserRepository>(
