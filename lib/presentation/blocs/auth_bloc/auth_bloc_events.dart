@@ -1,5 +1,5 @@
-abstract class AuthBlocEvents {}
+abstract class AuthBlocEvent {}
 
-class LoginEvent extends AuthBlocEvents {}
+class LoginEvent extends AuthBlocEvent {}
 
-class LogoutEvent extends AuthBlocEvents {}
+class LogoutEvent extends AuthBlocEvent {}

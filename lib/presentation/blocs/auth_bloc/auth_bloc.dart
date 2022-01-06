@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
-class AuthBloc extends Bloc<AuthBlocEvents, AuthBlocState> {
+class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   AuthBloc({
     required this.repository,
     // TODO(Maxim): Rename editedUser parameter
