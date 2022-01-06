@@ -1,8 +1,7 @@
 import 'package:fire_chat/core/constants.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/user_repository/user_repository.dart';
-import 'package:fire_chat/presentation/blocs/user_bloc/user_bloc.dart';
-import 'package:fire_chat/presentation/blocs/user_bloc/user_bloc_events.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -16,15 +15,13 @@ class AuthBlocWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final box = GetIt.instance.get<Box>();
-    final hiveUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
+    final user = box.get(StorageKeys.userHiveKey) as UserEntity?;
     final repository = GetIt.instance.get<UserRepository>();
     return BlocProvider<AuthBloc>(
       create: (context) => AuthBloc(
-        editedUser: hiveUser,
+        editedUser: user,
         repository: repository,
-      )..add(
-          LoginUserEvent(),
-        ),
+      ),
       child: child,
     );
   }
