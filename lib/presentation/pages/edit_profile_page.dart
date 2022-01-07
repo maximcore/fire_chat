@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:fire_chat/config/routing/routes.dart';
+import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
+import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc.dart';
 import 'package:fire_chat/presentation/views/edit_profile_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +24,20 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<ProfileExistenceBloc>();
+    return EditProfilePageView(
+      saveProfileChanges: () {
+        _saveProfileChanges(context);
+      },
+      onPressed: _uploadImage,
+      onDeleteProfilePressed: () {
+        _showDeleteProfileDialog(context, bloc);
+      },
+    );
+  }
+
   void _saveProfileChanges(BuildContext context) {
     context.read<ProfileEditingBloc>().save();
     Navigator.of(context).pop();
@@ -33,13 +50,35 @@ class EditProfilePage extends StatelessWidget {
     final url = base64Encode(result);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return EditProfilePageView(
-      saveProfileChanges: () {
-        _saveProfileChanges(context);
+  void _showDeleteProfileDialog(
+    BuildContext context,
+    ProfileExistenceBloc bloc,
+  ) {
+    showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(AppLocalization.deleteProfileTitle),
+          actions: [
+            TextButton(
+              child: const Text(AppLocalization.delete),
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  AppRoutes.loginPageRoute,
+                  (route) => true,
+                );
+                bloc.delete();
+              },
+            ),
+            TextButton(
+              child: const Text(AppLocalization.cancel),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
       },
-      onPressed: _uploadImage,
     );
   }
 }

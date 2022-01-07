@@ -27,7 +27,7 @@ class ProfileEditingBloc
         ),
       );
       // handle changes here
-      await Future<void>.delayed(const Duration(microseconds: 100));
+      await Future<void>.delayed(const Duration(microseconds: 250));
       emit(
         ProfileEditingBlocState(
           status: ProfileEditingBlocStatus.ready,
@@ -44,12 +44,12 @@ class ProfileEditingBloc
   void save() => add(SaveProfileEvent());
 
   void updateUserWithUsername(String username) {
-    save();
     repository.editUsername(username);
+    save();
   }
 
   void updateUserWithEmail(String email) {
-    save();
     repository.editEmail(email);
+  save();
   }
 }

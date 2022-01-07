@@ -14,10 +14,12 @@ class EditProfilePageView extends StatelessWidget {
     Key? key,
     required this.saveProfileChanges,
     required this.onPressed,
+    required this.onDeleteProfilePressed,
   }) : super(key: key);
 
   final VoidCallback saveProfileChanges;
   final VoidCallback onPressed;
+  final VoidCallback onDeleteProfilePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,11 @@ class EditProfilePageView extends StatelessWidget {
             case ProfileEditingBlocStatus.initial:
               return const ProfileInitializingWidget();
             case ProfileEditingBlocStatus.ready:
-              return ProfileReadyWidget(state: state, onPressed: onPressed);
+              return ProfileReadyWidget(
+                state: state,
+                onPressed: onPressed,
+                onDeleteProfilePressed: onDeleteProfilePressed,
+              );
             case ProfileEditingBlocStatus.updating:
               return const ProfileUpdatingWidget();
             case ProfileEditingBlocStatus.error:

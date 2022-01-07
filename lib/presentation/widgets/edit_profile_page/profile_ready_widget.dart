@@ -9,10 +9,12 @@ class ProfileReadyWidget extends StatelessWidget {
     Key? key,
     required this.state,
     required this.onPressed,
+    required this.onDeleteProfilePressed,
   }) : super(key: key);
 
   final ProfileEditingBlocState state;
   final VoidCallback onPressed;
+  final VoidCallback onDeleteProfilePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,10 @@ class ProfileReadyWidget extends StatelessWidget {
                 ),
                 EmailTextField(
                   initialValue: state.user!.email,
+                ),
+                ElevatedButton(
+                  onPressed: onDeleteProfilePressed,
+                  child: const Text(AppLocalization.deleteProfile),
                 ),
               ],
             ),
