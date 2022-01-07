@@ -2,6 +2,8 @@ class AppLocalization {
   // Defaults
   static const String emptyString = '';
   static const String username = 'Username';
+  static const String email = 'Email';
+
 
   // Page titles
   static const String editProfilePageTitle = 'EDIT PROFILE';
@@ -18,6 +20,7 @@ class AppLocalization {
   static const String loginWithGoogleButtonText = 'LOGIN WITH GOOGLE';
   static const String loginWithAppleButtonText = 'LOGIN WITH APPLE';
   static const String editProfile = 'Edit profile';
+  static const String updateAvatar = 'Update avatar';
 
   // Label text
   static const String loginLabelText = 'Login';
@@ -38,4 +41,10 @@ class AppLocalization {
 
   // Dialogs, snackbars, etc
   static const String changesSaved = 'Saved!';
+
+  // Status
+  static const String initializing = 'Initializing';
+  static const String error = 'Error';
+  static const String updating = 'Updating';
+
 }
