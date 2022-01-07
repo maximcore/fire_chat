@@ -60,8 +60,6 @@ class HiveUserRepository implements UserRepository {
   @override
   Future<void> deleteUser() async {
     final box = GetIt.instance.get<Box>();
-    if (box.containsKey(StorageKeys.userHiveKey)) {
-      await box.delete(StorageKeys.userHiveKey);
-    }
+    await box.delete(StorageKeys.userHiveKey);
   }
 }
