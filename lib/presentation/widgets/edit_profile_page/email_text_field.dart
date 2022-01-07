@@ -3,28 +3,27 @@ import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editin
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UsernameTextFormField extends StatefulWidget {
-  const UsernameTextFormField({Key? key, required this.initialValue})
-      : super(key: key);
+class EmailTextField extends StatefulWidget {
+  const EmailTextField({Key? key, required this.initialValue}) : super(key: key);
 
   final String? initialValue;
 
   @override
-  _UsernameTextFormFieldState createState() => _UsernameTextFormFieldState();
+  _EmailTextFieldState createState() => _EmailTextFieldState();
 }
 
-class _UsernameTextFormFieldState extends State<UsernameTextFormField> {
-  late final TextEditingController _usernameController;
+class _EmailTextFieldState extends State<EmailTextField> {
+  late final TextEditingController _emailController;
 
   @override
   void initState() {
     super.initState();
-    _usernameController = TextEditingController(text: widget.initialValue);
+    _emailController = TextEditingController(text: widget.initialValue);
   }
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -39,10 +38,10 @@ class _UsernameTextFormFieldState extends State<UsernameTextFormField> {
         bottom: 8,
       ),
       child: TextField(
-        onSubmitted: bloc.updateUserWithUsername,
-        controller: _usernameController,
+        onSubmitted: bloc.updateUserWithEmail,
+        controller: _emailController,
         decoration: const InputDecoration(
-          hintText: AppLocalization.username,
+          hintText: AppLocalization.email,
         ),
       ),
     );

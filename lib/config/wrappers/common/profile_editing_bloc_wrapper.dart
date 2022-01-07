@@ -21,7 +21,9 @@ class ProfileEditingBlocWrapper extends StatelessWidget {
     final user = box.containsKey(StorageKeys.userHiveKey)
         ? box.get(StorageKeys.userHiveKey) as UserEntity?
         : const UserEntity(
-            username: 'maxim',
+            username: 'user',
+            email: 'user@gmail.com',
+            id: '0',
             profilePictureUrl:
                 'https://ichef.bbci.co.uk/news/640/cpsprodpb/14F0E/production/_119647758_84555a20-7d7f-4d16-906a-46bf24d4698f.jpg',
           );
