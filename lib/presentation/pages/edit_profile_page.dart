@@ -31,7 +31,6 @@ class EditProfilePage extends StatelessWidget {
     final image = await _picker.pickImage(source: ImageSource.gallery);
     final result = await image!.readAsBytes();
     final url = base64Encode(result);
-    print(url);
   }
 
   @override
