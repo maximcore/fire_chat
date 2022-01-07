@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmailTextField extends StatefulWidget {
-  const EmailTextField({Key? key, required this.initialValue}) : super(key: key);
+  const EmailTextField({
+    Key? key,
+    required this.initialValue,
+  }) : super(key: key);
 
   final String? initialValue;
 
