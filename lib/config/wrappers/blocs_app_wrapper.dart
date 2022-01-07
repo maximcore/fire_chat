@@ -1,5 +1,6 @@
 import 'package:fire_chat/config/wrappers/common/auth_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/profile_editing_bloc_wrapper.dart';
+import 'package:fire_chat/config/wrappers/common/profile_existence_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/theme_bloc_wrapper.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +13,10 @@ class BlocsAppWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return AuthBlocWrapper(
       child: ThemeBlocWrapper(
-        child: ProfileEditingBlocWrapper(
-          child: child,
+        child: ProfileExistenceBlocWrapper(
+          child: ProfileEditingBlocWrapper(
+            child: child,
+          ),
         ),
       ),
     );
