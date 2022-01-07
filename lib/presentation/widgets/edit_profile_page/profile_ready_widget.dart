@@ -38,7 +38,8 @@ class ProfileReadyWidget extends StatelessWidget {
                   height: 16,
                 ),
                 ElevatedButton(
-                  onPressed: onPressed,
+                  onPressed: null,
+                  //onPressed: onPressed,
                   child: const Text(AppLocalization.updateAvatar),
                 ),
                 const SizedBox(
