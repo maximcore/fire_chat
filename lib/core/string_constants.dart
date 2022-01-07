@@ -20,7 +20,10 @@ class AppLocalization {
   static const String loginWithGoogleButtonText = 'LOGIN WITH GOOGLE';
   static const String loginWithAppleButtonText = 'LOGIN WITH APPLE';
   static const String editProfile = 'Edit profile';
+  static const String deleteProfile = 'Delete profile';
   static const String updateAvatar = 'Update avatar';
+  static const String delete = 'Delete';
+  static const String cancel = 'Cancel';
 
   // Label text
   static const String loginLabelText = 'Login';
@@ -34,6 +37,7 @@ class AppLocalization {
   static const String useSystemThemeMode = 'Use system theme mode';
   static const String useSystemThemeModeDescription =
       'This will force system theme mode';
+  static const String deleteProfileTitle = 'Do you want to delete profile?';
 
   // Navbar button titles
   static const String feedLabel = 'Feed';
