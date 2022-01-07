@@ -13,17 +13,48 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> editUser(UserEntity userEntity) async {
+  Future<void> editUsername(String username) async {
     final box = GetIt.instance.get<Box>();
-    if (box.containsKey(StorageKeys.userHiveKey)) {
-      await box.delete(
-        StorageKeys.userHiveKey,
-      );
-      await box.put(
-        StorageKeys.userHiveKey,
-        userEntity,
-      );
-    }
+    late final UserEntity? newUser;
+
+    final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
+    newUser = currentUser!.copyWith(
+      username: username,
+    );
+    await box.put(
+      StorageKeys.userHiveKey,
+      newUser,
+    );
+  }
+
+  @override
+  Future<void> editEmail(String email) async {
+    final box = GetIt.instance.get<Box>();
+    late final UserEntity? newUser;
+
+    final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
+    newUser = currentUser!.copyWith(
+      email: email,
+    );
+    await box.put(
+      StorageKeys.userHiveKey,
+      newUser,
+    );
+  }
+
+  @override
+  Future<void> editProfilePictureUrl(String profilePictureUrl) async {
+    final box = GetIt.instance.get<Box>();
+    late final UserEntity? newUser;
+
+    final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
+    newUser = currentUser!.copyWith(
+      profilePictureUrl: profilePictureUrl,
+    );
+    await box.put(
+      StorageKeys.userHiveKey,
+      newUser,
+    );
   }
 
   @override
