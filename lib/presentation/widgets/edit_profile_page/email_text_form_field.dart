@@ -1,0 +1,50 @@
+import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class EmailTextFormField extends StatefulWidget {
+  const EmailTextFormField({Key? key, required this.initialValue})
+      : super(key: key);
+
+  final String? initialValue;
+
+  @override
+  _EmailTextFormFieldState createState() => _EmailTextFormFieldState();
+}
+
+class _EmailTextFormFieldState extends State<EmailTextFormField> {
+  late final TextEditingController _emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = context.read<ProfileEditingBloc>();
+
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 32,
+        right: 32,
+        bottom: 8,
+      ),
+      child: TextField(
+        onSubmitted: bloc.updateUserWithEmail,
+        controller: _emailController,
+        decoration: const InputDecoration(
+          hintText: AppLocalization.email,
+        ),
+      ),
+    );
+  }
+}
