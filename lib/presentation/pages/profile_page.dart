@@ -1,7 +1,9 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
+import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
 import 'package:fire_chat/presentation/widgets/profile/profile_card.dart';
@@ -67,13 +69,15 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthBlocState>(
-      builder: (_, userState) {
+    return BlocSelector<ProfileEditingBloc, ProfileEditingBlocState,
+        UserEntity>(
+      selector: (state) => state.user!,
+      builder: (_, user) {
         return BlocBuilder<ThemeBloc, ThemeBlocState>(
-          builder: (_, state) {
+          builder: (_, builderState) {
             return Scaffold(
               appBar: AppBar(
-                actions: _actions(context, state),
+                actions: _actions(context, builderState),
                 title: const Text(AppLocalization.profilePageTitle),
                 centerTitle: true,
               ),
@@ -82,8 +86,8 @@ class ProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ProfileCard(user: userState.user),
-                    _systemThemeSettings(context, state),
+                    ProfileCard(user: user),
+                    _systemThemeSettings(context, builderState),
                   ],
                 ),
               ),

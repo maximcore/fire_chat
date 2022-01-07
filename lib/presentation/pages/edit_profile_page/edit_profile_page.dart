@@ -1,5 +1,8 @@
+import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:fire_chat/presentation/pages/edit_profile_page/edit_profile_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -16,19 +19,23 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 
-  // void showSnackBar(BuildContext context) {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     const SnackBar(
-  //       content: ProfileSnackBar(),
-  //     ),
-  //   );
-  //   Navigator.of(context).pop();
-  // }
+  void _saveProfileChanges(BuildContext context) {
+    context.read<ProfileEditingBloc>().save();
+    Navigator.of(context).pop();
+  }
+
+  Future<void> _uploadImage() async {
+    final _picker = ImagePicker();
+    final image = await _picker.pickImage(source: ImageSource.gallery);
+  }
 
   @override
   Widget build(BuildContext context) {
     return EditProfilePageView(
-      showSnackBar: () {},
+      saveProfileChanges: () {
+        _saveProfileChanges(context);
+      },
+      onPressed: _uploadImage,
     );
   }
 }

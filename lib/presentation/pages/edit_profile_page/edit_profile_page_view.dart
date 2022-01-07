@@ -1,14 +1,23 @@
 import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
+import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_state.dart';
+import 'package:fire_chat/presentation/widgets/edit_profile_page/profile_error_widget.dart';
+import 'package:fire_chat/presentation/widgets/edit_profile_page/profile_initializing_widget.dart';
+import 'package:fire_chat/presentation/widgets/edit_profile_page/profile_ready_widget.dart';
+import 'package:fire_chat/presentation/widgets/edit_profile_page/profile_updating_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EditProfilePageView extends StatelessWidget {
   const EditProfilePageView({
     Key? key,
-    required this.showSnackBar,
+    required this.saveProfileChanges,
+    required this.onPressed,
   }) : super(key: key);
 
-  final VoidCallback showSnackBar;
+  final VoidCallback saveProfileChanges;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +25,7 @@ class EditProfilePageView extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {
-              
-            },
+            onPressed: saveProfileChanges,
             icon: const FaIcon(
               FontAwesomeIcons.solidSave,
             ),
@@ -29,7 +36,20 @@ class EditProfilePageView extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const Center(),
+      body: BlocBuilder<ProfileEditingBloc, ProfileEditingBlocState>(
+        builder: (context, state) {
+          switch (state.status) {
+            case ProfileEditingBlocStatus.initial:
+              return const ProfileInitializingWidget();
+            case ProfileEditingBlocStatus.ready:
+              return ProfileReadyWidget(state: state, onPressed: onPressed);
+            case ProfileEditingBlocStatus.updating:
+              return const ProfileUpdatingWidget();
+            case ProfileEditingBlocStatus.error:
+              return const ProfileErrorWidget();
+          }
+        },
+      ),
     );
   }
 }

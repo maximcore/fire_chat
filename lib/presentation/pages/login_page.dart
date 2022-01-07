@@ -1,7 +1,6 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_events.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +77,7 @@ class LoginPage extends StatelessWidget {
                           context,
                           AppRoutes.homePageRoute,
                         );
-                        context.read<AuthBloc>().add(LoginEvent());
+                        context.read<AuthBloc>().login();
                       },
                       padding: 50,
                       radius: 16,
