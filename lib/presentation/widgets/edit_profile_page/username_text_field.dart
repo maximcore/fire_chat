@@ -31,7 +31,6 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<ProfileEditingBloc>();
-
     return Padding(
       padding: const EdgeInsets.only(
         left: 32,

@@ -15,10 +15,9 @@ class HiveUserRepository implements UserRepository {
   @override
   Future<void> editUsername(String username) async {
     final box = GetIt.instance.get<Box>();
-    late final UserEntity? newUser;
 
     final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
-    newUser = currentUser!.copyWith(
+    final newUser = currentUser!.copyWith(
       username: username,
     );
     await box.put(
@@ -30,10 +29,8 @@ class HiveUserRepository implements UserRepository {
   @override
   Future<void> editEmail(String email) async {
     final box = GetIt.instance.get<Box>();
-    late final UserEntity? newUser;
-
     final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
-    newUser = currentUser!.copyWith(
+    final newUser = currentUser!.copyWith(
       email: email,
     );
     await box.put(
@@ -45,10 +42,8 @@ class HiveUserRepository implements UserRepository {
   @override
   Future<void> editProfilePictureUrl(String profilePictureUrl) async {
     final box = GetIt.instance.get<Box>();
-    late final UserEntity? newUser;
-
     final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
-    newUser = currentUser!.copyWith(
+    final newUser = currentUser!.copyWith(
       profilePictureUrl: profilePictureUrl,
     );
     await box.put(

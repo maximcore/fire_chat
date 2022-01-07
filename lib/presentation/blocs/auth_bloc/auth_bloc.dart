@@ -27,6 +27,4 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   void login() => add(LoginEvent());
 
   void logout() => add(LogoutEvent());
-
-  void registration() => add(RegistrationEvent());
 }
