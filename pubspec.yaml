@@ -58,7 +58,8 @@ dev_dependencies:
   freezed: ^1.1.1
   json_serializable: ^6.1.3
   very_good_analysis: ^2.4.0
-  #hive_generator: ^1.1.1
+  # I use repo url because github contains package version with some fixes, which
+  # are not published on pubdev.
   hive_generator:
     git:
       url: git://github.com/hivedb/hive.git
