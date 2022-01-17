@@ -20,7 +20,7 @@ class ProfileEditingBlocWrapper extends StatelessWidget {
     final user = bloc.state.user;
     return BlocProvider<ProfileEditingBloc>(
       create: (context) => ProfileEditingBloc(
-        initialUser: user,
+        user: user,
         repository: repository,
       ),
       child: child,

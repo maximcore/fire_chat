@@ -20,8 +20,14 @@ class _EmailTextFieldState extends State<EmailTextField> {
 
   @override
   void initState() {
+    final bloc = context.read<ProfileEditingBloc>();
     super.initState();
     _emailController = TextEditingController(text: widget.initialValue);
+    _emailController.addListener(
+      () {
+        bloc.editUser(email: _emailController.text);
+      },
+    );
   }
 
   @override
@@ -32,7 +38,6 @@ class _EmailTextFieldState extends State<EmailTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<ProfileEditingBloc>();
     return Padding(
       padding: const EdgeInsets.only(
         left: 32,
@@ -40,7 +45,6 @@ class _EmailTextFieldState extends State<EmailTextField> {
         bottom: 8,
       ),
       child: TextField(
-        onSubmitted: bloc.updateUserWithEmail,
         controller: _emailController,
         decoration: const InputDecoration(
           hintText: AppLocalization.email,

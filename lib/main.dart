@@ -38,20 +38,21 @@ class DynamicThemeApp extends StatelessWidget {
       selector: (state) => state.themeMode,
       builder: (context, mode) {
         return BlocBuilder<ProfileExistenceBloc, ProfileExistenceBlocState>(
-            builder: (context, profileState) {
-          return MaterialApp(
-            title: 'Fire Chat',
-            theme: CustomAppTheme.lightTheme,
-            darkTheme: CustomAppTheme.darkTheme,
-            themeMode: mode,
-            onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: profileState.status == ProfileExistenceBlocStatus.notExists
-                ? AppRoutes.loginPageRoute
-                : AppRoutes.homePageRoute,
-            debugShowCheckedModeBanner: false,
-            useInheritedMediaQuery: kIsWeb,
-          );
-        });
+          builder: (context, profileState) {
+            return MaterialApp(
+              title: 'Fire Chat',
+              theme: CustomAppTheme.lightTheme,
+              darkTheme: CustomAppTheme.darkTheme,
+              themeMode: mode,
+              onGenerateRoute: AppRouter.generateRoute,
+              initialRoute: profileState.status == ProfileExistenceBlocStatus.notExists
+                  ? AppRoutes.loginPageRoute
+                  : AppRoutes.homePageRoute,
+              debugShowCheckedModeBanner: false,
+              useInheritedMediaQuery: kIsWeb,
+            );
+          },
+        );
       },
     );
   }

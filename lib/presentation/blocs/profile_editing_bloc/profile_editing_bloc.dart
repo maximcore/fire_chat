@@ -9,13 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlocState> {
   ProfileEditingBloc({
     required this.repository,
-    UserEntity? initialUser,
+    UserEntity? user,
   }) : super(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.ready,
-            user: initialUser,
+            user: user,
           ),
         ) {
+    on<EditProfileEvent>((event, emit) {});
     on<SaveProfileEvent>((event, emit) async {
       try {
         final newUser = await repository.readUser();
@@ -44,18 +45,24 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
   }
 
   final UserRepository repository;
+  UserEntity localUser = const UserEntity();
 
   void edit() => add(EditProfileEvent());
 
   void save() => add(SaveProfileEvent());
 
-  void updateUserWithUsername(String username) {
-    repository.editUsername(username);
+  void saveUser() {
+    repository.editUser(username: localUser.username, email: localUser.email);
     save();
   }
 
-  void updateUserWithEmail(String email) {
-    repository.editEmail(email);
-    save();
+  Future<void> editUser({String? username, String? email}) async {
+    if (username != null) {
+      localUser = localUser.copyWith(username: username);
+    }
+    if (email != null) {
+      localUser = localUser.copyWith(email: email);
+    }
+    edit();
   }
 }

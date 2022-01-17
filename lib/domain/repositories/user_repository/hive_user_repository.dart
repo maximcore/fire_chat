@@ -13,25 +13,13 @@ class HiveUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> editUsername(String username) async {
+  Future<void> editUser({String? username, String? email}) async {
     final box = GetIt.instance.get<Box>();
 
-    final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
+    final currentUser = await readUser();
     final newUser = currentUser!.copyWith(
-      username: username,
-    );
-    await box.put(
-      StorageKeys.userHiveKey,
-      newUser,
-    );
-  }
-
-  @override
-  Future<void> editEmail(String email) async {
-    final box = GetIt.instance.get<Box>();
-    final currentUser = box.get(StorageKeys.userHiveKey) as UserEntity?;
-    final newUser = currentUser!.copyWith(
-      email: email,
+      username: username ?? currentUser.username,
+      email: email ?? currentUser.email,
     );
     await box.put(
       StorageKeys.userHiveKey,

@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsernameTextField extends StatefulWidget {
-  const UsernameTextField({Key? key, required this.initialValue})
-      : super(key: key);
+  const UsernameTextField({Key? key, required this.initialValue}) : super(key: key);
 
   final String? initialValue;
 
@@ -18,8 +17,14 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
 
   @override
   void initState() {
+    final bloc = context.read<ProfileEditingBloc>();
     super.initState();
     _usernameController = TextEditingController(text: widget.initialValue);
+    _usernameController.addListener(
+      () {
+        bloc.editUser(username: _usernameController.text);
+      },
+    );
   }
 
   @override
@@ -30,7 +35,6 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<ProfileEditingBloc>();
     return Padding(
       padding: const EdgeInsets.only(
         left: 32,
@@ -38,7 +42,6 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
         bottom: 8,
       ),
       child: TextField(
-        onSubmitted: bloc.updateUserWithUsername,
         controller: _usernameController,
         decoration: const InputDecoration(
           hintText: AppLocalization.username,
