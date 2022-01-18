@@ -6,7 +6,6 @@ import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_exis
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class ProfileExistenceBlocWrapper extends StatelessWidget {
   const ProfileExistenceBlocWrapper({
@@ -18,8 +17,23 @@ class ProfileExistenceBlocWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iStorage = GetIt.instance.get<IStorageProvider>();
-    final user = iStorage.containsKey(StorageKeys.userHiveKey)
+    return BlocProvider<ProfileExistenceBloc>(
+      create: (context) {
+        final iStorage = GetIt.instance.get<IStorageProvider>();
+        final user = fetchUser(iStorage);
+        iStorage.put(StorageKeys.userHiveKey, user);
+        final repository = GetIt.instance.get<UserRepository>();
+        return ProfileExistenceBloc(
+          initialUser: user,
+          repository: repository,
+        );
+      },
+      child: child,
+    );
+  }
+
+  UserEntity? fetchUser(IStorageProvider iStorage) {
+    return iStorage.containsKey(StorageKeys.userHiveKey)
         ? iStorage.get(StorageKeys.userHiveKey) as UserEntity?
         : const UserEntity(
             username: 'user',
@@ -28,17 +42,5 @@ class ProfileExistenceBlocWrapper extends StatelessWidget {
             profilePictureUrl:
                 'https://ichef.bbci.co.uk/news/640/cpsprodpb/14F0E/production/_119647758_84555a20-7d7f-4d16-906a-46bf24d4698f.jpg',
           );
-    iStorage.put(StorageKeys.userHiveKey, user);
-
-    final repository = GetIt.instance.get<UserRepository>();
-
-    return BlocProvider<ProfileExistenceBloc>(
-      create: (context) => ProfileExistenceBloc(
-        initialUser: user,
-        repository: repository,
-      ),
-      child: child,
-    );
-    ;
   }
 }
