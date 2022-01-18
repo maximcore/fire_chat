@@ -25,7 +25,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
     _emailController = TextEditingController(text: widget.initialValue);
     _emailController.addListener(
       () {
-        bloc.editUser(email: _emailController.text);
+        bloc.editLocalUser(email: _emailController.text);
       },
     );
   }

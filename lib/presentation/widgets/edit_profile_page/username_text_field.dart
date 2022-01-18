@@ -22,7 +22,7 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
     _usernameController = TextEditingController(text: widget.initialValue);
     _usernameController.addListener(
       () {
-        bloc.editUser(username: _usernameController.text);
+        bloc.editLocalUser(username: _usernameController.text);
       },
     );
   }

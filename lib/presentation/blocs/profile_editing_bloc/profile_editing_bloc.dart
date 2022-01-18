@@ -6,17 +6,33 @@ import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editin
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlocState> {
+class ProfileEditingBloc
+    extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlocState> {
   ProfileEditingBloc({
     required this.repository,
     UserEntity? user,
-  }) : super(
+  })  : localUser = UserEntity(
+          username: user!.username,
+          email: user.email,
+          id: user.id,
+          profilePictureUrl: user.profilePictureUrl,
+        ),
+        super(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.ready,
             user: user,
           ),
         ) {
-    on<EditProfileEvent>((event, emit) {});
+    on<EditProfileEvent>((event, emit) {
+      try {} catch (error) {
+        emit(
+          ProfileEditingBlocState(
+            status: ProfileEditingBlocStatus.error,
+          ),
+        );
+        log(error.toString());
+      }
+    });
     on<SaveProfileEvent>((event, emit) async {
       try {
         final newUser = await repository.readUser();
@@ -45,7 +61,7 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
   }
 
   final UserRepository repository;
-  UserEntity localUser = const UserEntity();
+  late UserEntity localUser;
 
   void edit() => add(EditProfileEvent());
 
@@ -56,7 +72,7 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
     save();
   }
 
-  Future<void> editUser({String? username, String? email}) async {
+  UserEntity? editLocalUser({String? username, String? email}) {
     if (username != null) {
       localUser = localUser.copyWith(username: username);
     }
