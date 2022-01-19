@@ -39,7 +39,7 @@ class EditProfilePage extends StatelessWidget {
   }
 
   void _saveProfileChanges(BuildContext context) {
-    context.read<ProfileEditingBloc>().saveUser();
+    context.read<ProfileEditingBloc>().save();
     Navigator.of(context).pop();
   }
 

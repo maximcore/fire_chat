@@ -1,10 +1,12 @@
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
+import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsernameTextField extends StatefulWidget {
-  const UsernameTextField({Key? key, required this.initialValue}) : super(key: key);
+  const UsernameTextField({Key? key, required this.initialValue})
+      : super(key: key);
 
   final String? initialValue;
 
@@ -22,7 +24,9 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
     _usernameController = TextEditingController(text: widget.initialValue);
     _usernameController.addListener(
       () {
-        bloc.editLocalUser(username: _usernameController.text);
+        bloc.add(
+          EditUsernameEvent(_usernameController.text),
+        );
       },
     );
   }

@@ -11,20 +11,37 @@ class ProfileEditingBloc
   ProfileEditingBloc({
     required this.repository,
     UserEntity? user,
-  })  : localUser = UserEntity(
-          username: user!.username,
-          email: user.email,
-          id: user.id,
-          profilePictureUrl: user.profilePictureUrl,
-        ),
-        super(
+  }) : super(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.ready,
             user: user,
+            localUser: user?.copyWith(id: 'localUser'),
           ),
         ) {
-    on<EditProfileEvent>((event, emit) {
-      try {} catch (error) {
+    on<EditUsernameEvent>((event, emit) {
+      try {
+        emit(
+          state.copyWith(
+            localUser: state.localUser?.copyWith(username: event.username),
+          ),
+        );
+      } catch (error) {
+        emit(
+          ProfileEditingBlocState(
+            status: ProfileEditingBlocStatus.error,
+          ),
+        );
+        log(error.toString());
+      }
+    });
+    on<EditEmailEvent>((event, emit) {
+      try {
+        emit(
+          state.copyWith(
+            localUser: state.localUser?.copyWith(email: event.email),
+          ),
+        );
+      } catch (error) {
         emit(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.error,
@@ -35,18 +52,20 @@ class ProfileEditingBloc
     });
     on<SaveProfileEvent>((event, emit) async {
       try {
-        final newUser = await repository.readUser();
-        emit(
-          ProfileEditingBlocState(
-            status: ProfileEditingBlocStatus.updating,
-            user: newUser,
-          ),
-        );
         await Future<void>.delayed(const Duration(microseconds: 250));
+
+        await repository.editUser(
+          username: state.localUser?.username,
+          email: state.localUser?.email,
+        );
+
+        final newUser = await repository.readUser();
+
         emit(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.ready,
             user: newUser,
+            localUser: newUser,
           ),
         );
       } catch (error) {
@@ -61,24 +80,6 @@ class ProfileEditingBloc
   }
 
   final UserRepository repository;
-  late UserEntity localUser;
-
-  void edit() => add(EditProfileEvent());
 
   void save() => add(SaveProfileEvent());
-
-  void saveUser() {
-    repository.editUser(username: localUser.username, email: localUser.email);
-    save();
-  }
-
-  UserEntity? editLocalUser({String? username, String? email}) {
-    if (username != null) {
-      localUser = localUser.copyWith(username: username);
-    }
-    if (email != null) {
-      localUser = localUser.copyWith(email: email);
-    }
-    edit();
-  }
 }
