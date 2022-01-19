@@ -1,6 +1,5 @@
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
-import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,11 +24,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
     super.initState();
     _emailController = TextEditingController(text: widget.initialValue);
     _emailController.addListener(
-      () {
-        bloc.add(
-          EditEmailEvent(_emailController.text),
-        );
-      },
+      () => bloc.editEmail(_emailController.text),
     );
   }
 

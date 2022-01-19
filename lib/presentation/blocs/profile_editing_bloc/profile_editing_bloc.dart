@@ -82,4 +82,8 @@ class ProfileEditingBloc
   final UserRepository repository;
 
   void save() => add(SaveProfileEvent());
+
+  void editUsername(String username) => add(EditUsernameEvent(username));
+
+  void editEmail(String email) => add(EditEmailEvent(email));
 }

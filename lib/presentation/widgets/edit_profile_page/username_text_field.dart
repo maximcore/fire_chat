@@ -1,6 +1,5 @@
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
-import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,11 +22,7 @@ class _UsernameTextFieldState extends State<UsernameTextField> {
     super.initState();
     _usernameController = TextEditingController(text: widget.initialValue);
     _usernameController.addListener(
-      () {
-        bloc.add(
-          EditUsernameEvent(_usernameController.text),
-        );
-      },
+      () => bloc.editUsername(_usernameController.text),
     );
   }
 
