@@ -22,7 +22,7 @@ class ProfileEditingBlocWrapper extends StatelessWidget {
           create: (context) {
             final repository = GetIt.instance.get<UserRepository>();
             return ProfileEditingBloc(
-              user: state.user,
+              user: state.user!,
               repository: repository,
             );
           },

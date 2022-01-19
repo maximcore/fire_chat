@@ -16,7 +16,6 @@ class ProfileExistenceBloc
   }) : super(
           const ProfileExistenceBlocState(
             status: ProfileExistenceBlocStatus.exists,
-            //user: initialUser,
           ),
         ) {
     on<CreateProfileEvent>((event, emit) {
@@ -50,9 +49,9 @@ class ProfileExistenceBloc
 
   void delete() => add(DeleteProfileEvent());
 
-  UserEntity? fetchUser() {
+  UserEntity fetchUser() {
     return iStorage.containsKey(StorageKeys.userHiveKey)
-        ? iStorage.get(StorageKeys.userHiveKey) as UserEntity?
+        ? iStorage.get(StorageKeys.userHiveKey) as UserEntity
         : const UserEntity(
             username: 'user',
             email: 'user@gmail.com',

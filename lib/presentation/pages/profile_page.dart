@@ -71,7 +71,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<ProfileEditingBloc, ProfileEditingBlocState,
         UserEntity>(
-      selector: (state) => state.user!,
+      selector: (state) => state.user,
       builder: (_, user) {
         return BlocBuilder<ThemeBloc, ThemeBlocState>(
           builder: (_, builderState) {

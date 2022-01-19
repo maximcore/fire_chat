@@ -10,25 +10,27 @@ class ProfileEditingBloc
     extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlocState> {
   ProfileEditingBloc({
     required this.repository,
-    UserEntity? user,
+    required UserEntity user,
   }) : super(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.ready,
             user: user,
-            localUser: user?.copyWith(id: 'localUser'),
+            localUser: user.copyWith(id: 'localUser'),
           ),
         ) {
     on<EditUsernameEvent>((event, emit) {
       try {
         emit(
           state.copyWith(
-            localUser: state.localUser?.copyWith(username: event.username),
+            localUser: state.localUser.copyWith(username: event.username),
           ),
         );
       } catch (error) {
         emit(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.error,
+            user: state.user,
+            localUser: state.localUser,
           ),
         );
         log(error.toString());
@@ -38,13 +40,15 @@ class ProfileEditingBloc
       try {
         emit(
           state.copyWith(
-            localUser: state.localUser?.copyWith(email: event.email),
+            localUser: state.localUser.copyWith(email: event.email),
           ),
         );
       } catch (error) {
         emit(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.error,
+            user: state.user,
+            localUser: state.localUser,
           ),
         );
         log(error.toString());
@@ -55,23 +59,33 @@ class ProfileEditingBloc
         await Future<void>.delayed(const Duration(microseconds: 250));
 
         await repository.editUser(
-          username: state.localUser?.username,
-          email: state.localUser?.email,
+          username: state.localUser.username,
+          email: state.localUser.email,
         );
 
         final newUser = await repository.readUser();
 
-        emit(
-          ProfileEditingBlocState(
-            status: ProfileEditingBlocStatus.ready,
-            user: newUser,
-            localUser: newUser,
-          ),
-        );
+        newUser == null
+            ? emit(
+                ProfileEditingBlocState(
+                  status: ProfileEditingBlocStatus.ready,
+                  user: state.user,
+                  localUser: state.user,
+                ),
+              )
+            : emit(
+                ProfileEditingBlocState(
+                  status: ProfileEditingBlocStatus.ready,
+                  user: newUser,
+                  localUser: newUser,
+                ),
+              );
       } catch (error) {
         emit(
           ProfileEditingBlocState(
             status: ProfileEditingBlocStatus.error,
+            user: state.user,
+            localUser: state.localUser,
           ),
         );
         log(error.toString());

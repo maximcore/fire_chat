@@ -31,7 +31,7 @@ class ProfileReadyWidget extends StatelessWidget {
                 CircleAvatar(
                   radius: 100,
                   foregroundImage: Image.network(
-                    state.user!.profilePictureUrl,
+                    state.user.profilePictureUrl,
                   ).image,
                 ),
                 const SizedBox(
@@ -46,10 +46,10 @@ class ProfileReadyWidget extends StatelessWidget {
                   height: 16,
                 ),
                 UsernameTextField(
-                  initialValue: state.user!.username,
+                  initialValue: state.user.username,
                 ),
                 EmailTextField(
-                  initialValue: state.user!.email,
+                  initialValue: state.user.email,
                 ),
                 ElevatedButton(
                   onPressed: onDeleteProfilePressed,
