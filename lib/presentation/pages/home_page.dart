@@ -1,3 +1,4 @@
+import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
@@ -35,46 +36,51 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final repository = GetIt.instance.get<PostsRepository>();
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          _isFeedPage()
-              ? AppLocalization.feedPageTitle
-              : AppLocalization.chatsPageTitle,
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.account_circle_rounded),
-            onPressed: () => Navigator.pushNamed(
-              context,
-              AppRoutes.profilePageRoute,
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text(
+              _isFeedPage()
+                  ? AppLocalization.feedPageTitle
+                  : AppLocalization.chatsPageTitle,
             ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.account_circle_rounded),
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  AppRoutes.profilePageRoute,
+                ),
+              ),
+            ],
+            centerTitle: true,
           ),
-        ],
-        centerTitle: true,
-      ),
-      body: BlocProvider<PostsBloc>(
-        create: (_) => PostsBloc(repository: repository)
-          ..add(
-            FetchingDataEvent(),
+          body: BlocProvider<PostsBloc>(
+            create: (_) => PostsBloc(repository: repository)
+              ..add(
+                FetchingDataEvent(),
+              ),
+            child: _pages[_currentPageIndex],
           ),
-        child: _pages[_currentPageIndex],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentPageIndex,
-        onTap: _onNavbarItemTap,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.rss_feed_rounded),
-            label: AppLocalization.feedLabel,
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentPageIndex,
+            onTap: _onNavbarItemTap,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.rss_feed_rounded),
+                label: AppLocalization.feedLabel,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.chat),
+                label: AppLocalization.chatsLabel,
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: AppLocalization.chatsLabel,
-          ),
-        ],
-      ),
+        ),
+        const FlavorsBanner(),
+      ],
     );
   }
 }

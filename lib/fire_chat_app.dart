@@ -1,22 +1,16 @@
+import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:fire_chat/config/routing/router.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/config/theme.dart';
 import 'package:fire_chat/config/wrappers/blocs_app_wrapper.dart';
-import 'package:fire_chat/injector.dart';
 import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc.dart';
 import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
+import 'package:fire_chat/presentation/pages/login_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-Future<void> main() async {
-  await setup();
-  runApp(
-    const FireChatApp(),
-  );
-}
 
 class FireChatApp extends StatelessWidget {
   const FireChatApp({Key? key}) : super(key: key);
@@ -40,14 +34,21 @@ class DynamicThemeApp extends StatelessWidget {
         return BlocBuilder<ProfileExistenceBloc, ProfileExistenceBlocState>(
           builder: (context, profileState) {
             return MaterialApp(
+              home: Stack(
+                children: [
+                  LoginPage(),
+                  const FlavorsBanner(),
+                ],
+              ),
               title: 'Fire Chat',
               theme: CustomAppTheme.lightTheme,
               darkTheme: CustomAppTheme.darkTheme,
               themeMode: mode,
               onGenerateRoute: AppRouter.generateRoute,
-              initialRoute: profileState.status == ProfileExistenceBlocStatus.notExists
-                  ? AppRoutes.loginPageRoute
-                  : AppRoutes.homePageRoute,
+              initialRoute:
+                  profileState.status == ProfileExistenceBlocStatus.notExists
+                      ? AppRoutes.loginPageRoute
+                      : AppRoutes.homePageRoute,
               debugShowCheckedModeBanner: false,
               useInheritedMediaQuery: kIsWeb,
             );
