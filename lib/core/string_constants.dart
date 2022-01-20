@@ -2,8 +2,11 @@ class AppLocalization {
   // Defaults
   static const String emptyString = '';
   static const String username = 'Username';
+  static const String email = 'Email';
+
 
   // Page titles
+  static const String editProfilePageTitle = 'EDIT PROFILE';
   static const String chatPageTitle = 'CHAT';
   static const String chatsPageTitle = 'CHATS';
   static const String feedPageTitle = 'FEED';
@@ -16,6 +19,11 @@ class AppLocalization {
   static const String loginButtonText = 'LOGIN';
   static const String loginWithGoogleButtonText = 'LOGIN WITH GOOGLE';
   static const String loginWithAppleButtonText = 'LOGIN WITH APPLE';
+  static const String editProfile = 'Edit profile';
+  static const String deleteProfile = 'Delete profile';
+  static const String updateAvatar = 'Update avatar';
+  static const String delete = 'Delete';
+  static const String cancel = 'Cancel';
 
   // Label text
   static const String loginLabelText = 'Login';
@@ -27,9 +35,20 @@ class AppLocalization {
   static const String postDetailsText = 'Tap to see post details';
   static const String tapToStartChat = 'Tap to start chat user';
   static const String useSystemThemeMode = 'Use system theme mode';
-  static const String useSystemThemeModeDescription = 'This will force system theme mode';
+  static const String useSystemThemeModeDescription =
+      'This will force system theme mode';
+  static const String deleteProfileTitle = 'Do you want to delete profile?';
 
   // Navbar button titles
   static const String feedLabel = 'Feed';
   static const String chatsLabel = 'Chats';
+
+  // Dialogs, snackbars, etc
+  static const String changesSaved = 'Saved!';
+
+  // Status
+  static const String initializing = 'Initializing';
+  static const String error = 'Error';
+  static const String updating = 'Updating';
+
 }

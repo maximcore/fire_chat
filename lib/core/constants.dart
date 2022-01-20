@@ -2,6 +2,8 @@
 class StorageKeys {
   static const String themeModeHiveKey = 'appThemeMode';
   static const String lastSavedNonSystemModeHiveKey = 'lastSavedNonSystem';
+
+  static const String userHiveKey = 'user';
 }
 
 // Theme modes

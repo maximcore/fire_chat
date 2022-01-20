@@ -1,9 +1,15 @@
-import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/presentation/widgets/common/placeholder_container.dart';
+import 'package:fire_chat/presentation/widgets/profile/edit_profile_button.dart';
 import 'package:flutter/material.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({Key? key}) : super(key: key);
+  const ProfileCard({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
+  final UserEntity user;
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +21,20 @@ class ProfileCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Icon(
-            Icons.person_pin,
-            size: 128,
-            color: Theme.of(context).primaryColor,
+          const SizedBox(
+            height: 16,
+          ),
+          CircleAvatar(
+            radius: 100,
+            foregroundImage: Image.network(
+              user.profilePictureUrl,
+            ).image,
           ),
           const SizedBox(
             height: 16,
           ),
-          const Text(
-            AppLocalization.username,
+          Text(
+            user.username,
             textAlign: TextAlign.center,
           ),
           const SizedBox(
@@ -39,6 +49,10 @@ class ProfileCard extends StatelessWidget {
             height: 16,
           ),
           const PlaceholderContainer(),
+          const SizedBox(
+            height: 16,
+          ),
+          const EditProfileButton(),
           const SizedBox(
             height: 16,
           ),

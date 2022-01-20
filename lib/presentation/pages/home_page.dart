@@ -1,6 +1,6 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
-import 'package:fire_chat/domain/repositories/posts_repository.dart';
+import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
 import 'package:fire_chat/presentation/pages/chats_page.dart';
@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
     final repository = GetIt.instance.get<PostsRepository>();
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           _isFeedPage()
               ? AppLocalization.feedPageTitle

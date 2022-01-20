@@ -1,10 +1,13 @@
 import 'package:fire_chat/config/routing/defined_routes_export.dart';
 import 'package:fire_chat/config/routing/routes.dart';
+import 'package:fire_chat/presentation/pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case EditProfilePage.routeName:
+        return EditProfilePage.route(settings);
       case AppRoutes.loginPageRoute:
         return MaterialPageRoute<void>(builder: (_) => LoginPage());
       case AppRoutes.homePageRoute:

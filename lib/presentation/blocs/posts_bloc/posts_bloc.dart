@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
-import 'package:fire_chat/domain/repositories/posts_repository.dart';
+import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
 

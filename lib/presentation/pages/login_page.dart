@@ -1,7 +1,10 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
+import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(AppLocalization.loginPageTitle),
         centerTitle: true,
       ),
@@ -69,10 +73,14 @@ class LoginPage extends StatelessWidget {
                       height: 8,
                     ),
                     CustomElevatedButton(
-                      onPressed: () => Navigator.pushReplacementNamed(
-                        context,
-                        AppRoutes.homePageRoute,
-                      ),
+                      onPressed: () {
+                        context.read<ProfileExistenceBloc>().create();
+                        context.read<AuthBloc>().login();
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.homePageRoute,
+                        );
+                      },
                       padding: 50,
                       radius: 16,
                       child: const Text(
