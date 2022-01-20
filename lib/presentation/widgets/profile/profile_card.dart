@@ -9,7 +9,7 @@ class ProfileCard extends StatelessWidget {
     required this.user,
   }) : super(key: key);
 
-  final UserEntity? user;
+  final UserEntity user;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,14 @@ class ProfileCard extends StatelessWidget {
           CircleAvatar(
             radius: 100,
             foregroundImage: Image.network(
-              user!.profilePictureUrl,
+              user.profilePictureUrl,
             ).image,
           ),
           const SizedBox(
             height: 16,
           ),
           Text(
-            user!.username,
+            user.username,
             textAlign: TextAlign.center,
           ),
           const SizedBox(
