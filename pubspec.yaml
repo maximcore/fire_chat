@@ -44,6 +44,7 @@ dependencies:
   hive_flutter: ^1.1.0
   font_awesome_flutter: ^9.2.0
   image_picker: ^0.8.4+4
+  flutter_flavorizr: ^2.1.2
 
 dev_dependencies:
   flutter_test:
@@ -106,3 +107,38 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    ios:
+
+  flavors:
+    local:
+      app:
+        name: "Local"
+
+      android:
+        applicationId: "com.example.fire_chat.local"
+
+      ios:
+        bundleId: "com.example.fire_chat.local"
+
+    dev:
+      app:
+        name: "Dev"
+
+      android:
+        applicationId: "com.example.fire_chat.dev"
+      ios:
+        bundleId: "com.example.fire_chat.dev"
+
+    demo:
+      app:
+        name: "Demo"
+
+      android:
+        applicationId: "com.example.fire_chat.demo"
+      ios:
+        bundleId: "com.example.fire_chat.demo"

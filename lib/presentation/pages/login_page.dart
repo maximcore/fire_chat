@@ -3,6 +3,7 @@ import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
+import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,86 +15,89 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text(AppLocalization.loginPageTitle),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Icon(
-                      Icons.person_pin,
-                      size: 64,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      child: TextField(
-                        controller: _loginController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text(AppLocalization.loginLabelText),
+    return Stack(children: [
+      Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text(AppLocalization.loginPageTitle),
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Icon(
+                        Icons.person_pin,
+                        size: 64,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: TextField(
+                          controller: _loginController,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            label: Text(AppLocalization.loginLabelText),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      child: TextField(
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          label: Text(AppLocalization.passwordLabelText),
-                          border: OutlineInputBorder(),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: TextField(
+                          controller: _passwordController,
+                          decoration: const InputDecoration(
+                            label: Text(AppLocalization.passwordLabelText),
+                            border: OutlineInputBorder(),
+                          ),
+                          obscureText: true,
                         ),
-                        obscureText: true,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 16, right: 16),
-                      color: Colors.black,
-                      height: 64,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    CustomElevatedButton(
-                      onPressed: () {
-                        context.read<ProfileExistenceBloc>().create();
-                        context.read<AuthBloc>().login();
-                        Navigator.pushNamed(
-                          context,
-                          AppRoutes.homePageRoute,
-                        );
-                      },
-                      padding: 50,
-                      radius: 16,
-                      child: const Text(
-                        AppLocalization.loginButtonText,
+                      const SizedBox(
+                        height: 8,
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin: const EdgeInsets.only(left: 16, right: 16),
+                        color: Colors.black,
+                        height: 64,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      CustomElevatedButton(
+                        onPressed: () {
+                          context.read<ProfileExistenceBloc>().create();
+                          context.read<AuthBloc>().login();
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.homePageRoute,
+                          );
+                        },
+                        padding: 50,
+                        radius: 16,
+                        child: const Text(
+                          AppLocalization.loginButtonText,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
-    );
+      const FlavorsBanner(),
+    ]);
   }
 }
