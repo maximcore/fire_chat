@@ -29,6 +29,49 @@
             {
               "client_id": "683578617176-cso2t6i1uo2n6o7qtcirkrd6eblqn91a.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "683578617176-vk9qlffuc6716puvq07cvvrqtvdpt4v6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fireChat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683578617176:android:94c6145e69bfbe5587c92d",
+        "android_client_info": {
+          "package_name": "com.example.fire_chat.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683578617176-cso2t6i1uo2n6o7qtcirkrd6eblqn91a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJMRyJe7Dz1ETbVV7y6KZix-UGGsGK3_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683578617176-cso2t6i1uo2n6o7qtcirkrd6eblqn91a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "683578617176-vk9qlffuc6716puvq07cvvrqtvdpt4v6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fireChat"
+              }
             }
           ]
         }
