@@ -1,14 +1,17 @@
+import 'dart:developer';
+
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class RegistrationPage extends StatelessWidget {
+  RegistrationPage({Key? key}) : super(key: key);
 
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -20,7 +23,7 @@ class LoginPage extends StatelessWidget {
         Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: const Text(AppLocalization.loginPageTitle),
+            title: const Text(AppLocalization.createUserPageTitle),
             centerTitle: true,
           ),
           body: SafeArea(
@@ -70,7 +73,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         Container(
                           margin: const EdgeInsets.only(left: 16, right: 16),
-                          color: Colors.black,
+                          color: Colors.white,
                           height: 64,
                         ),
                         const SizedBox(
@@ -88,7 +91,38 @@ class LoginPage extends StatelessWidget {
                           padding: 50,
                           radius: 16,
                           child: const Text(
-                            AppLocalization.loginButtonText,
+                            AppLocalization.createAccount,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        CustomElevatedButton(
+                          onPressed: () async {
+                            try {
+                              await FirebaseAuth.instance.signInAnonymously();
+                            } on FirebaseAuthException catch (error) {
+                              log(error.toString());
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    error.toString(),
+                                  ),
+                                ),
+                              );
+                            } catch (error) {
+                              log(error.toString());
+                            }
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.homePageRoute,
+                            );
+                            // default behavior for my app - show login screen after logout
+                          },
+                          padding: 50,
+                          radius: 16,
+                          child: const Text(
+                            AppLocalization.loginAnonymously,
                           ),
                         ),
                         const SizedBox(
@@ -97,10 +131,10 @@ class LoginPage extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacementNamed(
-                              AppRoutes.registrationPageRoute,
+                              AppRoutes.loginPageRoute,
                             );
                           },
-                          child: const Text(AppLocalization.noAccount),
+                          child: const Text(AppLocalization.haveAccount),
                         ),
                       ],
                     ),

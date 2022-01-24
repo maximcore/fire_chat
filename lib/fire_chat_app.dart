@@ -34,12 +34,6 @@ class DynamicThemeApp extends StatelessWidget {
         return BlocBuilder<ProfileExistenceBloc, ProfileExistenceBlocState>(
           builder: (context, profileState) {
             return MaterialApp(
-              home: Stack(
-                children: [
-                  LoginPage(),
-                  const FlavorsBanner(),
-                ],
-              ),
               title: 'Fire Chat',
               theme: CustomAppTheme.lightTheme,
               darkTheme: CustomAppTheme.darkTheme,
