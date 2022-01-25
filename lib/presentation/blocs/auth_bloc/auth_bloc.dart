@@ -1,30 +1,42 @@
+import 'dart:developer';
+
+import 'package:fire_chat/domain/providers/auth_providers/auth_provider.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_events.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
-  AuthBloc()
+  AuthBloc({required this.authProvider})
       : super(
           AuthBlocState(status: AuthBlocStatus.loggedOut),
         ) {
-    on<LoginEvent>((event, emit) async {
+    on<AnonymousLoginEvent>((event, emit) async {
+      final user = await authProvider.signInAnonymously();
       emit(
         AuthBlocState(
-          status: AuthBlocStatus.loggedIn,
+          user: user,
+          status: AuthBlocStatus.loggedInAnonymously,
         ),
       );
     });
 
-    on<LogoutEvent>((event, emit) {
-      emit(
-        AuthBlocState(
-          status: AuthBlocStatus.loggedOut,
-        ),
-      );
+    on<SignOutEvent>((event, emit) async {
+      try {
+        await authProvider.signOut();
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.loggedOut,
+          ),
+        );
+      } catch (error) {
+        log(error.toString());
+      }
     });
   }
 
-  void login() => add(LoginEvent());
+  final AuthProvider authProvider;
 
-  void logout() => add(LogoutEvent());
+  void loginAnonymously() => add(AnonymousLoginEvent());
+
+  void signOut() => add(SignOutEvent());
 }

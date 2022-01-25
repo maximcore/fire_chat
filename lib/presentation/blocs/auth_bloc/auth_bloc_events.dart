@@ -1,7 +1,7 @@
 abstract class AuthBlocEvent {}
 
-class LoginEvent extends AuthBlocEvent {}
+class AnonymousLoginEvent extends AuthBlocEvent {}
 
-class LogoutEvent extends AuthBlocEvent {}
+class SignOutEvent extends AuthBlocEvent {}
 
-class RegistrationEvent extends AuthBlocEvent {}
+//class RegistrationEvent extends AuthBlocEvent {}
