@@ -4,7 +4,7 @@ import 'package:fire_chat/fire_chat_app.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  F.appFlavor = Flavor.LOCAL;
+  F.appFlavor = Flavor.local;
   await setup();
   runApp(
     const FireChatApp(),

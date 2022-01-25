@@ -11,9 +11,8 @@ class UserEntity with _$UserEntity {
   const factory UserEntity({
     @HiveField(0) @Default('') String username,
     @HiveField(1) @Default('') String email,
-    @HiveField(2) @Default('') String id,
+    @HiveField(2) required String id,
     @HiveField(3) @Default('') String profilePictureUrl,
-    @HiveField(4) required String uid,
   }) = _UserEntity;
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>

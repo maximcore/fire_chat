@@ -9,8 +9,8 @@ enum ProfileEditingBlocStatus { initial, ready, updating, error }
 @freezed
 class ProfileEditingBlocState with _$ProfileEditingBlocState {
   factory ProfileEditingBlocState({
-    required UserEntity user,
-    required UserEntity localUser,
+     required UserEntity user,
+     required UserEntity localUser,
     required ProfileEditingBlocStatus status,
   }) = _ProfileEditingBlocState;
 }

@@ -3,7 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_bloc_state.freezed.dart';
 
-enum AuthBlocStatus { loggedInAnonymously, loggedOut }
+enum AuthBlocStatus {
+  loading,
+  loggedInAnonymously,
+  loggedInWithEmailAndPassword,
+  loggedOut,
+}
 
 @freezed
 class AuthBlocState with _$AuthBlocState {

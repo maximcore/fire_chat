@@ -13,7 +13,11 @@ class FirebaseAuthProvider implements AuthProvider {
     return userCredential == null
         ? null
         : UserEntity(
-            uid: userCredential.user!.uid,
+            id: userCredential.user!.uid,
+            username: userCredential.user!.email!,
+            email: userCredential.user!.email!,
+            profilePictureUrl:
+                'https://tinypng.com/images/apng/panda-waving.png',
           );
   }
 
@@ -28,13 +32,25 @@ class FirebaseAuthProvider implements AuthProvider {
     await FirebaseAuth.instance.signOut();
   }
 
-  // @override
-  // Future<FCUser?> signInWithEmailAndPassword({
-  //   required String email,
-  //   required String password,
-  // }) async {
-  //   final user = await FirebaseAuth.instance
-  //       .signInWithEmailAndPassword(email: email, password: password);
-  //   return _userFromFirebase(user);
-  // }
+  @override
+  Future<UserEntity?> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return _userFromFirebase(user);
+  }
+
+@override
+Future<UserEntity?> signInWithEmailAndPassword({
+  required String email,
+  required String password,
+}) async {
+  final user = await FirebaseAuth.instance
+      .signInWithEmailAndPassword(email: email, password: password);
+  return _userFromFirebase(user);
+}
 }

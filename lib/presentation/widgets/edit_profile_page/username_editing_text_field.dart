@@ -3,17 +3,17 @@ import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editin
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UsernameTextField extends StatefulWidget {
-  const UsernameTextField({Key? key, required this.initialValue})
+class UsernameEditingTextField extends StatefulWidget {
+  const UsernameEditingTextField({Key? key, required this.initialValue})
       : super(key: key);
 
   final String? initialValue;
 
   @override
-  _UsernameTextFieldState createState() => _UsernameTextFieldState();
+  _UsernameEditingTextFieldState createState() => _UsernameEditingTextFieldState();
 }
 
-class _UsernameTextFieldState extends State<UsernameTextField> {
+class _UsernameEditingTextFieldState extends State<UsernameEditingTextField> {
   late final TextEditingController _usernameController;
 
   @override

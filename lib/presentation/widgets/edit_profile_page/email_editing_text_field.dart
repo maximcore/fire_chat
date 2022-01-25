@@ -3,8 +3,8 @@ import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editin
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EmailTextField extends StatefulWidget {
-  const EmailTextField({
+class EmailEditingTextField extends StatefulWidget {
+  const EmailEditingTextField({
     Key? key,
     required this.initialValue,
   }) : super(key: key);
@@ -12,10 +12,10 @@ class EmailTextField extends StatefulWidget {
   final String? initialValue;
 
   @override
-  _EmailTextFieldState createState() => _EmailTextFieldState();
+  _EmailEditingTextFieldState createState() => _EmailEditingTextFieldState();
 }
 
-class _EmailTextFieldState extends State<EmailTextField> {
+class _EmailEditingTextFieldState extends State<EmailEditingTextField> {
   late final TextEditingController _emailController;
 
   @override

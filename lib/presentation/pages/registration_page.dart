@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc.dart';
+import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,7 +50,7 @@ class RegistrationPage extends StatelessWidget {
                             controller: _loginController,
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
-                              label: Text(AppLocalization.loginLabelText),
+                              label: Text(AppLocalization.emailLabelText),
                             ),
                           ),
                         ),
@@ -80,14 +80,7 @@ class RegistrationPage extends StatelessWidget {
                           height: 8,
                         ),
                         CustomElevatedButton(
-                          onPressed: () {
-                            context.read<ProfileExistenceBloc>().create();
-                            context.read<AuthBloc>().login();
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutes.homePageRoute,
-                            );
-                          },
+                          onPressed: () => onCreatePressed(context),
                           padding: 50,
                           radius: 16,
                           child: const Text(
@@ -98,27 +91,7 @@ class RegistrationPage extends StatelessWidget {
                           height: 8,
                         ),
                         CustomElevatedButton(
-                          onPressed: () async {
-                            try {
-                              await FirebaseAuth.instance.signInAnonymously();
-                            } on FirebaseAuthException catch (error) {
-                              log(error.toString());
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    error.toString(),
-                                  ),
-                                ),
-                              );
-                            } catch (error) {
-                              log(error.toString());
-                            }
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutes.homePageRoute,
-                            );
-                            // default behavior for my app - show login screen after logout
-                          },
+                          onPressed: () => onLoginAnonymouslyPressed(context),
                           padding: 50,
                           radius: 16,
                           child: const Text(
@@ -147,5 +120,40 @@ class RegistrationPage extends StatelessWidget {
         const FlavorsBanner(),
       ],
     );
+  }
+
+  void onCreatePressed(BuildContext context) {
+    //context.read<ProfileExistenceBloc>().create();
+    context.read<RegistrationBloc>().createUser(
+          email: _loginController.text,
+          password: _passwordController.text,
+        );
+    Navigator.pushNamed(
+      context,
+      AppRoutes.homePageRoute,
+    );
+  }
+
+  Future<void> onLoginAnonymouslyPressed(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously().then((_) {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.homePageRoute,
+        );
+        context.read<AuthBloc>().loginAnonymously();
+      });
+    } on FirebaseAuthException catch (error) {
+      log(error.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            error.toString(),
+          ),
+        ),
+      );
+    } catch (error) {
+      log(error.toString());
+    }
   }
 }

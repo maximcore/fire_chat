@@ -1,4 +1,3 @@
-import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
@@ -6,6 +5,7 @@ import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
 import 'package:fire_chat/presentation/pages/chats_page.dart';
 import 'package:fire_chat/presentation/pages/feed_page.dart';
+import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';

@@ -1,7 +1,7 @@
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_state.dart';
-import 'package:fire_chat/presentation/widgets/edit_profile_page/email_text_field.dart';
-import 'package:fire_chat/presentation/widgets/edit_profile_page/username_text_field.dart';
+import 'package:fire_chat/presentation/widgets/edit_profile_page/email_editing_text_field.dart';
+import 'package:fire_chat/presentation/widgets/edit_profile_page/username_editing_text_field.dart';
 import 'package:flutter/material.dart';
 
 class ProfileReadyWidget extends StatelessWidget {
@@ -45,10 +45,10 @@ class ProfileReadyWidget extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                UsernameTextField(
+                UsernameEditingTextField(
                   initialValue: state.user.username,
                 ),
-                EmailTextField(
+                EmailEditingTextField(
                   initialValue: state.user.email,
                 ),
                 ElevatedButton(

@@ -30,7 +30,7 @@ class AppLocalization {
   static const String createAccount = 'CREATE ACCOUNT';
 
   // Label text
-  static const String loginLabelText = 'Login';
+  static const String emailLabelText = 'Email';
   static const String passwordLabelText = 'Password';
 
   // Other text
@@ -54,4 +54,9 @@ class AppLocalization {
   static const String initializing = 'Initializing';
   static const String error = 'Error';
   static const String updating = 'Updating';
+
+  // Error text
+static const String passwordFormatErrorHelperText = 'Password must be at least 6 characters';
+
+  static const String emailFormatErrorHelperText = 'Please ensure the email entered is valid';
 }

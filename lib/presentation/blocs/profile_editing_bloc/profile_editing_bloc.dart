@@ -13,7 +13,7 @@ class ProfileEditingBloc
     required UserEntity user,
   }) : super(
           ProfileEditingBlocState(
-            status: ProfileEditingBlocStatus.ready,
+            status: ProfileEditingBlocStatus.initial,
             user: user,
             localUser: user.copyWith(id: 'localUser'),
           ),
@@ -82,10 +82,8 @@ class ProfileEditingBloc
               );
       } catch (error) {
         emit(
-          ProfileEditingBlocState(
+          state.copyWith(
             status: ProfileEditingBlocStatus.error,
-            user: state.user,
-            localUser: state.localUser,
           ),
         );
         log(error.toString());

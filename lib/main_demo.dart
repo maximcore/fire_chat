@@ -4,7 +4,7 @@ import 'package:fire_chat/injector.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  F.appFlavor = Flavor.DEMO;
+  F.appFlavor = Flavor.demo;
   await setup();
   runApp(
     const FireChatApp(),

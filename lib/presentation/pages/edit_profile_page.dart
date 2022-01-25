@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
-import 'package:fire_chat/presentation/blocs/profile_existence_bloc/profile_existence_bloc.dart';
 import 'package:fire_chat/presentation/views/edit_profile_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,7 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<ProfileExistenceBloc>();
+    final bloc = context.read<AuthBloc>();
     return EditProfilePageView(
       saveProfileChanges: () {
         _saveProfileChanges(context);
@@ -52,7 +52,7 @@ class EditProfilePage extends StatelessWidget {
 
   void _showDeleteProfileDialog(
     BuildContext context,
-    ProfileExistenceBloc bloc,
+    AuthBloc bloc,
   ) {
     showDialog<void>(
       context: context,
@@ -67,7 +67,7 @@ class EditProfilePage extends StatelessWidget {
                   AppRoutes.loginPageRoute,
                   (route) => true,
                 );
-                bloc.delete();
+                //bloc.delete();
               },
             ),
             TextButton(
