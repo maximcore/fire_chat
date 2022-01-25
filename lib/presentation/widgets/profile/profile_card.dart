@@ -34,6 +34,13 @@ class ProfileCard extends StatelessWidget {
             height: 16,
           ),
           Text(
+            user.uid,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(
             user.username,
             textAlign: TextAlign.center,
           ),
