@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:fire_chat/domain/providers/auth_providers/auth_provider.dart';
+import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
 import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_events.dart';
 import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +31,7 @@ class RegistrationBloc
     });
   }
 
-  final AuthProvider authProvider;
+  final AuthRepository authProvider;
 
   void createUser({
     required String email,

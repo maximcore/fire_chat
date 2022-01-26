@@ -1,13 +1,13 @@
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
-import 'package:fire_chat/domain/providers/auth_providers/auth_provider.dart';
+import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseAuthProvider implements AuthProvider {
-  FirebaseAuthProvider._();
+class FirebaseAuthRepository implements AuthRepository {
+  FirebaseAuthRepository._();
 
-  static final FirebaseAuthProvider _instance = FirebaseAuthProvider._();
+  static final FirebaseAuthRepository _instance = FirebaseAuthRepository._();
 
-  static FirebaseAuthProvider get instance => _instance;
+  static FirebaseAuthRepository get instance => _instance;
 
   UserEntity? _userFromFirebase(UserCredential? userCredential) {
     return userCredential == null
