@@ -18,9 +18,11 @@ class FormValidationBloc
         ) {
     on<EmailChangedEvent>((event, emit) {
       final email = Email.dirty(event.email);
-      state.copyWith(
-        email: email.valid ? email : Email.pure(event.email),
-        status: Formz.validate([email, state.password]),
+      emit(
+        state.copyWith(
+          email: email.valid ? email : Email.pure(event.email),
+          status: Formz.validate([email, state.password]),
+        ),
       );
     });
     on<EmailUnfocusedEvent>((event, emit) {
@@ -34,9 +36,11 @@ class FormValidationBloc
     });
     on<PasswordChangedEvent>((event, emit) {
       final password = Password.dirty(event.password);
-      state.copyWith(
-        password: password.valid ? password : Password.pure(event.password),
-        status: Formz.validate([state.email, password]),
+      emit(
+        state.copyWith(
+          password: password.valid ? password : Password.pure(event.password),
+          status: Formz.validate([state.email, password]),
+        ),
       );
     });
     on<PasswordUnfocusedEvent>((event, emit) {
