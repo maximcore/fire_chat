@@ -1,14 +1,10 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
-import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
-import 'package:fire_chat/domain/repositories/auth_repository/firebase_auth_repository.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_events.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
 import 'package:fire_chat/presentation/widgets/profile/profile_card.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

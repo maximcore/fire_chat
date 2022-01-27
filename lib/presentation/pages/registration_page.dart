@@ -4,7 +4,6 @@ import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:fire_chat/presentation/widgets/login_page/auth_form.dart';
