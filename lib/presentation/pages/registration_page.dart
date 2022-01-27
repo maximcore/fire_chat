@@ -4,6 +4,8 @@ import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
+import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc.dart';
+import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_state.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:fire_chat/presentation/widgets/login_page/auth_form.dart';
@@ -18,78 +20,77 @@ class RegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => FormValidationBloc(),
-      child: Stack(
-        children: [
-          Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              title: const Text(AppLocalization.createUserPageTitle),
-              centerTitle: true,
-            ),
-            body: SafeArea(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return SingleChildScrollView(
-                    child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(minHeight: constraints.maxHeight),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const Icon(
-                            Icons.person_pin,
-                            size: 64,
+      child: BlocBuilder<RegistrationBloc, RegistrationBlocState>(
+        builder: (context, state) {
+          print(state);
+          return Stack(
+            children: [
+              Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  title: const Text(AppLocalization.createUserPageTitle),
+                  centerTitle: true,
+                ),
+                body: SafeArea(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        child: ConstrainedBox(
+                          constraints:
+                              BoxConstraints(minHeight: constraints.maxHeight),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              const Icon(
+                                Icons.person_pin,
+                                size: 64,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              const LoginForm(
+                                isLoginForm: false,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              CustomElevatedButton(
+                                onPressed: () =>
+                                    onLoginAnonymouslyPressed(context),
+                                padding: 50,
+                                radius: 16,
+                                child: const Text(
+                                  AppLocalization.loginAnonymously,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacementNamed(
+                                    AppRoutes.loginPageRoute,
+                                  );
+                                },
+                                child: const Text(AppLocalization.haveAccount),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const LoginForm(
-                            isLoginForm: false,
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          CustomElevatedButton(
-                            onPressed: () => onLoginAnonymouslyPressed(context),
-                            padding: 50,
-                            radius: 16,
-                            child: const Text(
-                              AppLocalization.loginAnonymously,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(
-                                AppRoutes.loginPageRoute,
-                              );
-                            },
-                            child: const Text(AppLocalization.haveAccount),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-            ),
-          ),
-          const FlavorsBanner(),
-        ],
+              const FlavorsBanner(),
+            ],
+          );
+        },
       ),
-    );
-  }
-
-  void onCreatePressed(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      AppRoutes.homePageRoute,
     );
   }
 
