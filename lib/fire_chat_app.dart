@@ -4,7 +4,6 @@ import 'package:fire_chat/config/theme.dart';
 import 'package:fire_chat/config/wrappers/blocs_app_wrapper.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
