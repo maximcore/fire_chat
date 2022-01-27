@@ -56,7 +56,9 @@ class AppLocalization {
   static const String updating = 'Updating';
 
   // Error text
-static const String passwordFormatErrorHelperText = 'Password must be at least 6 characters';
+  static const String passwordFormatErrorHelperText =
+      'Password must be at least 6 characters';
 
-  static const String emailFormatErrorHelperText = 'Please ensure the email entered is valid';
+  static const String emailFormatErrorHelperText =
+      'Please ensure the email entered is valid';
 }
