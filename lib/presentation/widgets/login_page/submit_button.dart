@@ -9,6 +9,7 @@ import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:formz/formz.dart';
 
 class SubmitButton extends StatelessWidget {
@@ -55,6 +56,22 @@ class SubmitButton extends StatelessWidget {
               if (registrationState.status == RegistrationBlocStatus.ready) {
                 Navigator.of(context)
                     .pushReplacementNamed(AppRoutes.homePageRoute);
+              }
+              else if(registrationState.status == RegistrationBlocStatus.error){
+                showDialog<void>(context: context, builder: (context) {
+                  return AlertDialog(
+                    title: Text('The email address is already in use by another account'),
+                  );
+                });
+                Fluttertoast.showToast(
+                    msg: "Can't login",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );
               }
             },
             builder: (_, registrationState) {
