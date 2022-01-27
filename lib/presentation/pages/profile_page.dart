@@ -1,12 +1,14 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
+import 'package:fire_chat/domain/repositories/auth_repository/firebase_auth_repository.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_events.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
 import 'package:fire_chat/presentation/widgets/profile/profile_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -69,32 +71,51 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //return BlocSelector<ProfileEditingBloc, ProfileEditingBlocState,
-    //    UserEntity>(
-    return BlocSelector<RegistrationBloc, RegistrationBlocState,UserEntity>(
-      selector: (state) => state.user!,
-      builder: (_, user) {
-        return BlocBuilder<ThemeBloc, ThemeBlocState>(
-          builder: (_, builderState) {
-            return Scaffold(
-              appBar: AppBar(
-                actions: _actions(context, builderState),
-                title: const Text(AppLocalization.profilePageTitle),
-                centerTitle: true,
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ProfileCard(user: user),
-                    _systemThemeSettings(context, builderState),
-                  ],
-                ),
-              ),
+    return BlocBuilder<AuthBloc, AuthBlocState>(
+      builder: (_, authState) {
+        switch (authState.status) {
+          case AuthBlocStatus.loggedInAnonymously:
+          case AuthBlocStatus.loggedInWithEmailAndPassword:
+          case AuthBlocStatus.loading:
+            return BlocBuilder<ThemeBloc, ThemeBlocState>(
+              builder: (_, builderState) {
+                return Scaffold(
+                  appBar: AppBar(
+                    actions: _actions(context, builderState),
+                    title: const Text(AppLocalization.profilePageTitle),
+                    centerTitle: true,
+                  ),
+                  body: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ProfileCard(user: authState.user!),
+                        _systemThemeSettings(context, builderState),
+                      ],
+                    ),
+                  ),
+                );
+              },
             );
-          },
-        );
+          case AuthBlocStatus.loggedOut:
+            return BlocBuilder<ThemeBloc, ThemeBlocState>(
+              builder: (_, builderState) {
+                return Scaffold(
+                  appBar: AppBar(
+                    actions: _actions(context, builderState),
+                    title: const Text(AppLocalization.profilePageTitle),
+                    centerTitle: true,
+                  ),
+                  body: const SingleChildScrollView(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              },
+            );
+        }
       },
     );
   }

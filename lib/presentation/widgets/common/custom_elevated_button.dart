@@ -11,7 +11,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.height = 50,
   }) : super(key: key);
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
   final double padding;
   final double radius;

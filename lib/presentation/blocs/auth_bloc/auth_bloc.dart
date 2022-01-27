@@ -20,7 +20,19 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       );
     });
     on<LoginWithEmailAndPasswordEvent>((event, emit) async {
-      final user = await authRepository.createUserWithEmailAndPassword(
+      final user = await authRepository.signInWithEmailAndPassword(
+        email: event.email,
+        password: event.password,
+      );
+      emit(
+        AuthBlocState(
+          user: user,
+          status: AuthBlocStatus.loggedInWithEmailAndPassword,
+        ),
+      );
+    });
+    on<LoginWithEmailAndPasswordAfterRegistrationEvent>((event, emit) async {
+      final user = await authRepository.signInWithEmailAndPassword(
         email: event.email,
         password: event.password,
       );
@@ -33,12 +45,18 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     });
     on<SignOutEvent>((event, emit) async {
       try {
+        emit(
+          state.copyWith(status: AuthBlocStatus.loading),
+        );
+
         await authRepository.signOut();
+
         emit(
           AuthBlocState(
             status: AuthBlocStatus.loggedOut,
           ),
         );
+
       } catch (error) {
         log(error.toString());
       }
@@ -57,6 +75,17 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   }) =>
       add(
         LoginWithEmailAndPasswordEvent(
+          email: email,
+          password: password,
+        ),
+      );
+
+  void loginWithEmailAndPasswordAfterRegistration({
+    required String email,
+    required String password,
+  }) =>
+      add(
+        LoginWithEmailAndPasswordAfterRegistrationEvent(
           email: email,
           password: password,
         ),

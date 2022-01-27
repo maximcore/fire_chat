@@ -3,15 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'registration_bloc_state.freezed.dart';
 
-enum RegistrationBlocStatus {
-  initial,
-  registered,
-}
-
 @freezed
 class RegistrationBlocState with _$RegistrationBlocState {
   factory RegistrationBlocState({
     UserEntity? user,
-    required RegistrationBlocStatus status,
   }) = _RegistrationBlocState;
 }

@@ -37,10 +37,10 @@ class ProfileReadyWidget extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                ElevatedButton(
+                const ElevatedButton(
                   onPressed: null,
                   //onPressed: onPressed,
-                  child: const Text(AppLocalization.updateAvatar),
+                  child: Text(AppLocalization.updateAvatar),
                 ),
                 const SizedBox(
                   height: 16,

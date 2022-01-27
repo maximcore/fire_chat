@@ -10,7 +10,6 @@ class RegistrationBloc
   RegistrationBloc({required this.authProvider})
       : super(
           RegistrationBlocState(
-            status: RegistrationBlocStatus.initial,
           ),
         ) {
     on<RegistrationWithEmailAndPasswordEvent>((event, emit) async {
@@ -21,7 +20,6 @@ class RegistrationBloc
         );
         emit(
           RegistrationBlocState(
-            status: RegistrationBlocStatus.registered,
             user: user,
           ),
         );

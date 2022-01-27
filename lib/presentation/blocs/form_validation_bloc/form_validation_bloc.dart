@@ -64,8 +64,13 @@ class FormValidationBloc
       );
       if (state.status.isValidated) {
         emit(state.copyWith(status: FormzStatus.submissionInProgress));
-        await Future<void>.delayed(const Duration(seconds: 1));
-        emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        await Future<void>.delayed(const Duration(milliseconds: 5));
+        try {
+          // ...
+          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+        } catch (error) {
+          emit(state.copyWith(status: FormzStatus.submissionFailure));
+        }
       }
     });
   }

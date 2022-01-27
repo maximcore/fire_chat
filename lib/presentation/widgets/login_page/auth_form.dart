@@ -1,14 +1,17 @@
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
-import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_state.dart';
 import 'package:fire_chat/presentation/widgets/login_page/email_text_field.dart';
 import 'package:fire_chat/presentation/widgets/login_page/password_text_field.dart';
 import 'package:fire_chat/presentation/widgets/login_page/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
+  const LoginForm({
+    Key? key,
+    required this.isLoginForm,
+  }) : super(key: key);
+
+  final bool isLoginForm;
 
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -43,23 +46,16 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<FormValidationBloc, FormValidationState>(
-      listener: (context, state) {
-        if (state.status.isSubmissionInProgress) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(content: Text('Submitting...')),
-            );
-        }
-      },
-      child: Column(
-        children: <Widget>[
-          EmailTextField(focusNode: _emailFocusNode),
-          PasswordTextField(focusNode: _passwordFocusNode),
-          const SubmitButton(),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        EmailTextField(focusNode: _emailFocusNode),
+        PasswordTextField(focusNode: _passwordFocusNode),
+        SubmitButton(
+          isLoginForm: widget.isLoginForm,
+        ),
+      ],
     );
   }
 }

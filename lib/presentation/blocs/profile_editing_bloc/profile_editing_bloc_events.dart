@@ -15,5 +15,3 @@ class EditEmailEvent extends ProfileEditingBlocEvent {
 }
 
 class SaveProfileEvent extends ProfileEditingBlocEvent {}
-
-
