@@ -14,8 +14,8 @@ class FirebaseAuthRepository implements AuthRepository {
         ? null
         : UserEntity(
             id: userCredential.user!.uid,
-            username: userCredential.user!.email!,
-            email: userCredential.user!.email!,
+            username: userCredential.user!.email ?? '',
+            email: userCredential.user!.email ?? '',
             profilePictureUrl:
                 'https://tinypng.com/images/apng/panda-waving.png',
           );
@@ -44,13 +44,30 @@ class FirebaseAuthRepository implements AuthRepository {
     return _userFromFirebase(user);
   }
 
-@override
-Future<UserEntity?> signInWithEmailAndPassword({
-  required String email,
-  required String password,
-}) async {
-  final user = await FirebaseAuth.instance
-      .signInWithEmailAndPassword(email: email, password: password);
-  return _userFromFirebase(user);
-}
+  @override
+  Future<UserEntity?> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final user = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+    return _userFromFirebase(user);
+  }
+
+  @override
+  UserEntity? currentUser() {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+    // TODO(Maxim): handle anonymous user case(remove '')
+    return currentUser.isAnonymous
+        ? UserEntity(
+            email: currentUser.email ?? '',
+            id: currentUser.uid,
+            username: currentUser.email ?? '',
+          )
+        : UserEntity(
+            email: currentUser.email!,
+            id: currentUser.uid,
+            username: currentUser.email!,
+          );
+  }
 }
