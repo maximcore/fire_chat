@@ -1,24 +1,24 @@
 import 'dart:developer';
 
 import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_events.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc_events.dart';
+import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegistrationBloc
-    extends Bloc<RegistrationBlocEvent, RegistrationBlocState> {
-  RegistrationBloc({required this.authProvider})
+class SignUpBloc
+    extends Bloc<SignUpBlocEvent, SignUpBlocState> {
+  SignUpBloc({required this.authProvider})
       : super(
-          RegistrationBlocState(
-            status: RegistrationBlocStatus.initial,
+          SignUpBlocState(
+            status: SignUpBlocStatus.initial,
           ),
         ) {
-    on<RegistrationWithEmailAndPasswordEvent>((event, emit) async {
+    on<SignUpWithEmailAndPasswordEvent>((event, emit) async {
       try {
         emit(
-          RegistrationBlocState(
-            status: RegistrationBlocStatus.loading,
+          SignUpBlocState(
+            status: SignUpBlocStatus.loading,
           ),
         );
         final user = await authProvider.createUserWithEmailAndPassword(
@@ -26,30 +26,30 @@ class RegistrationBloc
           password: event.password,
         );
         emit(
-          RegistrationBlocState(
-            status: RegistrationBlocStatus.ready,
+          SignUpBlocState(
+            status: SignUpBlocStatus.ready,
             user: user,
           ),
         );
       } on FirebaseAuthException catch (error) {
         log(error.toString());
         emit(
-          RegistrationBlocState(
-            status: RegistrationBlocStatus.error,
+          SignUpBlocState(
+            status: SignUpBlocStatus.error,
             errorMessage: error.message,
           ),
         );
         rethrow;
       } catch (error) {
         emit(
-          RegistrationBlocState(
-            status: RegistrationBlocStatus.error,
+          SignUpBlocState(
+            status: SignUpBlocStatus.error,
           ),
         );
         log(error.toString());
         emit(
-          RegistrationBlocState(
-            status: RegistrationBlocStatus.loading,
+          SignUpBlocState(
+            status: SignUpBlocStatus.loading,
           ),
         );
         rethrow;
@@ -64,7 +64,7 @@ class RegistrationBloc
     required String password,
   }) =>
       add(
-        RegistrationWithEmailAndPasswordEvent(
+        SignUpWithEmailAndPasswordEvent(
           email: email,
           password: password,
         ),

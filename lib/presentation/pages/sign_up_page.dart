@@ -4,8 +4,8 @@ import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
+import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc_state.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:fire_chat/presentation/widgets/login_page/auth_form.dart';
@@ -13,14 +13,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegistrationPage extends StatelessWidget {
-  RegistrationPage({Key? key}) : super(key: key);
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => FormValidationBloc(),
-      child: BlocBuilder<RegistrationBloc, RegistrationBlocState>(
+      child: BlocBuilder<SignUpBloc, SignUpBlocState>(
         builder: (context, state) {
           return Stack(
             children: [

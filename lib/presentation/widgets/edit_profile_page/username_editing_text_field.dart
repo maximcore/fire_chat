@@ -10,7 +10,8 @@ class UsernameEditingTextField extends StatefulWidget {
   final String? initialValue;
 
   @override
-  _UsernameEditingTextFieldState createState() => _UsernameEditingTextFieldState();
+  _UsernameEditingTextFieldState createState() =>
+      _UsernameEditingTextFieldState();
 }
 
 class _UsernameEditingTextFieldState extends State<UsernameEditingTextField> {

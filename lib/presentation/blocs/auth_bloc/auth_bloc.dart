@@ -67,7 +67,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         log(error.toString());
       }
     });
-    on<LoginWithEmailAndPasswordAfterRegistrationEvent>((event, emit) async {
+    on<LoginWithEmailAndPasswordAfterSignUpEvent>((event, emit) async {
       final user = await authRepository.signInWithEmailAndPassword(
         email: event.email,
         password: event.password,
@@ -115,12 +115,12 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         ),
       );
 
-  void loginWithEmailAndPasswordAfterRegistration({
+  void loginWithEmailAndPasswordAfterSignUp({
     required String email,
     required String password,
   }) =>
       add(
-        LoginWithEmailAndPasswordAfterRegistrationEvent(
+        LoginWithEmailAndPasswordAfterSignUpEvent(
           email: email,
           password: password,
         ),

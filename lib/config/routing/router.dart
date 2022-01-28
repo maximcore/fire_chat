@@ -1,7 +1,7 @@
 import 'package:fire_chat/config/routing/defined_routes_export.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/presentation/pages/edit_profile_page.dart';
-import 'package:fire_chat/presentation/pages/registration_page.dart';
+import 'package:fire_chat/presentation/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -11,8 +11,8 @@ class AppRouter {
         return EditProfilePage.route(settings);
       case AppRoutes.loginPageRoute:
         return MaterialPageRoute<void>(builder: (_) => LoginPage());
-      case AppRoutes.registrationPageRoute:
-        return MaterialPageRoute<void>(builder: (_) => RegistrationPage());
+      case AppRoutes.signUpPageRoute:
+        return MaterialPageRoute<void>(builder: (_) => const SignUpPage());
       case AppRoutes.homePageRoute:
         return MaterialPageRoute<void>(builder: (_) => const HomePage());
       case AppRoutes.chatPageRoute:

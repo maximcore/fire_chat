@@ -12,8 +12,8 @@ class LoginWithEmailAndPasswordEvent extends AuthBlocEvent {
   String password;
 }
 
-class LoginWithEmailAndPasswordAfterRegistrationEvent extends AuthBlocEvent {
-  LoginWithEmailAndPasswordAfterRegistrationEvent({
+class LoginWithEmailAndPasswordAfterSignUpEvent extends AuthBlocEvent {
+  LoginWithEmailAndPasswordAfterSignUpEvent({
     required this.email,
     required this.password,
   });

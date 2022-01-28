@@ -4,8 +4,8 @@ import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_state.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc.dart';
-import 'package:fire_chat/presentation/blocs/registration_bloc/registration_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +25,6 @@ class SubmitButton extends StatelessWidget {
     return isLoginForm
         ? BlocConsumer<AuthBloc, AuthBlocState>(
             listener: (_, authState) {
-              print(authState.status);
               if (authState.status == AuthBlocStatus.loggedInAnonymously &&
                   authState.status ==
                       AuthBlocStatus.loggedInWithEmailAndPassword) {
@@ -61,15 +60,14 @@ class SubmitButton extends StatelessWidget {
               );
             },
           )
-        : BlocConsumer<RegistrationBloc, RegistrationBlocState>(
-            listener: (_, registrationState) {
-              if (registrationState.status == RegistrationBlocStatus.ready) {
+        : BlocConsumer<SignUpBloc, SignUpBlocState>(
+            listener: (_, signUpState) {
+              if (signUpState.status == SignUpBlocStatus.ready) {
                 Navigator.of(context)
                     .pushReplacementNamed(AppRoutes.homePageRoute);
-              } else if (registrationState.status ==
-                  RegistrationBlocStatus.error) {
+              } else if (signUpState.status == SignUpBlocStatus.error) {
                 Fluttertoast.showToast(
-                  msg: registrationState.errorMessage!,
+                  msg: signUpState.errorMessage!,
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   backgroundColor: Colors.transparent,
@@ -77,7 +75,7 @@ class SubmitButton extends StatelessWidget {
                 );
               }
             },
-            builder: (_, registrationState) {
+            builder: (_, signUpState) {
               return BlocBuilder<FormValidationBloc, FormValidationState>(
                 buildWhen: (previous, current) =>
                     previous.status != current.status,
@@ -109,7 +107,7 @@ class SubmitButton extends StatelessWidget {
 
     isLoginForm
         ? onLoginSubmit(context, state)
-        : onRegistrationSubmit(context, state);
+        : onSignUpSubmit(context, state);
   }
 
   void onLoginSubmit(BuildContext context, FormValidationState state) {
@@ -119,16 +117,16 @@ class SubmitButton extends StatelessWidget {
         );
   }
 
-  void onRegistrationSubmit(
+  void onSignUpSubmit(
     BuildContext context,
     FormValidationState state,
   ) {
     try {
-      context.read<RegistrationBloc>().createUser(
+      context.read<SignUpBloc>().createUser(
             email: state.email.value,
             password: state.password.value,
           );
-      context.read<AuthBloc>().loginWithEmailAndPasswordAfterRegistration(
+      context.read<AuthBloc>().loginWithEmailAndPasswordAfterSignUp(
             email: state.email.value,
             password: state.password.value,
           );
