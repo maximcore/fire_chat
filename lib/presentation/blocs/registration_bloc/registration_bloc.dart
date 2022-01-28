@@ -36,6 +36,7 @@ class RegistrationBloc
         emit(
           RegistrationBlocState(
             status: RegistrationBlocStatus.error,
+            errorMessage: error.message,
           ),
         );
         rethrow;
@@ -46,6 +47,11 @@ class RegistrationBloc
           ),
         );
         log(error.toString());
+        emit(
+          RegistrationBlocState(
+            status: RegistrationBlocStatus.loading,
+          ),
+        );
         rethrow;
       }
     });

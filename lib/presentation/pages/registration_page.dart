@@ -22,7 +22,6 @@ class RegistrationPage extends StatelessWidget {
       create: (context) => FormValidationBloc(),
       child: BlocBuilder<RegistrationBloc, RegistrationBlocState>(
         builder: (context, state) {
-          print(state);
           return Stack(
             children: [
               Scaffold(

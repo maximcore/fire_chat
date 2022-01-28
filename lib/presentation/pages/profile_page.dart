@@ -95,6 +95,7 @@ class ProfilePage extends StatelessWidget {
               },
             );
           case AuthBlocStatus.loggedOut:
+          case AuthBlocStatus.error:
             return BlocBuilder<ThemeBloc, ThemeBlocState>(
               builder: (_, builderState) {
                 return Scaffold(

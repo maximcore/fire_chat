@@ -25,10 +25,20 @@ class SubmitButton extends StatelessWidget {
     return isLoginForm
         ? BlocConsumer<AuthBloc, AuthBlocState>(
             listener: (_, authState) {
-              if (authState.status != AuthBlocStatus.loading &&
-                  authState.status != AuthBlocStatus.loggedOut) {
+              print(authState.status);
+              if (authState.status == AuthBlocStatus.loggedInAnonymously &&
+                  authState.status ==
+                      AuthBlocStatus.loggedInWithEmailAndPassword) {
                 Navigator.of(context)
                     .pushReplacementNamed(AppRoutes.homePageRoute);
+              } else if (authState.status == AuthBlocStatus.error) {
+                Fluttertoast.showToast(
+                  msg: authState.errorMessage!,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.transparent,
+                  fontSize: 16,
+                );
               }
             },
             builder: (_, authState) {
@@ -56,21 +66,14 @@ class SubmitButton extends StatelessWidget {
               if (registrationState.status == RegistrationBlocStatus.ready) {
                 Navigator.of(context)
                     .pushReplacementNamed(AppRoutes.homePageRoute);
-              }
-              else if(registrationState.status == RegistrationBlocStatus.error){
-                showDialog<void>(context: context, builder: (context) {
-                  return AlertDialog(
-                    title: Text('The email address is already in use by another account'),
-                  );
-                });
+              } else if (registrationState.status ==
+                  RegistrationBlocStatus.error) {
                 Fluttertoast.showToast(
-                    msg: "Can't login",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0
+                  msg: registrationState.errorMessage!,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.transparent,
+                  fontSize: 16,
                 );
               }
             },

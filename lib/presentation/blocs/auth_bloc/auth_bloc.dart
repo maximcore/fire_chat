@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_events.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
@@ -11,25 +12,60 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
           AuthBlocState(status: AuthBlocStatus.loading),
         ) {
     on<AnonymousLoginEvent>((event, emit) async {
-      final user = await authRepository.signInAnonymously();
-      emit(
-        AuthBlocState(
-          user: user,
-          status: AuthBlocStatus.loggedInAnonymously,
-        ),
-      );
+      try {
+        final user = await authRepository.signInAnonymously();
+        emit(
+          AuthBlocState(
+            user: user,
+            status: AuthBlocStatus.loggedInAnonymously,
+          ),
+        );
+      } on FirebaseAuthException catch (error) {
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.error,
+            errorMessage: error.message,
+          ),
+        );
+        log(error.toString());
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.loading,
+          ),
+        );
+      } catch (error) {
+        log(error.toString());
+      }
     });
+
     on<LoginWithEmailAndPasswordEvent>((event, emit) async {
-      final user = await authRepository.signInWithEmailAndPassword(
-        email: event.email,
-        password: event.password,
-      );
-      emit(
-        AuthBlocState(
-          user: user,
-          status: AuthBlocStatus.loggedInWithEmailAndPassword,
-        ),
-      );
+      try {
+        final user = await authRepository.signInWithEmailAndPassword(
+          email: event.email,
+          password: event.password,
+        );
+        emit(
+          AuthBlocState(
+            user: user,
+            status: AuthBlocStatus.loggedInWithEmailAndPassword,
+          ),
+        );
+      } on FirebaseAuthException catch (error) {
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.error,
+            errorMessage: error.message,
+          ),
+        );
+        log(error.toString());
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.loading,
+          ),
+        );
+      } catch (error) {
+        log(error.toString());
+      }
     });
     on<LoginWithEmailAndPasswordAfterRegistrationEvent>((event, emit) async {
       final user = await authRepository.signInWithEmailAndPassword(
@@ -56,7 +92,6 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
             status: AuthBlocStatus.loggedOut,
           ),
         );
-
       } catch (error) {
         log(error.toString());
       }
