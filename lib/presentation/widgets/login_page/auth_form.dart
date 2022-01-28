@@ -1,6 +1,7 @@
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
 import 'package:fire_chat/presentation/widgets/login_page/email_text_field.dart';
 import 'package:fire_chat/presentation/widgets/login_page/password_text_field.dart';
+import 'package:fire_chat/presentation/widgets/login_page/sign_in_credentials_row.dart';
 import 'package:fire_chat/presentation/widgets/login_page/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +56,7 @@ class _LoginFormState extends State<LoginForm> {
         SubmitButton(
           isLoginForm: widget.isLoginForm,
         ),
+        const SignInCredentialsRow(),
       ],
     );
   }

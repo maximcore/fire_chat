@@ -13,6 +13,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         ) {
     on<AnonymousLoginEvent>((event, emit) async {
       try {
+        emit(state.copyWith(status: AuthBlocStatus.loading));
         final user = await authRepository.signInAnonymously();
         emit(
           AuthBlocState(
@@ -40,6 +41,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
 
     on<LoginWithEmailAndPasswordEvent>((event, emit) async {
       try {
+        emit(state.copyWith(status: AuthBlocStatus.loading));
         final user = await authRepository.signInWithEmailAndPassword(
           email: event.email,
           password: event.password,
@@ -67,6 +69,35 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         log(error.toString());
       }
     });
+
+    on<LoginWithGoogleEvent>((event, emit) async {
+      try {
+        emit(state.copyWith(status: AuthBlocStatus.loading));
+        final user = await authRepository.signInWithGoogle();
+        emit(
+          state.copyWith(
+            status: AuthBlocStatus.loggedInWithGoogle,
+            user: user,
+          ),
+        );
+      } on FirebaseAuthException catch (error) {
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.error,
+            errorMessage: error.message,
+          ),
+        );
+        log(error.toString());
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.loading,
+          ),
+        );
+      } catch (error) {
+        log(error.toString());
+      }
+    });
+
     on<LoginWithEmailAndPasswordAfterSignUpEvent>((event, emit) async {
       final user = await authRepository.signInWithEmailAndPassword(
         email: event.email,
@@ -114,6 +145,8 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
           password: password,
         ),
       );
+
+  void loginWithGoogle() => add(LoginWithGoogleEvent());
 
   void loginWithEmailAndPasswordAfterSignUp({
     required String email,

@@ -22,4 +22,6 @@ class LoginWithEmailAndPasswordAfterSignUpEvent extends AuthBlocEvent {
   String password;
 }
 
+class LoginWithGoogleEvent extends AuthBlocEvent {}
+
 class SignOutEvent extends AuthBlocEvent {}

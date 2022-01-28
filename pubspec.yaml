@@ -46,6 +46,7 @@ dependencies:
   image_picker: ^0.8.4+4
   flutter_flavorizr: ^2.1.2
   firebase_auth: ^3.3.5
+  google_sign_in: ^5.2.3
   firebase_core: ^1.11.0
   firebase_database: ^9.0.5
   formz: ^0.4.1

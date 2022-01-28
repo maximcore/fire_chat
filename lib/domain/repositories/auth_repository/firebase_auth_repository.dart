@@ -1,6 +1,7 @@
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
   FirebaseAuthRepository._();
@@ -51,6 +52,22 @@ class FirebaseAuthRepository implements AuthRepository {
   }) async {
     final user = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+    return _userFromFirebase(user);
+  }
+
+  @override
+  Future<UserEntity?> signInWithGoogle() async {
+    final googleUser = await GoogleSignIn(
+      scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
+      hostedDomain: '',
+      clientId: '',
+    ).signIn();
+    final googleAuth = await googleUser?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    final user = await FirebaseAuth.instance.signInWithCredential(credential);
     return _userFromFirebase(user);
   }
 

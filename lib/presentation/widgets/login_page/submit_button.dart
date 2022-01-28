@@ -25,9 +25,10 @@ class SubmitButton extends StatelessWidget {
     return isLoginForm
         ? BlocConsumer<AuthBloc, AuthBlocState>(
             listener: (_, authState) {
-              if (authState.status == AuthBlocStatus.loggedInAnonymously &&
+              if (authState.status == AuthBlocStatus.loggedInAnonymously ||
                   authState.status ==
-                      AuthBlocStatus.loggedInWithEmailAndPassword) {
+                      AuthBlocStatus.loggedInWithEmailAndPassword ||
+                  authState.status == AuthBlocStatus.loggedInWithGoogle) {
                 Navigator.of(context)
                     .pushReplacementNamed(AppRoutes.homePageRoute);
               } else if (authState.status == AuthBlocStatus.error) {
