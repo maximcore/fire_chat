@@ -15,5 +15,6 @@ class RegistrationBlocState with _$RegistrationBlocState {
   factory RegistrationBlocState({
     UserEntity? user,
     required RegistrationBlocStatus status,
+    String? errorMessage,
   }) = _RegistrationBlocState;
 }
