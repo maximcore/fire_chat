@@ -8,6 +8,7 @@ enum AuthBlocStatus {
   loggedInAnonymously,
   loggedInWithEmailAndPassword,
   loggedOut,
+  error,
 }
 
 @freezed
@@ -15,5 +16,6 @@ class AuthBlocState with _$AuthBlocState {
   factory AuthBlocState({
     UserEntity? user,
     required AuthBlocStatus status,
+    String? errorMessage,
   }) = _AuthBlocState;
 }
