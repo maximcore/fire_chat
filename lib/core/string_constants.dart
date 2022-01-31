@@ -18,7 +18,7 @@ class AppLocalization {
   // Button text
   static const String loginButtonText = 'LOGIN';
   static const String loginWithGoogleButtonText = 'LOGIN WITH GOOGLE';
-  static const String loginWithAppleButtonText = 'LOGIN WITH APPLE';
+  static const String loginWithFacebookButtonText = 'LOGIN WITH FACEBOOK';
   static const String loginAnonymously = 'LOGIN ANONYMOUSLY';
   static const String editProfile = 'Edit profile';
   static const String deleteProfile = 'Delete profile';
