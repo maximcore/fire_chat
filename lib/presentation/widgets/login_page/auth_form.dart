@@ -56,7 +56,11 @@ class _LoginFormState extends State<LoginForm> {
         SubmitButton(
           isLoginForm: widget.isLoginForm,
         ),
-        const SignInCredentialsRow(),
+        if (widget.isLoginForm)
+          const SizedBox(
+            height: 16,
+          ),
+        if (widget.isLoginForm) const SignInCredentialsColumn(),
       ],
     );
   }
