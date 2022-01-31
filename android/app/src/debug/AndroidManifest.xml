@@ -10,8 +10,9 @@
     <application
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher"
-            android:label="fire_chat">
+            android:label="fire_chat"
             android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <activity
                 android:name=".MainActivity"
                 android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
