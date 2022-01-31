@@ -98,6 +98,34 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       }
     });
 
+    on<LoginWithFacebookEvent>((event, emit) async {
+      try {
+        emit(state.copyWith(status: AuthBlocStatus.loading));
+        final user = await authRepository.signInWithFacebook();
+        emit(
+          state.copyWith(
+            status: AuthBlocStatus.loggedInWithFacebook,
+            user: user,
+          ),
+        );
+      } on FirebaseAuthException catch (error) {
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.error,
+            errorMessage: error.message,
+          ),
+        );
+        log(error.toString());
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.loading,
+          ),
+        );
+      } catch (error) {
+        log(error.toString());
+      }
+    });
+
     on<LoginWithEmailAndPasswordAfterSignUpEvent>((event, emit) async {
       final user = await authRepository.signInWithEmailAndPassword(
         email: event.email,
@@ -147,6 +175,8 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       );
 
   void loginWithGoogle() => add(LoginWithGoogleEvent());
+
+  void loginWithFacebook() => add(LoginWithFacebookEvent());
 
   void loginWithEmailAndPasswordAfterSignUp({
     required String email,

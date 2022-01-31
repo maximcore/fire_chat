@@ -73,6 +73,7 @@ class ProfilePage extends StatelessWidget {
           case AuthBlocStatus.loggedInAnonymously:
           case AuthBlocStatus.loggedInWithEmailAndPassword:
           case AuthBlocStatus.loggedInWithGoogle:
+          case AuthBlocStatus.loggedInWithFacebook:
           case AuthBlocStatus.loading:
             return BlocBuilder<ThemeBloc, ThemeBlocState>(
               builder: (_, builderState) {

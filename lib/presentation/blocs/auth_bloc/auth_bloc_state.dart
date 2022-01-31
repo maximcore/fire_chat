@@ -8,6 +8,7 @@ enum AuthBlocStatus {
   loggedInAnonymously,
   loggedInWithEmailAndPassword,
   loggedInWithGoogle,
+  loggedInWithFacebook,
   loggedOut,
   error,
 }

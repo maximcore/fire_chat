@@ -1,6 +1,7 @@
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
@@ -17,8 +18,7 @@ class FirebaseAuthRepository implements AuthRepository {
             id: userCredential.user!.uid,
             username: userCredential.user!.email ?? '',
             email: userCredential.user!.email ?? '',
-            profilePictureUrl:
-                'https://tinypng.com/images/apng/panda-waving.png',
+            profilePictureUrl: 'https://tinypng.com/images/apng/panda-waving.png',
           );
   }
 
@@ -50,8 +50,8 @@ class FirebaseAuthRepository implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    final user = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
+    final user =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     return _userFromFirebase(user);
   }
 
@@ -68,6 +68,18 @@ class FirebaseAuthRepository implements AuthRepository {
       idToken: googleAuth?.idToken,
     );
     final user = await FirebaseAuth.instance.signInWithCredential(credential);
+    return _userFromFirebase(user);
+  }
+
+  @override
+  Future<UserEntity?> signInWithFacebook() async {
+    final loginResult = await FacebookAuth.instance.login();
+    final facebookAuthCredential = FacebookAuthProvider.credential(
+      loginResult.accessToken!.token,
+    );
+    final user = await FirebaseAuth.instance.signInWithCredential(
+      facebookAuthCredential,
+    );
     return _userFromFirebase(user);
   }
 

@@ -17,9 +17,11 @@ class SignInCredentialsRow extends StatelessWidget {
           },
           icon: const FaIcon(FontAwesomeIcons.google),
         ),
-        const IconButton(
-          onPressed: null,
-          icon: FaIcon(FontAwesomeIcons.facebook),
+        IconButton(
+          onPressed: () {
+            context.read<AuthBloc>().loginWithFacebook();
+          },
+          icon: const FaIcon(FontAwesomeIcons.facebook),
         ),
         const IconButton(
           onPressed: null,
