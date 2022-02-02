@@ -25,7 +25,7 @@ class ProfileEditingBlocWrapper extends StatelessWidget {
             return ProfileEditingBloc(
               user: user!,
               repository: repository,
-            );
+            )..init();
           },
           child: child,
         );

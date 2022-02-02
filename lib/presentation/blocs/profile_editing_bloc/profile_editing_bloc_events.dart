@@ -1,6 +1,6 @@
 abstract class ProfileEditingBlocEvent {}
 
-//class InitialProfileEvent extends ProfileEditingBlocEvent {}
+class InitialProfileEvent extends ProfileEditingBlocEvent {}
 
 class EditUsernameEvent extends ProfileEditingBlocEvent {
   EditUsernameEvent(this.username);
