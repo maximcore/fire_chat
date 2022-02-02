@@ -99,4 +99,14 @@ class FirebaseAuthRepository implements AuthRepository {
             username: currentUser.email!,
           );
   }
+
+  @override
+  Future<void> editEmail(String newEmail) async {
+    await FirebaseAuth.instance.currentUser?.updateEmail(newEmail);
+  }
+
+  @override
+  Future<void> editUsername(String newUsername) async {
+    await FirebaseAuth.instance.currentUser?.updateDisplayName(newUsername);
+  }
 }

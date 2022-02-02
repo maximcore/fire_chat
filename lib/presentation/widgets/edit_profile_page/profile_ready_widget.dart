@@ -45,9 +45,9 @@ class ProfileReadyWidget extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                UsernameEditingTextField(
-                  initialValue: state.user.username,
-                ),
+                // UsernameEditingTextField(
+                //   initialValue: state.user.username,
+                // ),
                 EmailEditingTextField(
                   initialValue: state.user.email,
                 ),

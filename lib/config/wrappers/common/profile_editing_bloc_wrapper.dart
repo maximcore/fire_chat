@@ -1,3 +1,4 @@
+import 'package:fire_chat/domain/repositories/auth_repository/firebase_auth_repository.dart';
 import 'package:fire_chat/domain/repositories/user_repository/user_repository.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
@@ -21,10 +22,11 @@ class ProfileEditingBlocWrapper extends StatelessWidget {
         final user = authState.user;
         return BlocProvider<ProfileEditingBloc>(
           create: (___) {
-            final repository = GetIt.instance.get<UserRepository>();
+            //final repository = GetIt.instance.get<UserRepository>();
             return ProfileEditingBloc(
               user: user!,
-              repository: repository,
+              repository: FirebaseAuthRepository.instance,
+              //repository: repository,
             )..init();
           },
           child: child,
