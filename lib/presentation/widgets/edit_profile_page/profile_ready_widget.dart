@@ -37,17 +37,16 @@ class ProfileReadyWidget extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                const ElevatedButton(
-                  onPressed: null,
-                  //onPressed: onPressed,
-                  child: Text(AppLocalization.updateAvatar),
+                ElevatedButton(
+                  onPressed: onPressed,
+                  child: const Text(AppLocalization.updateAvatar),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                // UsernameEditingTextField(
-                //   initialValue: state.user.username,
-                // ),
+                UsernameEditingTextField(
+                  initialValue: state.user.username,
+                ),
                 EmailEditingTextField(
                   initialValue: state.user.email,
                 ),
