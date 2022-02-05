@@ -44,6 +44,7 @@ class _UsernameEditingTextFieldState extends State<UsernameEditingTextField> {
       child: TextField(
         controller: _usernameController,
         decoration: const InputDecoration(
+          labelText: AppLocalization.username,
           hintText: AppLocalization.username,
         ),
       ),
