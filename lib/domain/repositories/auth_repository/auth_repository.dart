@@ -4,8 +4,8 @@ abstract class AuthRepository {
   Future<UserEntity?> signInAnonymously();
 
   Future<UserEntity?> signInWithEmailAndPassword({
-      required String email,
-      required String password,
+    required String email,
+    required String password,
   });
 
   Future<void> signOut();
@@ -19,7 +19,7 @@ abstract class AuthRepository {
 
   Future<UserEntity?> signInWithFacebook();
 
-  UserEntity? currentUser()  {}
+  UserEntity? currentUser() {}
 
   Future<void> editUsername(String username);
 
