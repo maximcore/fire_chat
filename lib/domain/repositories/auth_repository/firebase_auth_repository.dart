@@ -11,21 +11,30 @@ class FirebaseAuthRepository implements AuthRepository {
 
   static FirebaseAuthRepository get instance => _instance;
 
-  UserEntity? _userFromFirebase(UserCredential? userCredential) {
+  UserEntity? _userFromCredentials(UserCredential? userCredential) {
     return userCredential == null
         ? null
         : UserEntity(
             id: userCredential.user!.uid,
-            username: userCredential.user!.email ?? '',
+            username: userCredential.user!.displayName ?? userCredential.user!.email ?? '',
             email: userCredential.user!.email ?? '',
             profilePictureUrl: 'https://tinypng.com/images/apng/panda-waving.png',
           );
   }
 
+  static UserEntity userFromFirebaseUser(User user) {
+    return UserEntity(
+      id: user.uid,
+      email: user.email!,
+      username: user.displayName ?? user.email!,
+      profilePictureUrl: user.photoURL ?? FirebaseAuth.instance.currentUser?.photoURL ?? '',
+    );
+  }
+
   @override
   Future<UserEntity?> signInAnonymously() async {
     final user = await FirebaseAuth.instance.signInAnonymously();
-    return _userFromFirebase(user);
+    return _userFromCredentials(user);
   }
 
   @override
@@ -42,7 +51,7 @@ class FirebaseAuthRepository implements AuthRepository {
       email: email,
       password: password,
     );
-    return _userFromFirebase(user);
+    return _userFromCredentials(user);
   }
 
   @override
@@ -50,9 +59,11 @@ class FirebaseAuthRepository implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    final user =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-    return _userFromFirebase(user);
+    final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return _userFromCredentials(user);
   }
 
   @override
@@ -68,7 +79,7 @@ class FirebaseAuthRepository implements AuthRepository {
       idToken: googleAuth?.idToken,
     );
     final user = await FirebaseAuth.instance.signInWithCredential(credential);
-    return _userFromFirebase(user);
+    return _userFromCredentials(user);
   }
 
   @override
@@ -80,7 +91,7 @@ class FirebaseAuthRepository implements AuthRepository {
     final user = await FirebaseAuth.instance.signInWithCredential(
       facebookAuthCredential,
     );
-    return _userFromFirebase(user);
+    return _userFromCredentials(user);
   }
 
   @override
@@ -92,11 +103,13 @@ class FirebaseAuthRepository implements AuthRepository {
             email: currentUser.email ?? '',
             id: currentUser.uid,
             username: currentUser.email ?? '',
+            profilePictureUrl: 'https://tinypng.com/images/apng/panda-waving.png',
           )
         : UserEntity(
             email: currentUser.email!,
             id: currentUser.uid,
-            username: currentUser.email!,
+            username: currentUser.displayName ?? currentUser.email!,
+            profilePictureUrl: 'https://tinypng.com/images/apng/panda-waving.png',
           );
   }
 
@@ -108,5 +121,10 @@ class FirebaseAuthRepository implements AuthRepository {
   @override
   Future<void> editUsername(String newUsername) async {
     await FirebaseAuth.instance.currentUser?.updateDisplayName(newUsername);
+  }
+
+  @override
+  Future<void> editPicture(String url) async {
+    await FirebaseAuth.instance.currentUser?.updatePhotoURL(url);
   }
 }
