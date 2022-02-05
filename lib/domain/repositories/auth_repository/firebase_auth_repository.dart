@@ -7,6 +7,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FirebaseAuthRepository implements AuthRepository {
   FirebaseAuthRepository._();
 
+  static const _defaultUserAvatarUrl =
+      'https://firebasestorage.googleapis.com/v0/b/fire-chat-mb.appspot.com/o/users%2Fdefault.png?alt=media&token=dd9e5977-f443-4308-81bc-cfb683903620';
+
   static final FirebaseAuthRepository _instance = FirebaseAuthRepository._();
 
   static FirebaseAuthRepository get instance => _instance;
@@ -18,7 +21,7 @@ class FirebaseAuthRepository implements AuthRepository {
             id: userCredential.user!.uid,
             username: userCredential.user!.displayName ?? userCredential.user!.email ?? '',
             email: userCredential.user!.email ?? '',
-            profilePictureUrl: 'https://tinypng.com/images/apng/panda-waving.png',
+            profilePictureUrl: _defaultUserAvatarUrl,
           );
   }
 
@@ -27,7 +30,8 @@ class FirebaseAuthRepository implements AuthRepository {
       id: user.uid,
       email: user.email!,
       username: user.displayName ?? user.email!,
-      profilePictureUrl: user.photoURL ?? FirebaseAuth.instance.currentUser?.photoURL ?? '',
+      profilePictureUrl:
+          user.photoURL ?? FirebaseAuth.instance.currentUser?.photoURL ?? _defaultUserAvatarUrl,
     );
   }
 
@@ -103,13 +107,13 @@ class FirebaseAuthRepository implements AuthRepository {
             email: currentUser.email ?? '',
             id: currentUser.uid,
             username: currentUser.email ?? '',
-            profilePictureUrl: 'https://tinypng.com/images/apng/panda-waving.png',
+            profilePictureUrl: _defaultUserAvatarUrl,
           )
         : UserEntity(
             email: currentUser.email!,
             id: currentUser.uid,
             username: currentUser.displayName ?? currentUser.email!,
-            profilePictureUrl: 'https://tinypng.com/images/apng/panda-waving.png',
+            profilePictureUrl: _defaultUserAvatarUrl,
           );
   }
 
@@ -126,5 +130,10 @@ class FirebaseAuthRepository implements AuthRepository {
   @override
   Future<void> editPicture(String url) async {
     await FirebaseAuth.instance.currentUser?.updatePhotoURL(url);
+  }
+
+  @override
+  Future<void> deleteUser() async {
+    await FirebaseAuth.instance.currentUser?.delete();
   }
 }
