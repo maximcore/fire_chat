@@ -23,9 +23,6 @@ class _EmailEditingTextFieldState extends State<EmailEditingTextField> {
     final bloc = context.read<ProfileEditingBloc>();
     super.initState();
     _emailController = TextEditingController(text: widget.initialValue);
-    _emailController.addListener(
-      () => bloc.editEmail(_emailController.text),
-    );
   }
 
   @override
@@ -43,8 +40,10 @@ class _EmailEditingTextFieldState extends State<EmailEditingTextField> {
         bottom: 8,
       ),
       child: TextField(
+        readOnly: true,
         controller: _emailController,
         decoration: const InputDecoration(
+          labelText: AppLocalization.email,
           hintText: AppLocalization.email,
         ),
       ),
