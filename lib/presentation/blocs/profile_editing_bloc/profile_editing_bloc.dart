@@ -69,7 +69,13 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
         log(error.toString());
       }
     });
-
+    on<CancelEditingEvent>((event, emit) {
+      emit(
+        state.copyWith(
+          localUser: state.user,
+        ),
+      );
+    });
     on<SaveProfileEvent>((event, emit) async {
       try {
         await Future<void>.delayed(const Duration(microseconds: 250));
@@ -118,4 +124,6 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
   void editUsername(String username) => add(EditUsernameEvent(username));
 
   void editAvatar(String url) => add(EditAvatarEvent(url));
+
+  void cancel() => add(CancelEditingEvent());
 }

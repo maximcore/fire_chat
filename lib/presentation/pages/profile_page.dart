@@ -3,7 +3,6 @@ import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/repositories/auth_repository/firebase_auth_repository.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
-import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc.dart';
 import 'package:fire_chat/presentation/blocs/theme_bloc/theme_bloc_state.dart';
 import 'package:fire_chat/presentation/widgets/profile/profile_card.dart';
@@ -101,7 +100,6 @@ class ProfilePage extends StatelessWidget {
                                             snapshot.data!,
                                           ),
                                         ),
-                                        //ProfileCard(user: authState.user!),
                                         _systemThemeSettings(
                                           context,
                                           builderState,

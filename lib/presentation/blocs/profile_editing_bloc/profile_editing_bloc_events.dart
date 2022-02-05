@@ -14,4 +14,6 @@ class EditAvatarEvent extends ProfileEditingBlocEvent {
   final String url;
 }
 
+class CancelEditingEvent extends ProfileEditingBlocEvent {}
+
 class SaveProfileEvent extends ProfileEditingBlocEvent {}

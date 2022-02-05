@@ -31,7 +31,7 @@ class ProfileReadyWidget extends StatelessWidget {
                 CircleAvatar(
                   radius: 100,
                   foregroundImage: Image.network(
-                    state.user.profilePictureUrl,
+                    state.localUser.profilePictureUrl,
                   ).image,
                 ),
                 const SizedBox(
