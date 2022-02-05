@@ -29,7 +29,9 @@ class SubmitButton extends StatelessWidget {
                   authState.status == AuthBlocStatus.loggedInWithEmailAndPassword ||
                   authState.status == AuthBlocStatus.loggedInWithGoogle ||
                   authState.status == AuthBlocStatus.loggedInWithFacebook) {
-                Navigator.of(context).pushReplacementNamed(AppRoutes.homePageRoute);
+                Navigator.of(context).pushReplacementNamed(
+                  AppRoutes.homePageRoute,
+                );
               } else if (authState.status == AuthBlocStatus.error) {
                 Fluttertoast.showToast(
                   msg: authState.errorMessage!,
