@@ -1,13 +1,10 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/domain/repositories/storage_repository/firebase_storage_repository.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:fire_chat/presentation/views/edit_profile_page_view.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,8 +54,8 @@ class EditProfilePage extends StatelessWidget {
     );
     final path = result?.files.single.path;
     final fileName = result?.files.single.name;
-    final storage = Storage();
-    await storage.uploadFile(context: context, path: path!, name: fileName!);
+    final storage = FirebaseStorageRepository();
+    await storage.uploadPicture(context: context, path: path!, name: fileName!);
   }
 
   void _showDeleteProfileDialog(
@@ -94,22 +91,3 @@ class EditProfilePage extends StatelessWidget {
   }
 }
 
-class Storage {
-  final _storage = FirebaseStorage.instance;
-
-  Future<void> uploadFile({
-    required BuildContext context,
-    required String path,
-    required String name,
-  }) async {
-    final file = File(path);
-    try {
-      final reference = _storage.refFromURL('gs://fire-chat-mb.appspot.com/pictures/$name');
-      await reference.putFile(file);
-      final url = await reference.getDownloadURL();
-      context.read<ProfileEditingBloc>().editAvatar(url);
-    } on FirebaseException catch (error) {
-      log(error.toString());
-    }
-  }
-}
