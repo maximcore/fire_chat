@@ -19,7 +19,7 @@ abstract class AuthRepository {
 
   Future<UserEntity?> signInWithFacebook();
 
-  UserEntity? currentUser() {}
+  UserEntity? currentUser();
 
   Future<void> editUsername(String username);
 

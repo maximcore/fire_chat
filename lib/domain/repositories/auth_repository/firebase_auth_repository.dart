@@ -30,8 +30,7 @@ class FirebaseAuthRepository implements AuthRepository {
       id: user.uid,
       email: user.email!,
       username: user.displayName ?? user.email!,
-      profilePictureUrl:
-          user.photoURL ?? FirebaseAuth.instance.currentUser?.photoURL ?? _defaultUserAvatarUrl,
+      profilePictureUrl: user.photoURL ?? _defaultUserAvatarUrl,
     );
   }
 
