@@ -25,7 +25,17 @@ class EditProfilePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              context.read<ProfileEditingBloc>().cancel();
+            },
+            icon: const Icon(
+              Icons.cancel_outlined,
+            ),
+          ),
           IconButton(
             onPressed: saveProfileChanges,
             icon: const FaIcon(

@@ -30,11 +30,15 @@ class EditProfilePage extends StatelessWidget {
       saveProfileChanges: () {
         _saveProfileChanges(context);
       },
-      onPressed: () {
-        _uploadImage(context);
+      onPressed: () async {
+        final url = await _uploadImage(context);
+        if (url != null) {
+          context.read<ProfileEditingBloc>().editAvatar(url);
+        }
       },
       onDeleteProfilePressed: () {
         _showDeleteProfileDialog(context, bloc);
+        context.read<AuthBloc>().delete();
       },
     );
   }
@@ -44,7 +48,7 @@ class EditProfilePage extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
-  Future<void> _uploadImage(BuildContext context) async {
+  Future<String?> _uploadImage(BuildContext context) async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: [
@@ -55,7 +59,11 @@ class EditProfilePage extends StatelessWidget {
     final path = result?.files.single.path;
     final fileName = result?.files.single.name;
     final storage = FirebaseStorageRepository();
-    await storage.uploadPicture(context: context, path: path!, name: fileName!);
+    final url = await storage.uploadPicture(
+      path: path!,
+      name: fileName!,
+    );
+    return url;
   }
 
   void _showDeleteProfileDialog(
@@ -90,4 +98,3 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 }
-

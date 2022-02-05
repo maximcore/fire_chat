@@ -27,3 +27,5 @@ class LoginWithGoogleEvent extends AuthBlocEvent {}
 class LoginWithFacebookEvent extends AuthBlocEvent {}
 
 class SignOutEvent extends AuthBlocEvent {}
+
+class DeleteUserEvent extends AuthBlocEvent {}

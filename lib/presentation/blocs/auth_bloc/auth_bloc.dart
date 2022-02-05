@@ -155,6 +155,26 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         log(error.toString());
       }
     });
+    on<DeleteUserEvent>((event, emit) async {
+      try {
+        await authRepository.deleteUser();
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.loggedOut,
+          ),
+        );
+      } on FirebaseAuthException catch (error) {
+        emit(
+          AuthBlocState(
+            status: AuthBlocStatus.error,
+            errorMessage: error.message,
+          ),
+        );
+        log(error.toString());
+      } catch (error) {
+        log(error.toString());
+      }
+    });
   }
 
   final AuthRepository authRepository;
@@ -192,4 +212,6 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   void signOut() => add(
         SignOutEvent(),
       );
+
+  void delete() => add(DeleteUserEvent());
 }
