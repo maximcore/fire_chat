@@ -20,11 +20,15 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
     on<InitialProfileEvent>((event, emit) {
       try {
         emit(
-          state.copyWith(status: ProfileEditingBlocStatus.ready),
+          state.copyWith(
+            status: ProfileEditingBlocStatus.ready,
+          ),
         );
       } catch (error) {
         emit(
-          state.copyWith(status: ProfileEditingBlocStatus.error),
+          state.copyWith(
+            status: ProfileEditingBlocStatus.error,
+          ),
         );
       }
     });
@@ -32,51 +36,51 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
       try {
         emit(
           state.copyWith(
-            localUser: state.localUser.copyWith(username: event.username),
+            localUser: state.localUser.copyWith(
+              username: event.username,
+            ),
           ),
         );
       } catch (error) {
         emit(
-          ProfileEditingBlocState(
+          state.copyWith(
             status: ProfileEditingBlocStatus.error,
-            user: state.user,
-            localUser: state.localUser,
           ),
         );
         log(error.toString());
       }
     });
-    on<EditEmailEvent>((event, emit) {
+
+    on<EditAvatarEvent>((event, emit) {
       try {
         emit(
           state.copyWith(
-            localUser: state.localUser.copyWith(email: event.email),
+            localUser: state.localUser.copyWith(
+              profilePictureUrl: event.url,
+            ),
           ),
         );
       } catch (error) {
         emit(
-          ProfileEditingBlocState(
+          state.copyWith(
             status: ProfileEditingBlocStatus.error,
-            user: state.user,
-            localUser: state.localUser,
           ),
         );
         log(error.toString());
       }
     });
+
     on<SaveProfileEvent>((event, emit) async {
       try {
         await Future<void>.delayed(const Duration(microseconds: 250));
+        if (state.localUser.username != state.user.username) {
+          await repository.editUsername(state.localUser.username);
+        }
 
-        // await repository.editUser(
-        //   username: state.localUser.username,
-        //   email: state.localUser.email,
-        // );
+        if (state.localUser.profilePictureUrl != state.user.profilePictureUrl) {
+          await repository.editPicture(state.localUser.profilePictureUrl);
+        }
 
-        await repository.editEmail(state.localUser.email);
-        //await repository.editUsername(state.localUser.username);
-
-        //final newUser = await repository.readUser();
         final newUser = repository.currentUser();
 
         newUser == null
@@ -84,7 +88,7 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
                 ProfileEditingBlocState(
                   status: ProfileEditingBlocStatus.ready,
                   user: state.user,
-                  localUser: state.user,
+                  localUser: state.localUser,
                 ),
               )
             : emit(
@@ -113,5 +117,5 @@ class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlo
 
   void editUsername(String username) => add(EditUsernameEvent(username));
 
-  void editEmail(String email) => add(EditEmailEvent(email));
+  void editAvatar(String url) => add(EditAvatarEvent(url));
 }

@@ -24,4 +24,6 @@ abstract class AuthRepository {
   Future<void> editUsername(String username);
 
   Future<void> editEmail(String email);
+
+  Future<void> editPicture(String url);
 }

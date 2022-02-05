@@ -1,13 +1,15 @@
-import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:fire_chat/presentation/views/edit_profile_page_view.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -31,7 +33,9 @@ class EditProfilePage extends StatelessWidget {
       saveProfileChanges: () {
         _saveProfileChanges(context);
       },
-      onPressed: _uploadImage,
+      onPressed: () {
+        _uploadImage(context);
+      },
       onDeleteProfilePressed: () {
         _showDeleteProfileDialog(context, bloc);
       },
@@ -43,11 +47,21 @@ class EditProfilePage extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
-  Future<void> _uploadImage() async {
-    final _picker = ImagePicker();
-    final image = await _picker.pickImage(source: ImageSource.gallery);
-    final result = await image!.readAsBytes();
-    final url = base64Encode(result);
+  Future<void> _uploadImage(BuildContext context) async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'png',
+        'jpg',
+      ],
+    );
+    final path = result?.files.single.path;
+    final fileName = result?.files.single.name;
+
+    print('path = $path, filename = $fileName');
+
+    final storage = Storage();
+    await storage.uploadFile(context: context, path: path!, name: fileName!);
   }
 
   void _showDeleteProfileDialog(
@@ -80,5 +94,25 @@ class EditProfilePage extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class Storage {
+  final _storage = FirebaseStorage.instance;
+
+  Future<void> uploadFile({
+    required BuildContext context,
+    required String path,
+    required String name,
+  }) async {
+    final file = File(path);
+    try {
+      final reference = _storage.refFromURL('gs://fire-chat-mb.appspot.com/pictures/$name');
+      await reference.putFile(file);
+      final url = await reference.getDownloadURL();
+      context.read<ProfileEditingBloc>().editAvatar(url);
+    } on FirebaseException catch (error) {
+      log(error.toString());
+    }
   }
 }

@@ -8,10 +8,10 @@ class EditUsernameEvent extends ProfileEditingBlocEvent {
   final String username;
 }
 
-class EditEmailEvent extends ProfileEditingBlocEvent {
-  EditEmailEvent(this.email);
+class EditAvatarEvent extends ProfileEditingBlocEvent {
+  EditAvatarEvent(this.url);
 
-  final String email;
+  final String url;
 }
 
 class SaveProfileEvent extends ProfileEditingBlocEvent {}
