@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:fire_chat/domain/repositories/storage_repository/storage_repository.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirebaseStorageRepository implements StorageRepository {
