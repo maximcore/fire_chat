@@ -15,8 +15,8 @@ class CustomAppTheme {
           primary: Color(0xffef7f52),
           secondary: Color(0xFF7768d8),
           surface: Color(0xfff3d3ca),
-          primaryVariant: Color(0xffb45e38),
-          secondaryVariant: Color(0xff604bde),
+          primaryContainer: Color(0xffb45e38),
+          secondaryContainer: Color(0xff604bde),
         ),
         textTheme: const TextTheme(
           headline6: TextStyle(color: Colors.black),
@@ -42,8 +42,8 @@ class CustomAppTheme {
           primary: Color(0xFF7768d8),
           secondary: Color(0xffefaf91),
           surface: Color(0xff393166),
-          primaryVariant: Color(0xff604bde),
-          secondaryVariant: Color(0xffa15333),
+          primaryContainer: Color(0xff604bde),
+          secondaryContainer: Color(0xffa15333),
         ),
         textTheme: const TextTheme(
           headline6: TextStyle(color: Colors.white),
