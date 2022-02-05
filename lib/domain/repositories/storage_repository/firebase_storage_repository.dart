@@ -2,17 +2,14 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:fire_chat/domain/repositories/storage_repository/storage_repository.dart';
-import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FirebaseStorageRepository implements StorageRepository {
   final String _path = 'gs://fire-chat-mb.appspot.com/pictures';
 
+  //uploads picture to firebase storage, returns picture url
   @override
-  Future<void> uploadPicture({
-    required BuildContext context,
+  Future<String?> uploadPicture({
     required String path,
     required String name,
   }) async {
@@ -22,9 +19,10 @@ class FirebaseStorageRepository implements StorageRepository {
       final reference = storage.refFromURL('$_path/$name');
       await reference.putFile(file);
       final url = await reference.getDownloadURL();
-      context.read<ProfileEditingBloc>().editAvatar(url);
+      return url;
     } on FirebaseException catch (error) {
       log(error.toString());
     }
+    return null;
   }
 }

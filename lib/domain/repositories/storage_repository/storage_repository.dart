@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-
 abstract class StorageRepository {
-  Future<void> uploadPicture({
-    required BuildContext context,
+  Future<String?> uploadPicture({
     required String path,
     required String name,
   });
