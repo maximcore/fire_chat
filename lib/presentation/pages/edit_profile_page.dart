@@ -57,9 +57,6 @@ class EditProfilePage extends StatelessWidget {
     );
     final path = result?.files.single.path;
     final fileName = result?.files.single.name;
-
-    print('path = $path, filename = $fileName');
-
     final storage = Storage();
     await storage.uploadFile(context: context, path: path!, name: fileName!);
   }
