@@ -25,11 +25,11 @@ class FirestorePostsRepository implements PostsRepository {
   Future<List<PostEntity>> fetchPosts() async {
     final result = <PostEntity>[];
     final request = await _postsRef.get();
-    request.docs.forEach((element) {
+    for (final element in request.docs) {
       final postElement = element.data();
       final postJson = postElement['post'] as Map<String, dynamic>;
       result.add(PostEntity.fromJson(postJson));
-    });
+    }
     return result;
   }
 }
