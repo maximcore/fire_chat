@@ -1,4 +1,3 @@
-import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:flutter/material.dart';
 
