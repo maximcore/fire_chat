@@ -11,9 +11,11 @@ class FirestorePostsRepository implements PostsRepository {
     required PostEntity post,
     required UserEntity user,
   }) async {
+    final ref = await _postsRef.get();
+    final id = ref.size;
     await _postsRef.add(
       <String, dynamic>{
-        'post': PostEntity(
+        '$id': PostEntity(
           description: post.description,
           username: user.email,
         ).toJson(),
@@ -22,13 +24,23 @@ class FirestorePostsRepository implements PostsRepository {
   }
 
   @override
+  Future<void> deletePost({
+    required PostEntity post,
+    required UserEntity user,
+  }) async {
+    //TODO(Maxim): implement this
+  }
+
+  @override
   Future<List<PostEntity>> fetchPosts() async {
     final result = <PostEntity>[];
     final request = await _postsRef.get();
-    for (final element in request.docs) {
-      final postElement = element.data();
-      final postJson = postElement['post'] as Map<String, dynamic>;
-      result.add(PostEntity.fromJson(postJson));
+    for (var id = 0; id < request.docs.length; id++) {
+      final postElement = request.docs[id].data();
+      final postJson = postElement['$id'] as Map<String, dynamic>?;
+      if (postJson != null) {
+        result.add(PostEntity.fromJson(postJson));
+      }
     }
     return result;
   }

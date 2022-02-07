@@ -8,4 +8,9 @@ abstract class PostsRepository {
     required PostEntity post,
     required UserEntity user,
   });
+
+  Future<void> deletePost({
+    required PostEntity post,
+    required UserEntity user,
+  });
 }

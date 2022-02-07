@@ -71,4 +71,10 @@ class HardcodedPostsRepository implements PostsRepository {
     // TODO: implement addPost
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> deletePost({required PostEntity post, required UserEntity user}) {
+    // TODO: implement deletePost
+    throw UnimplementedError();
+  }
 }
