@@ -14,6 +14,7 @@ class AppLocalization {
   static const String notFoundPageTitle = 'PAGE NOT FOUND';
   static const String postDetailsPageTitle = 'COMMENTS';
   static const String profilePageTitle = 'PROFILE';
+  static const String addPostPageTitle = 'ADD POST';
 
   // Button text
   static const String loginButtonText = 'LOGIN';
@@ -28,6 +29,7 @@ class AppLocalization {
   static const String delete = 'Delete';
   static const String cancel = 'Cancel';
   static const String createAccount = 'CREATE ACCOUNT';
+  static const String addPostText = 'Add';
 
   // Label text
   static const String emailLabelText = 'Email';
