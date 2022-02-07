@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
@@ -17,6 +18,33 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
       emit(
         PostsBlocState(status: PostsBlocStatus.error),
       );
+    });
+    on<AddPostEvent>((event, emit) async {
+      try {
+        emit(
+          state.copyWith(
+            status: PostsBlocStatus.loading,
+          ),
+        );
+        await repository.addPost(
+          post: event.post,
+          user: event.user,
+        );
+        final newPosts = await repository.fetchPosts();
+        emit(
+          state.copyWith(
+            status: PostsBlocStatus.loading,
+          ),
+        );
+        emit(
+          state.copyWith(
+            posts: newPosts,
+            status: PostsBlocStatus.ready,
+          ),
+        );
+      } catch (error) {
+        log(error.toString());
+      }
     });
   }
 
@@ -54,4 +82,10 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
       rethrow;
     }
   }
+
+  void addPost({
+    required PostEntity post,
+    required UserEntity user,
+  }) =>
+      add(AddPostEvent(post: post, user: user));
 }
