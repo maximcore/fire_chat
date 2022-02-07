@@ -1,6 +1,7 @@
 import 'package:fire_chat/core/constants.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/faker_posts_repository.dart';
+import 'package:fire_chat/domain/repositories/posts_repository/firestore_posts_repository.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 import 'package:fire_chat/domain/repositories/user_repository/hive_user_repository.dart';
 import 'package:fire_chat/domain/repositories/user_repository/providers/hive_storage_provider.dart';
@@ -26,7 +27,8 @@ Future<void> setup() async {
 
   GetIt.instance.registerSingleton<PostsRepository>(
     //HardcodedPostsRepository(),
-    FakerPostsRepository(),
+    //FakerPostsRepository(),
+    FirestorePostsRepository(),
   );
 }
 
