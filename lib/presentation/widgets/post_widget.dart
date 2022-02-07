@@ -43,9 +43,6 @@ class PostWidget extends StatelessWidget {
                 post.description,
                 textAlign: TextAlign.center,
               ),
-              const Text(
-                AppLocalization.postDetailsText,
-              ),
             ],
           ),
         ),
