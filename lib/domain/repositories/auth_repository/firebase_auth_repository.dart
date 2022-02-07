@@ -28,8 +28,8 @@ class FirebaseAuthRepository implements AuthRepository {
   static UserEntity userFromFirebaseUser(User user) {
     return UserEntity(
       id: user.uid,
-      email: user.email!,
-      username: user.displayName ?? user.email!,
+      email: user.isAnonymous ? 'guest' : user.email!,
+      username: user.isAnonymous ? 'guest' : user.displayName ?? user.email!,
       profilePictureUrl: user.photoURL ?? _defaultUserAvatarUrl,
     );
   }
