@@ -21,6 +21,8 @@ class AppRouter {
         return MaterialPageRoute<void>(builder: (_) => const PostDetailsPage());
       case AppRoutes.profilePageRoute:
         return MaterialPageRoute<void>(builder: (_) => const ProfilePage());
+      case AppRoutes.addPostPage:
+        return MaterialPageRoute<void>(builder: (_) => const AddPostPage());
       default:
         return MaterialPageRoute<void>(
           builder: (_) => NotFoundPage(

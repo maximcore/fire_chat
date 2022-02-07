@@ -1,3 +1,4 @@
+export 'package:fire_chat/presentation/pages/add_post_page.dart';
 export 'package:fire_chat/presentation/pages/chat_page.dart';
 export 'package:fire_chat/presentation/pages/chats_page.dart';
 export 'package:fire_chat/presentation/pages/feed_page.dart';

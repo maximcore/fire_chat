@@ -5,4 +5,5 @@ class AppRoutes {
   static const homePageRoute = '/home';
   static const postDetailsPageRoute = '/post_details';
   static const chatPageRoute = '/chat';
+  static const addPostPage = 'add_post';
 }
