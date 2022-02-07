@@ -1,4 +1,5 @@
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 
 class HardcodedPostsRepository implements PostsRepository {
@@ -61,4 +62,13 @@ class HardcodedPostsRepository implements PostsRepository {
           'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
     ),
   ];
+
+  @override
+  Future<void> addPost({
+    required PostEntity post,
+    required UserEntity user,
+  }) async {
+    // TODO: implement addPost
+    throw UnimplementedError();
+  }
 }
