@@ -1,4 +1,5 @@
 import 'package:fire_chat/config/wrappers/common/auth_bloc_wrapper.dart';
+import 'package:fire_chat/config/wrappers/common/posts_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/profile_editing_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/theme_bloc_wrapper.dart';
 import 'package:fire_chat/domain/repositories/auth_repository/firebase_auth_repository.dart';
@@ -19,7 +20,9 @@ class BlocsAppWrapper extends StatelessWidget {
             SignUpBloc(authProvider: FirebaseAuthRepository.instance),
         child: ThemeBlocWrapper(
           child: ProfileEditingBlocWrapper(
-            child: child,
+            child: PostsBlocWrapper(
+              child: child,
+            ),
           ),
         ),
       ),
