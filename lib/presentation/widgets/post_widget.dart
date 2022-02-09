@@ -1,5 +1,6 @@
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PostWidget extends StatelessWidget {
   const PostWidget({
@@ -7,11 +8,13 @@ class PostWidget extends StatelessWidget {
     required this.post,
     this.onTap,
     this.onDoubleTap,
+    this.onLikePressed,
   }) : super(key: key);
 
   final PostEntity post;
   final VoidCallback? onTap;
   final VoidCallback? onDoubleTap;
+  final VoidCallback? onLikePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +37,23 @@ class PostWidget extends StatelessWidget {
                 children: [
                   const Icon(Icons.account_circle_rounded),
                   Text(
-                    post.username,
+                    post.user.username,
                   ),
                 ],
               ),
               Text(
                 post.description,
                 textAlign: TextAlign.center,
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: onLikePressed,
+                    icon: const FaIcon(
+                      FontAwesomeIcons.heart,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
