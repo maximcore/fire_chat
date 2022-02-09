@@ -15,7 +15,7 @@ class FakerPostsRepository implements PostsRepository {
       (_) => PostEntity(
         description: faker.randomGenerator
             .string(_maxDescriptionLength, min: _maxDescriptionLength),
-        username: faker.internet.userName(),
+        //user: faker.internet.userName(),
       ),
     );
     return list;
@@ -24,7 +24,6 @@ class FakerPostsRepository implements PostsRepository {
   @override
   Future<void> addPost({
     required PostEntity post,
-    required UserEntity user,
   }) async {}
 
   @override

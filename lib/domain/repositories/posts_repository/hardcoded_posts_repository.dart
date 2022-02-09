@@ -10,63 +10,62 @@ class HardcodedPostsRepository implements PostsRepository {
   }
 
   final List<PostEntity> posts = const [
-    PostEntity(
-      username: 'Maxim',
-      description:
-          'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
-    ),
-    PostEntity(
-      username: 'Yura',
-      description: 'Hello my name is Yura',
-    ),
-    PostEntity(
-      username: 'Artem',
-      description: 'Hello my name is Artem',
-    ),
-    PostEntity(
-      username: 'Boris',
-      description: 'Hello my name is Boris',
-    ),
-    PostEntity(
-      username: 'Artem',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
-    ),
-    PostEntity(
-      username: 'Artem',
-      description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
-    ),
-    PostEntity(
-      username: 'Boris',
-      description:
-          'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
-    ),
-    PostEntity(
-      username: 'Boris',
-      description:
-          'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
-    ),
-    PostEntity(
-      username: 'Maxim',
-      description: 'Hello my name is Maxim',
-    ),
-    PostEntity(
-      username: 'Maxim',
-      description:
-          'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
-    ),
-    PostEntity(
-      username: 'Yura',
-      description:
-          'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
-    ),
+    // PostEntity(
+    //   username: 'Maxim',
+    //   description:
+    //       'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
+    // ),
+    // PostEntity(
+    //   username: 'Yura',
+    //   description: 'Hello my name is Yura',
+    // ),
+    // PostEntity(
+    //   username: 'Artem',
+    //   description: 'Hello my name is Artem',
+    // ),
+    // PostEntity(
+    //   username: 'Boris',
+    //   description: 'Hello my name is Boris',
+    // ),
+    // PostEntity(
+    //   username: 'Artem',
+    //   description:
+    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+    // ),
+    // PostEntity(
+    //   username: 'Artem',
+    //   description:
+    //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+    // ),
+    // PostEntity(
+    //   username: 'Boris',
+    //   description:
+    //       'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
+    // ),
+    // PostEntity(
+    //   username: 'Boris',
+    //   description:
+    //       'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
+    // ),
+    // PostEntity(
+    //   username: 'Maxim',
+    //   description: 'Hello my name is Maxim',
+    // ),
+    // PostEntity(
+    //   username: 'Maxim',
+    //   description:
+    //       'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
+    // ),
+    // PostEntity(
+    //   username: 'Yura',
+    //   description:
+    //       'iusmod tempor incididunt ut labore et dolore magna aliqua. Ut ',
+    // ),
   ];
 
   @override
   Future<void> addPost({
     required PostEntity post,
-    required UserEntity user,
   }) async {
     // TODO: implement addPost
     throw UnimplementedError();

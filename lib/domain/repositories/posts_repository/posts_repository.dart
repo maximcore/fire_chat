@@ -6,7 +6,6 @@ abstract class PostsRepository {
 
   Future<void> addPost({
     required PostEntity post,
-    required UserEntity user,
   });
 
   Future<void> deletePost({

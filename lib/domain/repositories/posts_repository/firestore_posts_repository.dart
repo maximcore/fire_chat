@@ -9,16 +9,16 @@ class FirestorePostsRepository implements PostsRepository {
   @override
   Future<void> addPost({
     required PostEntity post,
-    required UserEntity user,
   }) async {
     final ref = await _postsRef.get();
-    final id = ref.size;
+    final list = ref.docs;
+    final index = list.length;
     await _postsRef.add(
       <String, dynamic>{
-        '$id': PostEntity(
-          description: post.description,
-          username: user.email,
-        ).toJson(),
+        'description': post.description,
+        'user': post.user.toJson(),
+        'postLikedByUsers': post.postLikedByUsers,
+        'postId': index,
       },
     );
   }
@@ -35,9 +35,10 @@ class FirestorePostsRepository implements PostsRepository {
   Future<List<PostEntity>> fetchPosts() async {
     final result = <PostEntity>[];
     final request = await _postsRef.get();
+
     for (var id = 0; id < request.docs.length; id++) {
       final postElement = request.docs[id].data();
-      final postJson = postElement['$id'] as Map<String, dynamic>?;
+      final postJson = postElement; //as Map<String, dynamic>?;
       if (postJson != null) {
         result.add(PostEntity.fromJson(postJson));
       }
