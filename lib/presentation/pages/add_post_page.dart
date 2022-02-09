@@ -42,7 +42,7 @@ class AddPostPage extends StatelessWidget {
             final user = context.read<AuthBloc>().state.user!;
             final post = PostEntity(
               description: description,
-              username: user.email,
+              user: user,
             );
             context.read<PostsBloc>().addPost(
                   post: post,
@@ -50,7 +50,7 @@ class AddPostPage extends StatelessWidget {
                 );
             Navigator.of(context).pop();
           },
-          child: Text(AppLocalization.addPostText,),
+          child: const Text(AppLocalization.addPostText,),
         ),
       ],
     );
