@@ -28,7 +28,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
         );
         await repository.addPost(
           post: event.post,
-          user: event.user,
         );
         final newPosts = await repository.fetchPosts();
         emit(
