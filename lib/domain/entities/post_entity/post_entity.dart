@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post_entity.freezed.dart';
@@ -9,7 +9,9 @@ part 'post_entity.g.dart';
 class PostEntity with _$PostEntity {
   const factory PostEntity({
     @Default('') String description,
-    @Default('') String username,
+    @Default(UserEntity(id: '')) UserEntity user,
+    @Default(<String>[]) List<String> postLikedByUsers,
+    @Default(0) int postId,
   }) = _PostEntity;
 
   factory PostEntity.fromJson(Map<String, dynamic> json) =>
