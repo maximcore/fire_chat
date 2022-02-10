@@ -29,7 +29,11 @@ class AppLocalization {
   static const String delete = 'Delete';
   static const String cancel = 'Cancel';
   static const String createAccount = 'CREATE ACCOUNT';
-  static const String addPostText = 'Add';
+  static const String addPostText = 'Add post';
+  static const String uploadImageText = 'Upload image';
+  static const String backText = 'Back';
+  static const String cancelText = 'Cancel';
+  static const String discardText = 'Discard';
 
   // Label text
   static const String emailLabelText = 'Email';
@@ -42,8 +46,14 @@ class AppLocalization {
   static const String tapToStartChat = 'Tap to start chat user';
   static const String useSystemThemeMode = 'Use system theme mode';
   static const String useSystemThemeModeDescription =
-      'This will force system theme mode';
+      'This will force system theme mode settings';
   static const String deleteProfileTitle = 'Do you want to delete profile?';
+  static const String discardPost = 'Discard post?';
+
+
+  // ??
+  static const String description = 'Description';
+  static const String image = 'Image';
 
   // Navbar button titles
   static const String feedLabel = 'Feed';
