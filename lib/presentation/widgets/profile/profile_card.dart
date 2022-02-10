@@ -40,18 +40,6 @@ class ProfileCard extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const PlaceholderContainer(),
-          const SizedBox(
-            height: 16,
-          ),
-          const PlaceholderContainer(),
-          const SizedBox(
-            height: 16,
-          ),
-          const PlaceholderContainer(),
-          const SizedBox(
-            height: 16,
-          ),
           const EditProfileButton(),
           const SizedBox(
             height: 16,
