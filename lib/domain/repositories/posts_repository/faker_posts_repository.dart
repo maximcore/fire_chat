@@ -31,4 +31,10 @@ class FakerPostsRepository implements PostsRepository {
     // TODO: implement deletePost
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> likePost({required String postId, required String userId}) {
+    // TODO: implement likePost
+    throw UnimplementedError();
+  }
 }

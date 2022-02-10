@@ -12,4 +12,9 @@ abstract class PostsRepository {
     required PostEntity post,
     required UserEntity user,
   });
+
+  Future<void> likePost({
+    required String postId,
+    required String userId,
+  });
 }

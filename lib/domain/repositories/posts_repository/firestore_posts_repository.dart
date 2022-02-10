@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
@@ -10,6 +11,7 @@ class FirestorePostsRepository implements PostsRepository {
   Future<void> addPost({
     required PostEntity post,
   }) async {
+    // TODO(Maxim): change insert post logic when implement delete post function
     final ref = await _postsRef.get();
     final list = ref.docs;
     final index = list.length;
@@ -18,7 +20,7 @@ class FirestorePostsRepository implements PostsRepository {
         'description': post.description,
         'user': post.user.toJson(),
         'postLikedByUsers': post.postLikedByUsers,
-        'postId': index,
+        'postId': index.toString(),
       },
     );
   }
@@ -44,5 +46,21 @@ class FirestorePostsRepository implements PostsRepository {
       }
     }
     return result;
+  }
+
+  @override
+  Future<void> likePost({
+    required String postId,
+    required String userId,
+  }) async {
+    final callable = FirebaseFunctions.instanceFor(
+      region: 'europe-west3',
+    ).httpsCallable('likePost');
+    // final res =
+    await callable.call<Map>(<String, dynamic>{
+      'user': userId,
+      'postId': postId,
+    });
+    // print(res.data);
   }
 }
