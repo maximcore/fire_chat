@@ -16,3 +16,13 @@ class AddPostEvent extends PostsEvent {
   final PostEntity post;
   final UserEntity user;
 }
+
+class LikePostEvent extends PostsEvent {
+  LikePostEvent({
+    required this.postId,
+    required this.userId,
+  });
+
+  final String postId;
+  final String userId;
+}

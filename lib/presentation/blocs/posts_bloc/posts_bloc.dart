@@ -23,7 +23,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
       try {
         emit(
           state.copyWith(
-            status: PostsBlocStatus.loading,
+            status: PostsBlocStatus.addingPost,
           ),
         );
         await repository.addPost(
@@ -42,6 +42,34 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
           ),
         );
       } catch (error) {
+        log(error.toString());
+      }
+    });
+
+    on<LikePostEvent>((event, emit) async {
+      try {
+        emit(
+          state.copyWith(
+            status: PostsBlocStatus.addingLike,
+          ),
+        );
+        await repository.likePost(
+          postId: event.postId,
+          userId: event.userId,
+        );
+        final posts = await repository.fetchPosts();
+        emit(
+          state.copyWith(
+            posts: posts,
+            status: PostsBlocStatus.ready,
+          ),
+        );
+      } catch (error) {
+        emit(
+          state.copyWith(
+            status: PostsBlocStatus.error,
+          ),
+        );
         log(error.toString());
       }
     });
@@ -86,5 +114,15 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
     required PostEntity post,
     required UserEntity user,
   }) =>
-      add(AddPostEvent(post: post, user: user));
+      add(
+        AddPostEvent(post: post, user: user),
+      );
+
+  void likePost({
+    required String postId,
+    required String userId,
+  }) =>
+      add(
+        LikePostEvent(postId: postId, userId: userId),
+      );
 }

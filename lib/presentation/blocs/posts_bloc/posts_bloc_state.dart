@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'posts_bloc_state.freezed.dart';
 
-enum PostsBlocStatus { initial, loading, ready, error }
+enum PostsBlocStatus { initial, loading, ready, error, addingPost, addingLike, }
 
 @freezed
 class PostsBlocState with _$PostsBlocState {
