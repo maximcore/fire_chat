@@ -1,5 +1,7 @@
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PostWidget extends StatelessWidget {
@@ -18,6 +20,7 @@ class PostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<AuthBloc>().state.user;
     return GestureDetector(
       onTap: onTap,
       onDoubleTap: onDoubleTap,
@@ -52,6 +55,9 @@ class PostWidget extends StatelessWidget {
                     icon: const FaIcon(
                       FontAwesomeIcons.heart,
                     ),
+                    color: post.postLikedByUsers.contains(user?.id)
+                        ? Colors.red
+                        : Colors.white,
                   ),
                 ],
               ),

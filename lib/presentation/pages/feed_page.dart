@@ -1,4 +1,3 @@
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
@@ -49,16 +48,11 @@ class FeedPage extends StatelessWidget {
               _simulateError(context);
             }
           },
-          onLikePressed: () async {
-            final callable = FirebaseFunctions.instanceFor(
-              region: 'europe-west3',
-            ).httpsCallable('likePost');
+          onLikePressed: () {
             final user = context.read<AuthBloc>().state.user;
-            final res = await callable.call<Map>(<String, dynamic>{
-              'user': user?.id,
-              'postId': state.posts![index].postId,
-            });
-            //print(res.data);
+            final postId = state.posts![index].postId;
+            final userId = user!.id;
+            context.read<PostsBloc>().likePost(postId: postId, userId: userId);
           },
         );
       },
@@ -84,6 +78,8 @@ class FeedPage extends StatelessWidget {
               switch (state.status) {
                 case PostsBlocStatus.initial:
                 case PostsBlocStatus.loading:
+                case PostsBlocStatus.addingPost:
+                case PostsBlocStatus.addingLike:
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
