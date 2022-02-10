@@ -41,9 +41,7 @@ class FirestorePostsRepository implements PostsRepository {
     for (var id = 0; id < request.docs.length; id++) {
       final postElement = request.docs[id].data();
       final postJson = postElement; //as Map<String, dynamic>?;
-      if (postJson != null) {
-        result.add(PostEntity.fromJson(postJson));
-      }
+      result.add(PostEntity.fromJson(postJson));
     }
     return result;
   }

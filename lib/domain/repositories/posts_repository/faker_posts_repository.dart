@@ -27,7 +27,10 @@ class FakerPostsRepository implements PostsRepository {
   }) async {}
 
   @override
-  Future<void> deletePost({required PostEntity post, required UserEntity user}) {
+  Future<void> deletePost({
+    required PostEntity post,
+    required UserEntity user,
+  }) {
     // TODO: implement deletePost
     throw UnimplementedError();
   }

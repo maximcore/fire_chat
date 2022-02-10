@@ -19,7 +19,9 @@ class FirebaseAuthRepository implements AuthRepository {
         ? null
         : UserEntity(
             id: userCredential.user!.uid,
-            username: userCredential.user!.displayName ?? userCredential.user!.email ?? '',
+            username: userCredential.user!.displayName ??
+                userCredential.user!.email ??
+                '',
             email: userCredential.user!.email ?? '',
             profilePictureUrl: _defaultUserAvatarUrl,
           );

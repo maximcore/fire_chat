@@ -6,7 +6,8 @@ import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editin
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileEditingBloc extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlocState> {
+class ProfileEditingBloc
+    extends Bloc<ProfileEditingBlocEvent, ProfileEditingBlocState> {
   ProfileEditingBloc({
     required this.repository,
     required UserEntity user,

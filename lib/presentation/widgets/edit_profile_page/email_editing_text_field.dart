@@ -1,7 +1,5 @@
 import 'package:fire_chat/core/string_constants.dart';
-import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmailEditingTextField extends StatefulWidget {
   const EmailEditingTextField({
@@ -20,7 +18,6 @@ class _EmailEditingTextFieldState extends State<EmailEditingTextField> {
 
   @override
   void initState() {
-    final bloc = context.read<ProfileEditingBloc>();
     super.initState();
     _emailController = TextEditingController(text: widget.initialValue);
   }

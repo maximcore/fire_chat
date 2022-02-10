@@ -26,31 +26,32 @@ class AddPostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreatePostBloc, CreatePostBlocState>(
-        builder: (blocBuilderContext, state) {
-      return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              onPressed: () async {
-                await onPressed(context);
-              },
-              icon: const Icon(
-                Icons.cancel_outlined,
+      builder: (blocBuilderContext, state) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  await onPressed(context);
+                },
+                icon: const Icon(
+                  Icons.cancel_outlined,
+                ),
               ),
-            ),
-          ],
-          title: const Text(AppLocalization.addPostPageTitle),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              AddPostWidget(blocBuilderContext: blocBuilderContext),
             ],
+            title: const Text(AppLocalization.addPostPageTitle),
           ),
-        ),
-      );
-    });
+          body: SafeArea(
+            child: Column(
+              children: [
+                AddPostWidget(blocBuilderContext: blocBuilderContext),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

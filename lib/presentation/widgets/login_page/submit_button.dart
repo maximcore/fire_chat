@@ -26,7 +26,8 @@ class SubmitButton extends StatelessWidget {
         ? BlocConsumer<AuthBloc, AuthBlocState>(
             listener: (_, authState) {
               if (authState.status == AuthBlocStatus.loggedInAnonymously ||
-                  authState.status == AuthBlocStatus.loggedInWithEmailAndPassword ||
+                  authState.status ==
+                      AuthBlocStatus.loggedInWithEmailAndPassword ||
                   authState.status == AuthBlocStatus.loggedInWithGoogle ||
                   authState.status == AuthBlocStatus.loggedInWithFacebook) {
                 Navigator.of(context).pushReplacementNamed(
@@ -44,7 +45,8 @@ class SubmitButton extends StatelessWidget {
             },
             builder: (_, authState) {
               return BlocBuilder<FormValidationBloc, FormValidationState>(
-                buildWhen: (previous, current) => previous.status != current.status,
+                buildWhen: (previous, current) =>
+                    previous.status != current.status,
                 builder: (context, state) {
                   return CustomElevatedButton(
                     onPressed: state.status.isValidated
@@ -64,7 +66,9 @@ class SubmitButton extends StatelessWidget {
         : BlocConsumer<SignUpBloc, SignUpBlocState>(
             listener: (_, signUpState) {
               if (signUpState.status == SignUpBlocStatus.ready) {
-                Navigator.of(context).pushReplacementNamed(AppRoutes.homePageRoute);
+                Navigator.of(context).pushReplacementNamed(
+                  AppRoutes.homePageRoute,
+                );
               } else if (signUpState.status == SignUpBlocStatus.error) {
                 Fluttertoast.showToast(
                   msg: signUpState.errorMessage!,
@@ -77,7 +81,8 @@ class SubmitButton extends StatelessWidget {
             },
             builder: (_, signUpState) {
               return BlocBuilder<FormValidationBloc, FormValidationState>(
-                buildWhen: (previous, current) => previous.status != current.status,
+                buildWhen: (previous, current) =>
+                    previous.status != current.status,
                 builder: (context, state) {
                   return CustomElevatedButton(
                     onPressed: state.status.isValidated
@@ -104,7 +109,9 @@ class SubmitButton extends StatelessWidget {
   }) {
     context.read<FormValidationBloc>().submit();
 
-    isLoginForm ? onLoginSubmit(context, state) : onSignUpSubmit(context, state);
+    isLoginForm
+        ? onLoginSubmit(context, state)
+        : onSignUpSubmit(context, state);
   }
 
   void onLoginSubmit(BuildContext context, FormValidationState state) {

@@ -43,12 +43,13 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
           path: state.result?.files.single.path as String,
           name: state.result?.files.single.name as String,
         );
-        emit(state.copyWith(
-          imageUrl: url,
-          status: CreatePostBlocStatus.ready,
-        ));
-      }
-      catch (error) {
+        emit(
+          state.copyWith(
+            imageUrl: url,
+            status: CreatePostBlocStatus.ready,
+          ),
+        );
+      } catch (error) {
         log(error.toString());
       }
     });

@@ -70,68 +70,71 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.userChanges(),
-        builder: (_, snapshot) {
-          return BlocBuilder<AuthBloc, AuthBlocState>(
-            builder: (_, authState) {
-              switch (authState.status) {
-                case AuthBlocStatus.loggedInAnonymously:
-                case AuthBlocStatus.loggedInWithEmailAndPassword:
-                case AuthBlocStatus.loggedInWithGoogle:
-                case AuthBlocStatus.loggedInWithFacebook:
-                case AuthBlocStatus.loading:
-                  return BlocBuilder<ThemeBloc, ThemeBlocState>(
-                    builder: (_, builderState) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          actions: _actions(context, builderState),
-                          title: const Text(AppLocalization.profilePageTitle),
-                          centerTitle: true,
+      stream: FirebaseAuth.instance.userChanges(),
+      builder: (_, snapshot) {
+        return BlocBuilder<AuthBloc, AuthBlocState>(
+          builder: (_, authState) {
+            switch (authState.status) {
+              case AuthBlocStatus.loggedInAnonymously:
+              case AuthBlocStatus.loggedInWithEmailAndPassword:
+              case AuthBlocStatus.loggedInWithGoogle:
+              case AuthBlocStatus.loggedInWithFacebook:
+              case AuthBlocStatus.loading:
+                return BlocBuilder<ThemeBloc, ThemeBlocState>(
+                  builder: (_, builderState) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        actions: _actions(context, builderState),
+                        title: const Text(AppLocalization.profilePageTitle),
+                        centerTitle: true,
+                      ),
+                      body: SingleChildScrollView(
+                        child: snapshot.hasData &&
+                                snapshot.connectionState ==
+                                    ConnectionState.active
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  ProfileCard(
+                                    user: FirebaseAuthRepository
+                                        .userFromFirebaseUser(
+                                      snapshot.data!,
+                                    ),
+                                  ),
+                                  _systemThemeSettings(
+                                    context,
+                                    builderState,
+                                  ),
+                                ],
+                              )
+                            : const CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                );
+              case AuthBlocStatus.loggedOut:
+              case AuthBlocStatus.error:
+                return BlocBuilder<ThemeBloc, ThemeBlocState>(
+                  builder: (_, builderState) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        actions: _actions(context, builderState),
+                        title: const Text(AppLocalization.profilePageTitle),
+                        centerTitle: true,
+                      ),
+                      body: const SingleChildScrollView(
+                        child: Center(
+                          child: CircularProgressIndicator(),
                         ),
-                        body: SingleChildScrollView(
-                          child:
-                              snapshot.hasData && snapshot.connectionState == ConnectionState.active
-                                  ? Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: [
-                                        ProfileCard(
-                                          user: FirebaseAuthRepository.userFromFirebaseUser(
-                                            snapshot.data!,
-                                          ),
-                                        ),
-                                        _systemThemeSettings(
-                                          context,
-                                          builderState,
-                                        ),
-                                      ],
-                                    )
-                                  : const CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                  );
-                case AuthBlocStatus.loggedOut:
-                case AuthBlocStatus.error:
-                  return BlocBuilder<ThemeBloc, ThemeBlocState>(
-                    builder: (_, builderState) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          actions: _actions(context, builderState),
-                          title: const Text(AppLocalization.profilePageTitle),
-                          centerTitle: true,
-                        ),
-                        body: const SingleChildScrollView(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-              }
-            },
-          );
-        },);
+                      ),
+                    );
+                  },
+                );
+            }
+          },
+        );
+      },
+    );
   }
 }
