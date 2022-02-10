@@ -23,7 +23,7 @@ class PostWidget extends StatelessWidget {
     final user = context.read<AuthBloc>().state.user;
     return GestureDetector(
       onTap: onTap,
-      onDoubleTap: onDoubleTap,
+      //onDoubleTap: onDoubleTap,
       child: SizedBox(
         height: 160,
         child: Card(
@@ -38,7 +38,12 @@ class PostWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.account_circle_rounded),
+                  CircleAvatar(
+                    radius: 10,
+                    foregroundImage: Image.network(
+                      post.user.profilePictureUrl,
+                    ).image,
+                  ),
                   Text(
                     post.user.username,
                   ),

@@ -35,9 +35,9 @@ class FeedPage extends StatelessWidget {
   }
 
   Widget _postsList(BuildContext context, PostsBlocState state) {
-    return ListView.builder(
-      itemCount: state.posts!.length,
-      itemBuilder: (_, index) {
+    return AnimatedList(
+      initialItemCount: state.posts!.length,
+      itemBuilder: (_, index, __) {
         return PostWidget(
           post: state.posts![index],
           onTap: () {
@@ -78,8 +78,6 @@ class FeedPage extends StatelessWidget {
               switch (state.status) {
                 case PostsBlocStatus.initial:
                 case PostsBlocStatus.loading:
-                case PostsBlocStatus.addingPost:
-                case PostsBlocStatus.addingLike:
                   return const Center(
                     child: CircularProgressIndicator(),
                   );

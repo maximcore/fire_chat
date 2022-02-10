@@ -21,11 +21,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
     });
     on<AddPostEvent>((event, emit) async {
       try {
-        emit(
-          state.copyWith(
-            status: PostsBlocStatus.addingPost,
-          ),
-        );
         await repository.addPost(
           post: event.post,
         );
@@ -48,11 +43,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
 
     on<LikePostEvent>((event, emit) async {
       try {
-        emit(
-          state.copyWith(
-            status: PostsBlocStatus.addingLike,
-          ),
-        );
         await repository.likePost(
           postId: event.postId,
           userId: event.userId,
