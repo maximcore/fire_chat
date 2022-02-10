@@ -1,4 +1,5 @@
 import 'package:fire_chat/config/wrappers/common/auth_bloc_wrapper.dart';
+import 'package:fire_chat/config/wrappers/common/create_post_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/posts_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/profile_editing_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/theme_bloc_wrapper.dart';
@@ -21,7 +22,9 @@ class BlocsAppWrapper extends StatelessWidget {
         child: ThemeBlocWrapper(
           child: ProfileEditingBlocWrapper(
             child: PostsBlocWrapper(
-              child: child,
+              child: CreatePostBlocWrapper(
+                child: child,
+              ),
             ),
           ),
         ),
