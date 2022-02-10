@@ -8,7 +8,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalization.chatPageTitle),
+        title: const Text(AppLocalization.chatsPageTitle),
         centerTitle: true,
       ),
       body: ListView.builder(

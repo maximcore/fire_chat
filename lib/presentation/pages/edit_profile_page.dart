@@ -1,7 +1,6 @@
-import 'package:file_picker/file_picker.dart';
+import 'package:fire_chat/config/image_uploader.dart';
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
-import 'package:fire_chat/domain/repositories/storage_repository/firebase_storage_repository.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc.dart';
 import 'package:fire_chat/presentation/views/edit_profile_page_view.dart';
@@ -25,19 +24,20 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<AuthBloc>();
+    final authBloc = context.read<AuthBloc>();
+    final profileEditingBloc = context.read<ProfileEditingBloc>();
     return EditProfilePageView(
       saveProfileChanges: () {
         _saveProfileChanges(context);
       },
       onPressed: () async {
-        final url = await _uploadImage(context);
+        final url = await ImageUploader.uploadImage(context);
         if (url != null) {
-          context.read<ProfileEditingBloc>().editAvatar(url);
+          profileEditingBloc.editAvatar(url);
         }
       },
       onDeleteProfilePressed: () {
-        _showDeleteProfileDialog(context, bloc);
+        _showDeleteProfileDialog(context, authBloc);
         context.read<AuthBloc>().delete();
       },
     );
@@ -46,24 +46,6 @@ class EditProfilePage extends StatelessWidget {
   void _saveProfileChanges(BuildContext context) {
     context.read<ProfileEditingBloc>().save();
     Navigator.of(context).pop();
-  }
-
-  Future<String?> _uploadImage(BuildContext context) async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: [
-        'png',
-        'jpg',
-      ],
-    );
-    final path = result?.files.single.path;
-    final fileName = result?.files.single.name;
-    final storage = FirebaseStorageRepository();
-    final url = await storage.uploadPicture(
-      path: path!,
-      name: fileName!,
-    );
-    return url;
   }
 
   void _showDeleteProfileDialog(
