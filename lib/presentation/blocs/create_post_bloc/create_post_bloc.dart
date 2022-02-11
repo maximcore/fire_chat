@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fire_chat/domain/repositories/storage_repository/firebase_storage_repository.dart';
 import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc_state.dart';
@@ -39,9 +40,11 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
     on<SavePost>((event, emit) async {
       try {
         final storage = FirebaseStorageRepository();
+        final path = state.result?.files.single.path as String;
+        final name = state.result?.files.single.name as String;
         final url = await storage.uploadPicture(
-          path: state.result?.files.single.path as String,
-          name: state.result?.files.single.name as String,
+          path: path,
+          name: name,
         );
         emit(
           state.copyWith(
@@ -49,7 +52,11 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
             status: CreatePostBlocStatus.ready,
           ),
         );
-      } catch (error) {
+      }
+      on FirebaseException catch (error) {
+        print(error.message);
+      }
+      catch (error) {
         log(error.toString());
       }
     });
