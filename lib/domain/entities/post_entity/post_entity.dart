@@ -11,6 +11,7 @@ class PostEntity with _$PostEntity {
     @Default('') String description,
     @Default(UserEntity(id: '')) UserEntity user,
     @Default(<String>[]) List<String> postLikedByUsers,
+    String? imageUrl,
     @Default('0') String postId,
   }) = _PostEntity;
 
