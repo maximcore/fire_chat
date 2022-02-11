@@ -33,59 +33,83 @@ class PostWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: const EdgeInsets.only(
-                left: 12,
-                right: 12,
-                top: 6,
-              ),
-              //color: Colors.greenAccent,
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 10,
-                    foregroundImage: Image.network(
-                      post.user.profilePictureUrl,
-                    ).image,
-                  ),
-                  const SizedBox(
-                    width: 6,
-                  ),
-                  Text(
-                    post.user.username,
-                  ),
-                ],
+            Expanded(
+              child: Container(
+                color: Colors.greenAccent[100],
+                padding: const EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                  top: 6,
+                ),
+                //color: Colors.greenAccent,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 10,
+                      foregroundImage: Image.network(
+                        post.user.profilePictureUrl,
+                      ).image,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      post.user.username,
+                    ),
+                  ],
+                ),
               ),
             ),
-            Text(
-              post.description,
-              textAlign: TextAlign.center,
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                left: 12,
-                right: 12,
-                bottom: 6,
-              ),
-              //color: Colors.deepPurpleAccent,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: onLikePressed,
-                    icon: const FaIcon(
-                      FontAwesomeIcons.heart,
-                    ),
-                    color: post.postLikedByUsers.contains(user?.id)
-                        ? Colors.red
-                        : Colors.white,
+            if (post.imageUrl != null)
+              Expanded(
+                flex: 8,
+                child: Container(
+                  color: Colors.purple[100],
+                  child: Image.network(
+                    post.imageUrl!,
+                    // height: 100,
+                    // width: 100,
                   ),
-                  IconButton(
-                    onPressed: onTap,
-                    icon: const FaIcon(
-                      FontAwesomeIcons.comment,
+                ),
+              ),
+            Expanded(
+              child: Container(
+                color: Colors.greenAccent[100],
+                child: Text(
+                  post.description,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                color: Colors.purple[100],
+                padding: const EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                  bottom: 6,
+                ),
+                //color: Colors.deepPurpleAccent,
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: onLikePressed,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.heart,
+                      ),
+                      color: post.postLikedByUsers.contains(user?.id)
+                          ? Colors.red
+                          : Colors.white,
                     ),
-                  )
-                ],
+                    IconButton(
+                      onPressed: onTap,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.comment,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
