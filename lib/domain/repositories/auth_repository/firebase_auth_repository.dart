@@ -76,7 +76,6 @@ class FirebaseAuthRepository implements AuthRepository {
     final googleUser = await GoogleSignIn(
       scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
       hostedDomain: '',
-      clientId: '',
     ).signIn();
     final googleAuth = await googleUser?.authentication;
     final credential = GoogleAuthProvider.credential(
