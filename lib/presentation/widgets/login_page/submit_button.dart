@@ -55,7 +55,7 @@ class SubmitButton extends StatelessWidget {
                               state: state,
                             )
                         : null,
-                    padding: 50,
+                    padding: 40,
                     radius: 16,
                     child: const Text(AppLocalization.loginButtonText),
                   );

@@ -18,7 +18,7 @@ class SignInCredentialsColumn extends StatelessWidget {
             context.read<AuthBloc>().loginWithGoogle();
           },
           radius: 16,
-          padding: 50,
+          padding: 40,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: const [
@@ -39,7 +39,7 @@ class SignInCredentialsColumn extends StatelessWidget {
             context.read<AuthBloc>().loginWithFacebook();
           },
           radius: 16,
-          padding: 50,
+          padding: 40,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: const [
