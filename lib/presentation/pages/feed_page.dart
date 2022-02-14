@@ -1,6 +1,8 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
+import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc.dart';
+import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
@@ -26,7 +28,7 @@ class FeedPage extends StatelessWidget {
               onPressed: () {
                 context.read<PostsBloc>().add(FetchingDataEvent());
               },
-              icon: const Icon(Icons.ac_unit_sharp),
+              icon: const Icon(Icons.refresh),
             ),
           ],
         )
@@ -35,26 +37,40 @@ class FeedPage extends StatelessWidget {
   }
 
   Widget _postsList(BuildContext context, PostsBlocState state) {
-    return AnimatedList(
-      initialItemCount: state.posts!.length,
-      itemBuilder: (_, index, __) {
-        return PostWidget(
-          post: state.posts![index],
-          onTap: () {
-            _goToChatPage(context);
-          },
-          onDoubleTap: () {
-            if (index.isOdd) {
-              _simulateError(context);
-            }
-          },
-          onLikePressed: () {
-            final user = context.read<AuthBloc>().state.user;
-            final postId = state.posts![index].postId;
-            final userId = user!.id;
-            context.read<PostsBloc>().likePost(postId: postId, userId: userId);
-          },
-        );
+    return BlocBuilder<CreatePostBloc, CreatePostBlocState>(
+      builder: (context, createPostState) {
+        switch (createPostState.status) {
+          case CreatePostBlocStatus.progress:
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          case CreatePostBlocStatus.initial:
+          case CreatePostBlocStatus.ready:
+            return AnimatedList(
+              initialItemCount: state.posts!.length,
+              itemBuilder: (_, index, __) {
+                return PostWidget(
+                  post: state.posts![index],
+                  onTap: () {
+                    _goToChatPage(context);
+                  },
+                  onDoubleTap: () {
+                    if (index.isOdd) {
+                      _simulateError(context);
+                    }
+                  },
+                  onLikePressed: () {
+                    final user = context.read<AuthBloc>().state.user;
+                    final postId = state.posts![index].postId;
+                    final userId = user!.id;
+                    context
+                        .read<PostsBloc>()
+                        .likePost(postId: postId, userId: userId);
+                  },
+                );
+              },
+            );
+        }
       },
     );
   }
