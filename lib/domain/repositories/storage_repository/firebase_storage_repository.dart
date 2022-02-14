@@ -5,7 +5,7 @@ import 'package:fire_chat/domain/repositories/storage_repository/storage_reposit
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageRepository implements StorageRepository {
-  final String _path = 'gs://fire-chat-mb.appspot.com/pictures';
+  final String _path = 'gs://fire-chat-mb.appspot.com/posts_pictures';
 
   //uploads picture to firebase storage, returns picture url
   @override
