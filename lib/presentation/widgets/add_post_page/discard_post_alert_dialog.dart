@@ -39,7 +39,12 @@ class DiscardPostAlertDialog extends StatelessWidget {
                 Navigator.of(builderContext).pop();
                 Navigator.of(context).pop();
               },
-              child: const Text(AppLocalization.discardText),
+              child: Text(
+                AppLocalization.discardText,
+                style: TextStyle(
+                  color: Theme.of(context).errorColor,
+                ),
+              ),
             ),
           ],
         ),
