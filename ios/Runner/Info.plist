@@ -2,29 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleURLTypes</key>
-        <array>
-            <dict>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>fb3165900597065326</string>
-                </array>
-            </dict>
-            <dict>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>com.googleusercontent.apps.683578617176-vk9qlffuc6716puvq07cvvrqtvdpt4v6</string>
-                </array>
-            </dict>
-        </array>
-        <key>FacebookAppID</key>
-        <string>3165900597065326</string>
-        <key>FacebookClientToken</key>
-        <string>5c4c29ac2421a6acbca72ea3d91bf511</string>
-        <key>FacebookDisplayName</key>
-        <string>Fire Chat</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -43,19 +20,50 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb3165900597065326</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.683578617176-vk9qlffuc6716puvq07cvvrqtvdpt4v6</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>3165900597065326</string>
+	<key>FacebookClientToken</key>
+	<string>5c4c29ac2421a6acbca72ea3d91bf511</string>
+	<key>FacebookDisplayName</key>
+	<string>Fire Chat</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict/>
+	<key>NSCameraUsageDescription</key>
+	<string>To capture profile photo please grant camera access</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App needs access to photo lib for profile images</string>
 	<key>UILaunchScreen</key>
 	<dict>
-		<key>UIImageName</key>
-		<string>fire</string>
 		<key>UIColorName</key>
 		<string>LaunchScreenBackground</string>
+		<key>UIImageName</key>
+		<string>fire</string>
 		<key>UIImageRespectsSafeAreaInsets</key>
 		<true/>
 	</dict>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -75,11 +83,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App needs access to photo lib for profile images</string>
-	<key>NSCameraUsageDescription</key>
-	<string>To capture profile photo please grant camera access</string>
 </dict>
 </plist>
