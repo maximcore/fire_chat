@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 
 abstract class CreatePostEvent {}
 
@@ -14,6 +15,12 @@ class EditImage extends CreatePostEvent {
   final FilePickerResult image;
 }
 
-class SavePost extends CreatePostEvent {}
+class UploadImageToStorage extends CreatePostEvent {
+  UploadImageToStorage({
+    required this.post,
+  });
+
+  final PostEntity post;
+}
 
 class Discard extends CreatePostEvent {}

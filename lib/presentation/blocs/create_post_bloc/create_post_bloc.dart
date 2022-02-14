@@ -2,14 +2,18 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:fire_chat/domain/repositories/storage_repository/firebase_storage_repository.dart';
+import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
+import 'package:fire_chat/domain/repositories/storage_repository/storage_repository.dart';
 import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_events.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
-  CreatePostBloc()
-      : super(
+  CreatePostBloc({
+    required this.postsRepository,
+    required this.storageRepository,
+  }) : super(
           CreatePostBlocState(
             status: CreatePostBlocStatus.initial,
           ),
@@ -37,14 +41,24 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
         ),
       );
     });
-    on<SavePost>((event, emit) async {
+    on<UploadImageToStorage>((event, emit) async {
       try {
-        final storage = FirebaseStorageRepository();
+        emit(
+          state.copyWith(
+            status: CreatePostBlocStatus.progress,
+          ),
+        );
         final path = state.result?.files.single.path as String;
         final name = state.result?.files.single.name as String;
-        final url = await storage.uploadPicture(
+        final url = await storageRepository.uploadPicture(
           path: path,
           name: name,
+        );
+        final post = event.post.copyWith(
+          imageUrl: url,
+        );
+        await postsRepository.addPost(
+          post: post,
         );
         emit(
           state.copyWith(
@@ -52,21 +66,39 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
             status: CreatePostBlocStatus.ready,
           ),
         );
-      }
-      on FirebaseException catch (error) {
-        print(error.message);
-      }
-      catch (error) {
+      } on FirebaseException catch (error) {
+        log(error.message.toString());
+      } catch (error) {
         log(error.toString());
       }
     });
   }
 
-  void editDescription(String description) => add(EditDescription(description));
+  final PostsRepository postsRepository;
+  final StorageRepository storageRepository;
 
-  void editImage(FilePickerResult imagePath) => add(EditImage(imagePath));
+  void editDescription(String description) => add(
+        EditDescription(
+          description,
+        ),
+      );
 
-  void savePost() => add(SavePost());
+  void editImage(FilePickerResult imagePath) => add(
+        EditImage(
+          imagePath,
+        ),
+      );
 
-  void discard() => add(Discard());
+  void uploadImageToStorage(
+    PostEntity post,
+  ) =>
+      add(
+        UploadImageToStorage(
+          post: post,
+        ),
+      );
+
+  void discard() => add(
+        Discard(),
+      );
 }
