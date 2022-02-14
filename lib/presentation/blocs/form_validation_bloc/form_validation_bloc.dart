@@ -11,7 +11,7 @@ class FormValidationBloc
   FormValidationBloc()
       : super(
           FormValidationState(
-            email: const Email.pure('maxim1@maxim1'),
+            email: const Email.pure('maxim1@maxim1.com'),
             password: const Password.pure('maxim1'),
             status: FormzStatus.pure,
           ),
