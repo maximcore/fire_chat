@@ -10,7 +10,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   if (useEmulator) {
-    await connectToFirebaseEmulator();
+    //await connectToFirebaseEmulator();
   }
 
   F.appFlavor = Flavor.dev;
