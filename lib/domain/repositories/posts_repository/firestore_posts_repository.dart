@@ -21,6 +21,7 @@ class FirestorePostsRepository implements PostsRepository {
         'user': post.user.toJson(),
         'postLikedByUsers': post.postLikedByUsers,
         'postId': index.toString(),
+        'imageUrl': post.imageUrl,
       },
     );
   }
