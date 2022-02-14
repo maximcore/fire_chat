@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
-import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
@@ -19,17 +18,14 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
         PostsBlocState(status: PostsBlocStatus.error),
       );
     });
-    on<AddPostEvent>((event, emit) async {
+    on<SavePostEvent>((event, emit) async {
       try {
-        await repository.addPost(
-          post: event.post,
-        );
-        final newPosts = await repository.fetchPosts();
         emit(
           state.copyWith(
             status: PostsBlocStatus.loading,
           ),
         );
+        final newPosts = await repository.fetchPosts();
         emit(
           state.copyWith(
             posts: newPosts,
@@ -100,12 +96,8 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
     }
   }
 
-  void addPost({
-    required PostEntity post,
-    required UserEntity user,
-  }) =>
-      add(
-        AddPostEvent(post: post, user: user),
+  void savePost() => add(
+        SavePostEvent(),
       );
 
   void likePost({
