@@ -5,7 +5,6 @@ import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc.dart';
-import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +15,17 @@ class AddPostWidget extends StatelessWidget {
   }) : super(key: key);
 
   final BuildContext blocBuilderContext;
+
+  void uploadImage(CreatePostBloc bloc) {
+    final user = blocBuilderContext.read<AuthBloc>().state.user!;
+    final post = PostEntity(
+      description: bloc.state.description!,
+      user: user,
+    );
+    bloc.uploadImageToStorage(
+      post,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +64,7 @@ class AddPostWidget extends StatelessWidget {
             );
             if (result != null) {
               bloc.editImage(result);
+              //context.read<PostsBloc>().
             }
           },
           child: const Text(
@@ -62,16 +73,7 @@ class AddPostWidget extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            final user = blocBuilderContext.read<AuthBloc>().state.user!;
-            final post = PostEntity(
-              description: bloc.state.description!,
-              user: user,
-            );
-            blocBuilderContext.read<PostsBloc>().addPost(
-                  post: post,
-                  user: user,
-                );
-            blocBuilderContext.read<CreatePostBloc>().savePost();
+            uploadImage(bloc);
             Navigator.of(blocBuilderContext).pop();
           },
           child: const Text(
