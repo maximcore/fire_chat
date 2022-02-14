@@ -11,19 +11,7 @@ class ChatPage extends StatelessWidget {
         title: const Text(AppLocalization.chatsPageTitle),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8),
-            child: ColoredBox(
-              color: index.isEven ? Colors.greenAccent : Colors.blueAccent,
-              child: const SizedBox(
-                height: 50,
-              ),
-            ),
-          );
-        },
-      ),
+      body: ListView(),
     );
   }
 }
