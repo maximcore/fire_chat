@@ -75,7 +75,15 @@ class SignUpPage extends StatelessWidget {
                                     AppRoutes.loginPageRoute,
                                   );
                                 },
-                                child: const Text(AppLocalization.haveAccount),
+                                child: Text(
+                                  AppLocalization.haveAccount,
+                                  style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.color,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
