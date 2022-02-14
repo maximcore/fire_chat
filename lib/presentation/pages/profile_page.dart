@@ -49,7 +49,7 @@ class ProfilePage extends StatelessWidget {
                 FontAwesomeIcons.moon,
               )
             : const FaIcon(
-                FontAwesomeIcons.sun,
+                FontAwesomeIcons.solidSun,
               ),
       ),
       IconButton(
