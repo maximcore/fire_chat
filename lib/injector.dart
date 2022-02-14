@@ -3,6 +3,8 @@ import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/faker_posts_repository.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/firestore_posts_repository.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
+import 'package:fire_chat/domain/repositories/storage_repository/firebase_storage_repository.dart';
+import 'package:fire_chat/domain/repositories/storage_repository/storage_repository.dart';
 import 'package:fire_chat/domain/repositories/user_repository/hive_user_repository.dart';
 import 'package:fire_chat/domain/repositories/user_repository/providers/hive_storage_provider.dart';
 import 'package:fire_chat/domain/repositories/user_repository/providers/istorage_provider.dart';
@@ -23,6 +25,10 @@ Future<void> setup() async {
 
   GetIt.instance.registerSingleton<UserRepository>(
     HiveUserRepository(),
+  );
+
+  GetIt.instance.registerSingleton<StorageRepository>(
+    FirebaseStorageRepository(),
   );
 
   GetIt.instance.registerSingleton<PostsRepository>(
