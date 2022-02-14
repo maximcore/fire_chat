@@ -1,4 +1,5 @@
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,96 +25,163 @@ class PostWidget extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     return SizedBox(
       height: height / 2.5,
-      child: Card(
-        margin: const EdgeInsets.only(top: 8, bottom: 8, left: 32, right: 32),
-        color: Theme.of(context).cardColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          PostHeader(post: post),
+          if (post.imageUrl != null) PostImage(post: post),
+          PostActionButtons(
+            onLikePressed: onLikePressed,
+            post: post,
+            user: user,
+            onTap: onTap,
+          ),
+          PostDescription(post: post),
+          const Divider(
+            thickness: 0.5,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PostDescription extends StatelessWidget {
+  const PostDescription({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
+
+  final PostEntity post;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Row(
+        children: [
+          Text(
+            post.user.username,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+            // textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            width: 4,
+          ),
+          Text(
+            post.description,
+            // textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PostActionButtons extends StatelessWidget {
+  const PostActionButtons({
+    Key? key,
+    required this.onLikePressed,
+    required this.post,
+    required this.user,
+    required this.onTap,
+  }) : super(key: key);
+
+  final VoidCallback? onLikePressed;
+  final PostEntity post;
+  final UserEntity? user;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Row(
+        children: [
+          IconButton(
+            onPressed: onLikePressed,
+            icon: FaIcon(
+              post.postLikedByUsers.contains(user?.id)
+                  ? FontAwesomeIcons.solidHeart
+                  : FontAwesomeIcons.heart,
+            ),
+            color: post.postLikedByUsers.contains(user?.id)
+                ? Colors.red
+                : Theme.of(context).primaryIconTheme.color,
+          ),
+          IconButton(
+            onPressed: onTap,
+            icon: const FaIcon(
+              FontAwesomeIcons.comment,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class PostImage extends StatelessWidget {
+  const PostImage({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
+
+  final PostEntity post;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 7,
+      child: SizedBox(
+        width: double.infinity,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: Image.network(
+            post.imageUrl!,
+          ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Container(
-                color: Colors.greenAccent[100],
-                padding: const EdgeInsets.only(
-                  left: 12,
-                  right: 12,
-                  top: 6,
-                ),
-                //color: Colors.greenAccent,
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 10,
-                      foregroundImage: Image.network(
-                        post.user.profilePictureUrl,
-                      ).image,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      post.user.username,
-                    ),
-                  ],
-                ),
+      ),
+    );
+  }
+}
+
+class PostHeader extends StatelessWidget {
+  const PostHeader({
+    Key? key,
+    required this.post,
+  }) : super(key: key);
+
+  final PostEntity post;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Row(
+        children: [
+          Expanded(
+            child: CircleAvatar(
+              radius: 10,
+              foregroundImage: Image.network(
+                post.user.profilePictureUrl,
+              ).image,
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Text(
+              post.user.username,
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
               ),
             ),
-            if (post.imageUrl != null)
-              Expanded(
-                flex: 8,
-                child: Container(
-                  color: Colors.purple[100],
-                  child: Image.network(
-                    post.imageUrl!,
-                    // height: 100,
-                    // width: 100,
-                  ),
-                ),
-              ),
-            Expanded(
-              child: Container(
-                color: Colors.greenAccent[100],
-                child: Text(
-                  post.description,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.purple[100],
-                padding: const EdgeInsets.only(
-                  left: 12,
-                  right: 12,
-                  bottom: 6,
-                ),
-                //color: Colors.deepPurpleAccent,
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: onLikePressed,
-                      icon: const FaIcon(
-                        FontAwesomeIcons.heart,
-                      ),
-                      color: post.postLikedByUsers.contains(user?.id)
-                          ? Colors.red
-                          : Colors.white,
-                    ),
-                    IconButton(
-                      onPressed: onTap,
-                      icon: const FaIcon(
-                        FontAwesomeIcons.comment,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+          const Expanded(
+            flex: 6,
+            child: SizedBox(),
+          )
+        ],
       ),
     );
   }
