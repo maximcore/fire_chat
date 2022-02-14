@@ -30,8 +30,17 @@ class AddPostWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = blocBuilderContext.read<CreatePostBloc>();
+    final size = MediaQuery.of(context).size;
     return Column(
       children: [
+        if (bloc.state.result?.files.single.path == null)
+          const SizedBox()
+        else
+          Image.file(
+            File(bloc.state.result?.files.single.path as String),
+            width: size.width / 1.5,
+            height: size.height / 3.5,
+          ),
         const Text(AppLocalization.description),
         Padding(
           padding: const EdgeInsets.all(18),
@@ -42,17 +51,9 @@ class AddPostWidget extends StatelessWidget {
             onChanged: (String? value) {
               bloc.editDescription(value!);
             },
-            maxLines: 5,
+            maxLines: 2,
           ),
         ),
-        if (bloc.state.result?.files.single.path == null)
-          const SizedBox()
-        else
-          Image.file(
-            File(bloc.state.result?.files.single.path as String),
-            width: 100,
-            height: 150,
-          ),
         ElevatedButton(
           onPressed: () async {
             final result = await FilePicker.platform.pickFiles(
