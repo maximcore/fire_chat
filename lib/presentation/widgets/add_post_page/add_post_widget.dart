@@ -76,6 +76,7 @@ class AddPostWidget extends StatelessWidget {
           onPressed: () {
             uploadImage(bloc);
             Navigator.of(blocBuilderContext).pop();
+            context.read<CreatePostBloc>().clearPost();
           },
           child: const Text(
             AppLocalization.addPostText,
