@@ -16,7 +16,8 @@ class FirebaseStorageRepository implements StorageRepository {
     final storage = FirebaseStorage.instance;
     final file = File(path);
     try {
-      final reference = storage.refFromURL('$_path/$name');
+      final reference = storage
+          .refFromURL('$_path/$name${DateTime.now().millisecondsSinceEpoch}');
       await reference.putFile(file);
       final url = await reference.getDownloadURL();
       return url;
