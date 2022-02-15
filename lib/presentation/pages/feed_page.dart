@@ -37,40 +37,26 @@ class FeedPage extends StatelessWidget {
   }
 
   Widget _postsList(BuildContext context, PostsBlocState state) {
-    return BlocBuilder<CreatePostBloc, CreatePostBlocState>(
-      builder: (context, createPostState) {
-        switch (createPostState.status) {
-          case CreatePostBlocStatus.progress:
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          case CreatePostBlocStatus.initial:
-          case CreatePostBlocStatus.ready:
-            return AnimatedList(
-              initialItemCount: state.posts!.length,
-              itemBuilder: (_, index, __) {
-                return PostWidget(
-                  post: state.posts![index],
-                  onTap: () {
-                    _goToChatPage(context);
-                  },
-                  onDoubleTap: () {
-                    if (index.isOdd) {
-                      _simulateError(context);
-                    }
-                  },
-                  onLikePressed: () {
-                    final user = context.read<AuthBloc>().state.user;
-                    final postId = state.posts![index].postId;
-                    final userId = user!.id;
-                    context
-                        .read<PostsBloc>()
-                        .likePost(postId: postId, userId: userId);
-                  },
-                );
-              },
-            );
-        }
+    return AnimatedList(
+      initialItemCount: state.posts!.length,
+      itemBuilder: (_, index, __) {
+        return PostWidget(
+          post: state.posts![index],
+          onTap: () {
+            _goToChatPage(context);
+          },
+          onDoubleTap: () {
+            if (index.isOdd) {
+              _simulateError(context);
+            }
+          },
+          onLikePressed: () {
+            final user = context.read<AuthBloc>().state.user;
+            final postId = state.posts![index].postId;
+            final userId = user!.id;
+            context.read<PostsBloc>().likePost(postId: postId, userId: userId);
+          },
+        );
       },
     );
   }
