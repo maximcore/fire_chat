@@ -22,27 +22,23 @@ class PostWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthBloc>().state.user;
-    final height = MediaQuery.of(context).size.height;
-    return SizedBox(
-      height: height / 2.5,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PostHeader(post: post),
-          if (post.imageUrl != null) PostImage(post: post),
-          PostActionButtons(
-            onLikePressed: onLikePressed,
-            post: post,
-            user: user,
-            onTap: onTap,
-          ),
-          PostDescription(post: post),
-          const Divider(
-            thickness: 0.5,
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        PostHeader(post: post),
+        if (post.imageUrl != null) PostImage(post: post),
+        PostActionButtons(
+          onLikePressed: onLikePressed,
+          post: post,
+          user: user,
+          onTap: onTap,
+        ),
+        PostDescription(post: post),
+        const Divider(
+          thickness: 0.5,
+        ),
+      ],
     );
   }
 }
@@ -57,7 +53,8 @@ class PostDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 32,
       child: Row(
         children: [
           const SizedBox(
@@ -77,7 +74,6 @@ class PostDescription extends StatelessWidget {
             post.description,
             // textAlign: TextAlign.center,
           ),
-
         ],
       ),
     );
@@ -100,7 +96,8 @@ class PostActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 32,
       child: Row(
         children: [
           IconButton(
@@ -109,6 +106,7 @@ class PostActionButtons extends StatelessWidget {
               post.postLikedByUsers.contains(user?.id)
                   ? FontAwesomeIcons.solidHeart
                   : FontAwesomeIcons.heart,
+              size: 16,
             ),
             color: post.postLikedByUsers.contains(user?.id)
                 ? Colors.red
@@ -118,6 +116,7 @@ class PostActionButtons extends StatelessWidget {
             onPressed: onTap,
             icon: const FaIcon(
               FontAwesomeIcons.comment,
+              size: 16,
             ),
           )
         ],
@@ -136,17 +135,9 @@ class PostImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 7,
-      child: SizedBox(
-        width: double.infinity,
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: Image.network(
-            post.imageUrl!,
-          ),
-        ),
-      ),
+    return Image.network(
+      post.imageUrl!,
+      fit: BoxFit.cover,
     );
   }
 }
@@ -161,30 +152,22 @@ class PostHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 32,
       child: Row(
         children: [
-          Expanded(
-            child: CircleAvatar(
-              radius: 10,
-              foregroundImage: Image.network(
-                post.user.profilePictureUrl,
-              ).image,
+          CircleAvatar(
+            radius: 16,
+            foregroundImage: Image.network(
+              post.user.profilePictureUrl,
+            ).image,
+          ),
+          Text(
+            post.user.username,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
             ),
           ),
-          Expanded(
-            flex: 6,
-            child: Text(
-              post.user.username,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          const Expanded(
-            flex: 6,
-            child: SizedBox(),
-          )
         ],
       ),
     );
