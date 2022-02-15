@@ -5,6 +5,7 @@ import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc.dart';
+import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -77,6 +78,7 @@ class AddPostWidget extends StatelessWidget {
             uploadImage(bloc);
             Navigator.of(blocBuilderContext).pop();
             context.read<CreatePostBloc>().clearPost();
+            context.read<PostsBloc>().fetchPosts();
           },
           child: const Text(
             AppLocalization.addPostText,
