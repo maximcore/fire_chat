@@ -3,6 +3,8 @@ import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 
 abstract class CreatePostEvent {}
 
+class ClearPost extends CreatePostEvent {}
+
 class EditDescription extends CreatePostEvent {
   EditDescription(this.description);
 
