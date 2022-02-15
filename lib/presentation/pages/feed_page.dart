@@ -1,8 +1,6 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc.dart';
-import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
