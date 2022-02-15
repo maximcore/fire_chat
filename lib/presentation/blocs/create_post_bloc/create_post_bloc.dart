@@ -60,6 +60,7 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
         await postsRepository.addPost(
           post: post,
         );
+        await postsRepository.fetchPosts();
         emit(
           state.copyWith(
             imageUrl: url,
@@ -71,6 +72,13 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
       } catch (error) {
         log(error.toString());
       }
+    });
+    on<ClearPost>((event, emit) {
+      emit(
+        CreatePostBlocState(
+          status: CreatePostBlocStatus.initial,
+        ),
+      );
     });
   }
 
@@ -100,5 +108,9 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
 
   void discard() => add(
         Discard(),
+      );
+
+  void clearPost() => add(
+        ClearPost(),
       );
 }
