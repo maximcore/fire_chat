@@ -1,5 +1,6 @@
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PostDetailsPage extends StatelessWidget {
   const PostDetailsPage({Key? key}) : super(key: key);
@@ -11,13 +12,8 @@ class PostDetailsPage extends StatelessWidget {
         title: const Text(AppLocalization.postDetailsPageTitle),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: 30,
-        itemBuilder: (context, index) {
-          return const Padding(
-            padding: EdgeInsets.all(8),
-          );
-        },
+      body: Column(
+        children: [],
       ),
     );
   }
