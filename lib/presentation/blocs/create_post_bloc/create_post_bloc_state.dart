@@ -13,4 +13,9 @@ class CreatePostBlocState with _$CreatePostBlocState {
     String? imageUrl,
     required CreatePostBlocStatus status,
   }) = _CreatePostBlocState;
+
+  const CreatePostBlocState._();
+
+  bool isUnmodified() => (description == null || description == '') &&
+      result == null;
 }

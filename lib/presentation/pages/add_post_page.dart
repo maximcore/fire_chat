@@ -28,21 +28,26 @@ class AddPostPage extends StatelessWidget {
     return BlocBuilder<CreatePostBloc, CreatePostBlocState>(
       builder: (blocBuilderContext, state) {
         return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            automaticallyImplyLeading: false,
-            actions: [
-              IconButton(
-                onPressed: () async {
-                  await onPressed(context);
-                },
-                icon: const Icon(
-                  Icons.cancel_outlined,
+          appBar: state.isUnmodified()
+              ? AppBar(
+                  centerTitle: true,
+                  title: const Text(AppLocalization.addPostPageTitle),
+                )
+              : AppBar(
+                  centerTitle: true,
+                  automaticallyImplyLeading: false,
+                  actions: [
+                    IconButton(
+                      onPressed: () async {
+                        await onPressed(context);
+                      },
+                      icon: const Icon(
+                        Icons.cancel_outlined,
+                      ),
+                    ),
+                  ],
+                  title: const Text(AppLocalization.addPostPageTitle),
                 ),
-              ),
-            ],
-            title: const Text(AppLocalization.addPostPageTitle),
-          ),
           body: SafeArea(
             child: Column(
               children: [
