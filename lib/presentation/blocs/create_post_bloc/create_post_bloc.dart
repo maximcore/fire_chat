@@ -60,11 +60,15 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
         await postsRepository.addPost(
           post: post,
         );
-        await postsRepository.fetchPosts();
         emit(
           state.copyWith(
             imageUrl: url,
             status: CreatePostBlocStatus.ready,
+          ),
+        );
+        emit(
+          CreatePostBlocState(
+            status: CreatePostBlocStatus.initial,
           ),
         );
       } on FirebaseException catch (error) {
