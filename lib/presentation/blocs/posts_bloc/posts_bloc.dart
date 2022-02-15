@@ -107,4 +107,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
       add(
         LikePostEvent(postId: postId, userId: userId),
       );
+
+  void fetchPosts() => add(FetchingDataEvent());
 }
