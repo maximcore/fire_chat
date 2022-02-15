@@ -12,7 +12,7 @@ class CustomAppTheme {
           onSecondary: Color(0xff000000),
           onSurface: Color(0xff000000),
           onPrimary: Color(0xff000000),
-          primary: Color(0xffffffff),
+          primary: Color(0xffe1e1e1),
           secondary: Color(0xff000000),
           surface: Color(0xffffffff),
           primaryContainer: Color(0xffb45e38),
@@ -21,7 +21,10 @@ class CustomAppTheme {
         textTheme: const TextTheme(
           headline6: TextStyle(color: Colors.black),
           bodyText1: TextStyle(color: Colors.black),
-          bodyText2: TextStyle(color: Colors.black),
+          bodyText2: TextStyle(
+            color: Colors.black,
+            fontSize: 12,
+          ),
           button: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -40,15 +43,18 @@ class CustomAppTheme {
           onSurface: Color(0xffffffff),
           onPrimary: Color(0xffffffff),
           primary: Color(0xff000000),
-          secondary: Color(0xffefaf91),
-          surface: Color(0xff1a1616),
+          secondary: Color(0xff181818),
+          surface: Color(0xff000000),
           primaryContainer: Color(0xff604bde),
           secondaryContainer: Color(0xffa15333),
         ),
         textTheme: const TextTheme(
           headline6: TextStyle(color: Colors.white),
           bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+          ),
           button: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
