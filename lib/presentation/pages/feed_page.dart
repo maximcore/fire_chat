@@ -1,6 +1,8 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
+import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc.dart';
+import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
@@ -67,28 +69,25 @@ class FeedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (_, constraints) {
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: constraints.maxHeight,
-          ),
-          child: BlocBuilder<PostsBloc, PostsBlocState>(
-            builder: (_, state) {
-              switch (state.status) {
-                case PostsBlocStatus.initial:
-                case PostsBlocStatus.loading:
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                case PostsBlocStatus.ready:
-                  return _postsList(context, state);
-                case PostsBlocStatus.error:
-                  return _errorBanner(context);
-              }
-            },
-          ),
-        );
+    return BlocConsumer<PostsBloc, PostsBlocState>(
+      listener: (context, state) {
+        if (context.read<CreatePostBloc>().state.status ==
+            CreatePostBlocStatus.ready) {
+          context.read<PostsBloc>().fetchPosts();
+        }
+      },
+      builder: (_, state) {
+        switch (state.status) {
+          case PostsBlocStatus.initial:
+          case PostsBlocStatus.loading:
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          case PostsBlocStatus.ready:
+            return _postsList(context, state);
+          case PostsBlocStatus.error:
+            return _errorBanner(context);
+        }
       },
     );
   }
