@@ -60,6 +60,9 @@ class PostDescription extends StatelessWidget {
     return Expanded(
       child: Row(
         children: [
+          const SizedBox(
+            width: 10,
+          ),
           Text(
             post.user.username,
             style: const TextStyle(
@@ -74,6 +77,7 @@ class PostDescription extends StatelessWidget {
             post.description,
             // textAlign: TextAlign.center,
           ),
+
         ],
       ),
     );
@@ -169,7 +173,7 @@ class PostHeader extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: 6,
             child: Text(
               post.user.username,
               style: const TextStyle(
