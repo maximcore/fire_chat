@@ -4,6 +4,7 @@ import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
 import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_state.dart';
+import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc_state.dart';
 import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
@@ -119,6 +120,7 @@ class SubmitButton extends StatelessWidget {
           email: state.email.value,
           password: state.password.value,
         );
+    context.read<PostsBloc>().fetchPosts();
   }
 
   void onSignUpSubmit(
