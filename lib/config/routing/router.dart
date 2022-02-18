@@ -10,7 +10,7 @@ class AppRouter {
       case EditProfilePage.routeName:
         return EditProfilePage.route(settings);
       case AppRoutes.loginPageRoute:
-        return MaterialPageRoute<void>(builder: (_) => const LoginPage());
+        return MaterialPageRoute<void>(builder: (_) => const SignInPage());
       case AppRoutes.signUpPageRoute:
         return MaterialPageRoute<void>(builder: (_) => const SignUpPage());
       case AppRoutes.homePageRoute:
