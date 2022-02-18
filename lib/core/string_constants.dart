@@ -73,4 +73,7 @@ class AppLocalization {
 
   static const String emailFormatErrorHelperText =
       'Please ensure the email entered is valid';
+
+  // Hint text
+  static const String addComment = 'Add comment';
 }
