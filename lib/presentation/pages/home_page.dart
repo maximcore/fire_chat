@@ -1,8 +1,12 @@
 import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc.dart';
+import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc.dart';
 import 'package:fire_chat/presentation/pages/feed_page.dart';
 import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatelessWidget {
@@ -43,7 +47,16 @@ class HomePage extends StatelessWidget {
             ],
             centerTitle: true,
           ),
-          body: const FeedPage(),
+          body: BlocConsumer<CreatePostBloc, CreatePostBlocState>(
+            listener: (context, state) {
+              if (state.status == CreatePostBlocStatus.ready) {
+                context.read<PostsBloc>().fetchPosts();
+              }
+            },
+            builder: (context, state) {
+              return const FeedPage();
+            },
+          ),
         ),
         const FlavorsBanner(),
       ],
