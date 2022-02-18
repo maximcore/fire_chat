@@ -53,7 +53,7 @@ class CustomAppTheme {
           bodyText1: TextStyle(color: Colors.white),
           bodyText2: TextStyle(
             color: Colors.white,
-            fontSize: 12,
+            fontSize: 16,
           ),
           button: TextStyle(
             color: Colors.white,
