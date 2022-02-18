@@ -22,12 +22,17 @@ class PostWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<AuthBloc>().state.user;
+    final size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         PostHeader(post: post),
-        if (post.imageUrl != null) PostImage(post: post),
+        if (post.imageUrl != null)
+          PostImage(
+            post: post,
+            size: size,
+          ),
         PostActionButtons(
           onLikePressed: onLikePressed,
           post: post,
@@ -106,7 +111,6 @@ class PostActionButtons extends StatelessWidget {
               post.postLikedByUsers.contains(user?.id)
                   ? FontAwesomeIcons.solidHeart
                   : FontAwesomeIcons.heart,
-              size: 16,
             ),
             color: post.postLikedByUsers.contains(user?.id)
                 ? Colors.red
@@ -116,7 +120,6 @@ class PostActionButtons extends StatelessWidget {
             onPressed: onTap,
             icon: const FaIcon(
               FontAwesomeIcons.comment,
-              size: 16,
             ),
           )
         ],
@@ -129,15 +132,20 @@ class PostImage extends StatelessWidget {
   const PostImage({
     Key? key,
     required this.post,
+    required this.size,
   }) : super(key: key);
 
   final PostEntity post;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      post.imageUrl!,
-      fit: BoxFit.cover,
+    return SizedBox(
+      height: size.height * 0.3,
+      child: Image.network(
+        post.imageUrl!,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
