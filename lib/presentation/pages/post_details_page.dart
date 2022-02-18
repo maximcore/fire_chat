@@ -11,8 +11,20 @@ class PostDetailsPage extends StatelessWidget {
         title: const Text(AppLocalization.postDetailsPageTitle),
         centerTitle: true,
       ),
-      body: Column(
-        children: [],
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintText: AppLocalization.addComment,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
