@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
-import 'package:fire_chat/domain/repositories/auth_repository/firebase_auth_repository.dart';
+import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_events.dart';
 import 'package:fire_chat/presentation/blocs/profile_editing_bloc/profile_editing_bloc_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -116,7 +116,7 @@ class ProfileEditingBloc
     });
   }
 
-  final FirebaseAuthRepository repository;
+  final AuthRepository repository;
 
   void init() => add(InitialProfileEvent());
 
