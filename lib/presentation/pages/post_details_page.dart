@@ -1,4 +1,4 @@
-import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/views/post_details_page_view.dart';
 import 'package:flutter/material.dart';
 
 class PostDetailsPage extends StatelessWidget {
@@ -6,26 +6,6 @@ class PostDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(AppLocalization.postDetailsPageTitle),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                hintText: AppLocalization.addComment,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const PostDetailsPageView();
   }
 }
