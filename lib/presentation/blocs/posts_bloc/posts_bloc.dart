@@ -96,9 +96,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
     }
   }
 
-  void savePost() => add(
-        SavePostEvent(),
-      );
+  void savePost() => add(SavePostEvent());
 
   void likePost({
     required String postId,

@@ -179,9 +179,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
 
   final AuthRepository authRepository;
 
-  void loginAnonymously() => add(
-        AnonymousLoginEvent(),
-      );
+  void loginAnonymously() => add(AnonymousLoginEvent());
 
   void loginWithEmailAndPassword({
     required String email,
@@ -209,9 +207,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         ),
       );
 
-  void signOut() => add(
-        SignOutEvent(),
-      );
+  void signOut() => add(SignOutEvent());
 
   void delete() => add(DeleteUserEvent());
 }

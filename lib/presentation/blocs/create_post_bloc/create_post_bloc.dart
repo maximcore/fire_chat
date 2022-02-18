@@ -110,11 +110,7 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostBlocState> {
         ),
       );
 
-  void discard() => add(
-        Discard(),
-      );
+  void discard() => add(Discard());
 
-  void clearPost() => add(
-        ClearPost(),
-      );
+  void clearPost() => add(ClearPost());
 }
