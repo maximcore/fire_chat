@@ -1,105 +1,14 @@
 import 'dart:developer';
 
 import 'package:fire_chat/config/routing/routes.dart';
-import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:fire_chat/presentation/blocs/form_validation_bloc/form_validation_bloc.dart';
-import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
-import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc_state.dart';
-import 'package:fire_chat/presentation/widgets/common/custom_elevated_button.dart';
-import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
-import 'package:fire_chat/presentation/widgets/login_page/auth_form.dart';
+import 'package:fire_chat/presentation/views/sign_up_page_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FormValidationBloc(),
-      child: BlocBuilder<SignUpBloc, SignUpBlocState>(
-        builder: (context, state) {
-          return Stack(
-            children: [
-              Scaffold(
-                appBar: AppBar(
-                  automaticallyImplyLeading: false,
-                  title: const Text(AppLocalization.createUserPageTitle),
-                  centerTitle: true,
-                ),
-                body: SafeArea(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return SingleChildScrollView(
-                        child: ConstrainedBox(
-                          constraints:
-                              BoxConstraints(minHeight: constraints.maxHeight),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              const Icon(
-                                Icons.person_pin,
-                                size: 64,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              const LoginForm(
-                                isLoginForm: false,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              CustomElevatedButton(
-                                onPressed: () =>
-                                    onLoginAnonymouslyPressed(context),
-                                padding: 50,
-                                radius: 16,
-                                child: const Text(
-                                  AppLocalization.loginAnonymously,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushReplacementNamed(
-                                    AppRoutes.loginPageRoute,
-                                  );
-                                },
-                                child: Text(
-                                  AppLocalization.haveAccount,
-                                  style: TextStyle(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.color,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              const FlavorsBanner(),
-            ],
-          );
-        },
-      ),
-    );
-  }
 
   void onLoginAnonymouslyPressed(BuildContext context) {
     try {
@@ -120,5 +29,19 @@ class SignUpPage extends StatelessWidget {
     } catch (error) {
       log(error.toString());
     }
+  }
+
+  void onSwitchSignTypePressed(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed(
+      AppRoutes.loginPageRoute,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SignUpPageView(
+      onLoginAnonymouslyPressed: () => onLoginAnonymouslyPressed(context),
+      onSwitchSignTypePressed: () => onSwitchSignTypePressed(context),
+    );
   }
 }
