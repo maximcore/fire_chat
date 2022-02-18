@@ -58,29 +58,26 @@ class PostDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 32,
-      child: Row(
-        children: [
-          const SizedBox(
-            width: 10,
+    return Row(
+      children: [
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          post.user.username,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
           ),
-          Text(
-            post.user.username,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-            ),
-            // textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            width: 4,
-          ),
-          Text(
-            post.description,
-            // textAlign: TextAlign.center,
-          ),
-        ],
-      ),
+          // textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          width: 4,
+        ),
+        Text(
+          post.description,
+          // textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }
@@ -101,29 +98,26 @@ class PostActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 32,
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: onLikePressed,
-            icon: FaIcon(
-              post.postLikedByUsers.contains(user?.id)
-                  ? FontAwesomeIcons.solidHeart
-                  : FontAwesomeIcons.heart,
-            ),
-            color: post.postLikedByUsers.contains(user?.id)
-                ? Colors.red
-                : Theme.of(context).primaryIconTheme.color,
+    return Row(
+      children: [
+        IconButton(
+          onPressed: onLikePressed,
+          icon: FaIcon(
+            post.postLikedByUsers.contains(user?.id)
+                ? FontAwesomeIcons.solidHeart
+                : FontAwesomeIcons.heart,
           ),
-          IconButton(
-            onPressed: onTap,
-            icon: const FaIcon(
-              FontAwesomeIcons.comment,
-            ),
-          )
-        ],
-      ),
+          color: post.postLikedByUsers.contains(user?.id)
+              ? Colors.red
+              : Theme.of(context).primaryIconTheme.color,
+        ),
+        IconButton(
+          onPressed: onTap,
+          icon: const FaIcon(
+            FontAwesomeIcons.comment,
+          ),
+        )
+      ],
     );
   }
 }
@@ -160,24 +154,21 @@ class PostHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 32,
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 16,
-            foregroundImage: Image.network(
-              post.user.profilePictureUrl,
-            ).image,
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 16,
+          foregroundImage: Image.network(
+            post.user.profilePictureUrl,
+          ).image,
+        ),
+        Text(
+          post.user.username,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
           ),
-          Text(
-            post.user.username,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
