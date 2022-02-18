@@ -1,4 +1,4 @@
-import 'package:fire_chat/core/string_constants.dart';
+import 'package:fire_chat/presentation/views/chat_page_view.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
@@ -6,12 +6,6 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(AppLocalization.chatsPageTitle),
-        centerTitle: true,
-      ),
-      body: ListView(),
-    );
+    return const ChatPageView();
   }
 }
