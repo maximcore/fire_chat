@@ -11,7 +11,6 @@ import 'package:fire_chat/domain/repositories/user_repository/hive_user_reposito
 import 'package:fire_chat/domain/repositories/user_repository/providers/hive_storage_provider.dart';
 import 'package:fire_chat/domain/repositories/user_repository/providers/istorage_provider.dart';
 import 'package:fire_chat/domain/repositories/user_repository/user_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
