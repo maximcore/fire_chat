@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'profile_editing_bloc_state.freezed.dart';
 
-// Status of process of profile changes synchronization with repository
+// Status of process of profile_page changes synchronization with repository
 enum ProfileEditingBlocStatus { initial, ready, updating, error }
 
 @freezed

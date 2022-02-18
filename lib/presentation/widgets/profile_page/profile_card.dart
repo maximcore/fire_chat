@@ -1,5 +1,5 @@
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
-import 'package:fire_chat/presentation/widgets/profile/edit_profile_button.dart';
+import 'package:fire_chat/presentation/widgets/profile_page/edit_profile_button.dart';
 import 'package:flutter/material.dart';
 
 class ProfileCard extends StatelessWidget {
