@@ -23,7 +23,7 @@ class CustomAppTheme {
           bodyText1: TextStyle(color: Colors.black),
           bodyText2: TextStyle(
             color: Colors.black,
-            fontSize: 12,
+            fontSize: 16,
           ),
           button: TextStyle(
             color: Colors.black,
