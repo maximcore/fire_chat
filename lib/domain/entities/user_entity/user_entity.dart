@@ -13,6 +13,8 @@ class UserEntity with _$UserEntity {
     @HiveField(1) @Default('') String email,
     @HiveField(2) required String id,
     @HiveField(3) @Default('') String profilePictureUrl,
+    @HiveField(4) @Default(<String>[]) List<String> followers,
+    @HiveField(5) @Default(<String>[]) List<String> following,
   }) = _UserEntity;
 
   factory UserEntity.fromJson(Map<String, dynamic> json) =>
