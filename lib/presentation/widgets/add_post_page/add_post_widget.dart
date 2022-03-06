@@ -74,12 +74,14 @@ class AddPostWidget extends StatelessWidget {
           ),
         ),
         ElevatedButton(
-          onPressed: () {
-            uploadImage(bloc);
-            Navigator.of(blocBuilderContext).pop();
-            context.read<CreatePostBloc>().clearPost();
-            context.read<PostsBloc>().fetchPosts();
-          },
+          onPressed: (bloc.state.result == null || bloc.state.description == null)
+              ? null
+              : () {
+                  uploadImage(bloc);
+                  Navigator.of(blocBuilderContext).pop();
+                  context.read<CreatePostBloc>().clearPost();
+                  context.read<PostsBloc>().fetchPosts();
+                },
           child: const Text(
             AppLocalization.addPostText,
           ),
