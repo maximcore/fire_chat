@@ -1,6 +1,8 @@
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc.dart';
 import 'package:fire_chat/presentation/blocs/create_post_bloc/create_post_bloc_state.dart';
+import 'package:fire_chat/presentation/blocs/feed_navbar_bloc/feed_navbar_bloc.dart';
+import 'package:fire_chat/presentation/blocs/feed_navbar_bloc/feed_navbar_bloc_state.dart';
 import 'package:fire_chat/presentation/pages/feed_page.dart';
 import 'package:fire_chat/presentation/widgets/common/flavors_banner.dart';
 import 'package:flutter/material.dart';
@@ -28,23 +30,41 @@ class HomePageView extends StatelessWidget {
     return Stack(
       children: [
         Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            items: [
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(FontAwesomeIcons.user),
-                  onPressed: fetchPosts,
-                ),
-                label: AppLocalization.allPosts,
-              ),
-              BottomNavigationBarItem(
-                icon: IconButton(
-                  icon: const Icon(FontAwesomeIcons.userFriends),
-                  onPressed: onFilterPressed,
-                ),
-                label: AppLocalization.following,
-              ),
-            ],
+          bottomNavigationBar: BlocBuilder<FeedNavbarBloc, FeedNavbarBlocState>(
+            builder: (context, state) {
+              return BottomNavigationBar(
+                items: [
+                  BottomNavigationBarItem(
+                    icon: IconButton(
+                      icon: Icon(
+                        state.status == FeedNavbarStatus.all
+                            ? FontAwesomeIcons.list
+                            : FontAwesomeIcons.listAlt,
+                      ),
+                      onPressed: () {
+                        fetchPosts();
+                        context.read<FeedNavbarBloc>().all();
+                      },
+                    ),
+                    label: AppLocalization.allPosts,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: IconButton(
+                      icon: Icon(
+                        state.status == FeedNavbarStatus.filtered
+                            ? FontAwesomeIcons.userAlt
+                            : FontAwesomeIcons.user,
+                      ),
+                      onPressed: () {
+                        onFilterPressed();
+                        context.read<FeedNavbarBloc>().filter();
+                      },
+                    ),
+                    label: AppLocalization.following,
+                  ),
+                ],
+              );
+            },
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Theme.of(context).primaryColor,
