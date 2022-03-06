@@ -50,6 +50,13 @@ class AppLocalization {
   static const String deleteProfileTitle = 'Do you want to delete profile?';
   static const String discardPost = 'Discard post?';
 
+  static const String followers = 'Followers';
+  static const String following = 'Following';
+  static const String allPosts = 'All Posts';
+
+  static const String follow = 'Follow';
+  static const String unfollow = 'Unfollow';
+
 
   // ??
   static const String description = 'Description';
@@ -66,6 +73,9 @@ class AppLocalization {
   static const String initializing = 'Initializing';
   static const String error = 'Error';
   static const String updating = 'Updating';
+  static const String loading = 'Loading';
+
+
 
   // Error text
   static const String passwordFormatErrorHelperText =

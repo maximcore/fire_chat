@@ -19,6 +19,15 @@ abstract class AuthRepository {
 
   Future<UserEntity?> signInWithFacebook();
 
+  Future<UserEntity?> fetchUserById({
+    required String uid,
+  });
+
+  Future<void> followUser({
+    required String uid,
+    required String followerId,
+  });
+
   UserEntity? currentUser();
 
   Future<void> editUsername(String username);

@@ -2,6 +2,12 @@ abstract class PostsEvent {}
 
 class FetchingDataEvent extends PostsEvent {}
 
+class FetchingFollowingUsersDataEvent extends PostsEvent {
+  FetchingFollowingUsersDataEvent(this.id);
+
+  final String id;
+}
+
 class ErrorEvent extends PostsEvent {}
 
 class SavePostEvent extends PostsEvent {}

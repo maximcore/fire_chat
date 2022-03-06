@@ -55,11 +55,48 @@ class FirestorePostsRepository implements PostsRepository {
     final callable = FirebaseFunctions.instanceFor(
       region: 'europe-west3',
     ).httpsCallable('likePost');
-    // final res =
     await callable.call<Map>(<String, dynamic>{
       'user': userId,
       'postId': postId,
     });
-    // print(res.data);
+  }
+
+  @override
+  Future<List<PostEntity>> fetchFollowingUsersPosts({
+    required String userId,
+  }) async {
+    final result = <PostEntity>[];
+
+    final callable = FirebaseFunctions.instanceFor(
+      region: 'europe-west3',
+    ).httpsCallable('fetchFollowingUsersPosts');
+    final response = await callable.call<Map>(<String, dynamic>{
+      'uid': userId,
+    });
+
+    final postsRaw = response.data['posts'] as List;
+    for (var i = 0; i < postsRaw.length; i++) {
+      final post = Map<String, dynamic>.from(postsRaw[i] as Map);
+      // TODO(Maxim): figure out why it doesn't work without manual parse json
+      final postLikedByUsers = List<String>.from(
+        post['postLikedByUsers'] as List,
+      );
+      final imageUrl = post['imageUrl'] as String;
+      final postId = post['postId'] as String;
+      final description = post['description'] as String;
+      final user = UserEntity.fromJson(
+        Map<String, dynamic>.from(post['user'] as Map),
+      );
+      result.add(
+        PostEntity(
+          imageUrl: imageUrl,
+          postLikedByUsers: postLikedByUsers,
+          postId: postId,
+          description: description,
+          user: user,
+        ),
+      );
+    }
+    return result;
   }
 }

@@ -13,8 +13,8 @@ class FakerPostsRepository implements PostsRepository {
     final list = List<PostEntity>.generate(
       _postsAmount,
       (_) => PostEntity(
-        description: faker.randomGenerator
-            .string(_maxDescriptionLength, min: _maxDescriptionLength),
+        description:
+            faker.randomGenerator.string(_maxDescriptionLength, min: _maxDescriptionLength),
         //user: faker.internet.userName(),
       ),
     );
@@ -38,6 +38,14 @@ class FakerPostsRepository implements PostsRepository {
   @override
   Future<void> likePost({required String postId, required String userId}) {
     // TODO: implement likePost
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<PostEntity>> fetchFollowingUsersPosts({
+    required String userId,
+  }) {
+    // TODO: implement fetchFollowingUsersPosts
     throw UnimplementedError();
   }
 }

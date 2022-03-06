@@ -13,6 +13,27 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
           PostsBlocState(status: PostsBlocStatus.initial),
         ) {
     on<FetchingDataEvent>(handleFetchDataEvent);
+    on<FetchingFollowingUsersDataEvent>((event, emit) async {
+      try {
+        emit(
+          state.copyWith(status: PostsBlocStatus.loading),
+        );
+        final posts = await repository.fetchFollowingUsersPosts(
+          userId: event.id,
+        );
+        emit(
+          state.copyWith(
+            status: PostsBlocStatus.ready,
+            posts: posts,
+          ),
+        );
+      } catch (error) {
+        log(error.toString());
+        emit(
+          state.copyWith(status: PostsBlocStatus.error),
+        );
+      }
+    });
     on<ErrorEvent>((event, emit) {
       emit(
         PostsBlocState(status: PostsBlocStatus.error),
@@ -107,4 +128,10 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
       );
 
   void fetchPosts() => add(FetchingDataEvent());
+
+  void fetchFollowingUsersPosts(String id) => add(
+        FetchingFollowingUsersDataEvent(
+          id,
+        ),
+      );
 }

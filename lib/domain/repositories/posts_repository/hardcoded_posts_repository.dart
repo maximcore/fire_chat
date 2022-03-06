@@ -88,4 +88,12 @@ class HardcodedPostsRepository implements PostsRepository {
     // TODO: implement likePost
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<PostEntity>> fetchFollowingUsersPosts({
+    required String userId,
+  }) {
+    // TODO: implement fetchFollowingUsersPosts
+    throw UnimplementedError();
+  }
 }

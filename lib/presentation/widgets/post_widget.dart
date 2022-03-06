@@ -1,6 +1,8 @@
+import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
+import 'package:fire_chat/presentation/blocs/user_profile_bloc/user_profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -154,30 +156,35 @@ class PostHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const SizedBox(
-          width: 10,
-        ),
-        ClipOval(
-          child: Image.network(
-            post.user.profilePictureUrl,
-            width: 24,
-            height: 24,
-            fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        context.read<UserProfileBloc>().initProfile(post.user.id);
+        Navigator.of(context).pushNamed(AppRoutes.usersProfile);
+      },
+      child: Row(
+        children: [
+          const SizedBox(
+            width: 10,
           ),
-
-        ),
-        const SizedBox(
-          width: 8,
-        ),
-        Text(
-          post.user.username,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
+          ClipOval(
+            child: Image.network(
+              post.user.profilePictureUrl,
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-      ],
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            post.user.username,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

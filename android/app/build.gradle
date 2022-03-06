@@ -95,4 +95,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.facebook.android:facebook-login:latest.release'
     implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta04'
+    //TODO(Maxim): remove this
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
 }

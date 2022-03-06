@@ -17,4 +17,8 @@ abstract class PostsRepository {
     required String postId,
     required String userId,
   });
+
+  Future<List<PostEntity>> fetchFollowingUsersPosts({
+    required String userId,
+  });
 }

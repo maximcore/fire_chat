@@ -14,18 +14,38 @@ class HomePageView extends StatelessWidget {
     required this.goToChats,
     required this.goToProfile,
     required this.goToAddPostPage,
+    required this.onFilterPressed,
   }) : super(key: key);
 
   final Function() fetchPosts;
   final VoidCallback goToChats;
   final VoidCallback goToProfile;
   final VoidCallback goToAddPostPage;
+  final VoidCallback onFilterPressed;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  icon: const Icon(FontAwesomeIcons.user),
+                  onPressed: fetchPosts,
+                ),
+                label: AppLocalization.allPosts,
+              ),
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  icon: const Icon(FontAwesomeIcons.userFriends),
+                  onPressed: onFilterPressed,
+                ),
+                label: AppLocalization.following,
+              ),
+            ],
+          ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Theme.of(context).primaryColor,
             onPressed: goToAddPostPage,
@@ -35,6 +55,10 @@ class HomePageView extends StatelessWidget {
             automaticallyImplyLeading: false,
             title: const Text(AppLocalization.feedPageTitle),
             actions: [
+              // IconButton(
+              //   icon: const FaIcon(FontAwesomeIcons.filter),
+              //   onPressed: onFilterPressed,
+              // ),
               IconButton(
                 icon: const FaIcon(FontAwesomeIcons.facebookMessenger),
                 onPressed: goToChats,

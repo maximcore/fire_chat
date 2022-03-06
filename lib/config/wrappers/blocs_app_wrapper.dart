@@ -3,6 +3,7 @@ import 'package:fire_chat/config/wrappers/common/create_post_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/posts_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/profile_editing_bloc_wrapper.dart';
 import 'package:fire_chat/config/wrappers/common/theme_bloc_wrapper.dart';
+import 'package:fire_chat/config/wrappers/common/user_profile_bloc_wrapper.dart';
 import 'package:fire_chat/domain/repositories/auth_repository/auth_repository.dart';
 import 'package:fire_chat/presentation/blocs/sign_up_bloc/sign_up_bloc.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,11 @@ class BlocsAppWrapper extends StatelessWidget {
         ),
         child: ThemeBlocWrapper(
           child: ProfileEditingBlocWrapper(
-            child: PostsBlocWrapper(
-              child: CreatePostBlocWrapper(
-                child: child,
+            child: UserProfileBlocWrapper(
+              child: PostsBlocWrapper(
+                child: CreatePostBlocWrapper(
+                  child: child,
+                ),
               ),
             ),
           ),
