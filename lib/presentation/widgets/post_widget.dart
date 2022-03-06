@@ -65,19 +65,29 @@ class PostDescription extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        Text(
-          post.user.username,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: post.user.username,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).textTheme.bodyText1?.color,
+                  ),
+                ),
+                const TextSpan(
+                  text: '   ',
+                ),
+                TextSpan(
+                  text: post.description,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyText1?.color,
+                  ),
+                ),
+              ],
+            ),
           ),
-          // textAlign: TextAlign.center,
-        ),
-        const SizedBox(
-          width: 4,
-        ),
-        Text(
-          post.description,
-          // textAlign: TextAlign.center,
         ),
       ],
     );
