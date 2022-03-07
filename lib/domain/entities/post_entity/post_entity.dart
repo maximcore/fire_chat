@@ -1,3 +1,4 @@
+import 'package:fire_chat/domain/entities/comment_entity/comment_entity.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,6 +12,7 @@ class PostEntity with _$PostEntity {
     @Default('') String description,
     @Default(UserEntity(id: '')) UserEntity user,
     @Default(<String>[]) List<String> postLikedByUsers,
+    @Default(<CommentEntity>[]) List<CommentEntity> comments,
     @Default(<Map<String, String>>[])
         List<Map<String, String>> postCommentedByUsers,
     String? imageUrl,
