@@ -34,6 +34,7 @@ class AppLocalization {
   static const String backText = 'Back';
   static const String cancelText = 'Cancel';
   static const String discardText = 'Discard';
+  static const String message = 'Message';
 
   // Label text
   static const String emailLabelText = 'Email';
