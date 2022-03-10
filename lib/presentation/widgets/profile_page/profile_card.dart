@@ -1,3 +1,4 @@
+import 'package:fire_chat/config/routing/routes.dart';
 import 'package:fire_chat/core/string_constants.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/presentation/blocs/auth_bloc/auth_bloc.dart';
@@ -72,22 +73,32 @@ class ProfileCard extends StatelessWidget {
           if (isOwnProfile)
             const EditProfileButton()
           else
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 64,
-                right: 64,
-              ),
-              child: ElevatedButton(
-                onPressed: () => onFollowPressed(
-                  context: context,
-                  user: user,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => onFollowPressed(
+                    context: context,
+                    user: user,
+                  ),
+                  child: Text(
+                    user.followers.contains(follower!.id)
+                        ? AppLocalization.unfollow
+                        : AppLocalization.follow,
+                  ),
                 ),
-                child: Text(
-                  user.followers.contains(follower!.id)
-                      ? AppLocalization.unfollow
-                      : AppLocalization.follow,
+                const SizedBox(
+                  width: 8,
                 ),
-              ),
+                ElevatedButton(
+                  onPressed: () => onMessagePressed(
+                    context: context,
+                  ),
+                  child: const Text(
+                    AppLocalization.message,
+                  ),
+                ),
+              ],
             ),
           const SizedBox(
             height: 16,
@@ -106,5 +117,13 @@ class ProfileCard extends StatelessWidget {
           uid: user.id,
           followerId: follower!.id,
         );
+  }
+
+  void onMessagePressed({
+    required BuildContext context,
+  }) {
+    Navigator.of(context).pushNamed(
+      AppRoutes.chatPageRoute,
+    );
   }
 }
