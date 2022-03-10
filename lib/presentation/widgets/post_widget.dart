@@ -123,12 +123,12 @@ class PostActionButtons extends StatelessWidget {
               ? Colors.red
               : Theme.of(context).primaryIconTheme.color,
         ),
-        IconButton(
-          onPressed: onTap,
-          icon: const FaIcon(
-            FontAwesomeIcons.comment,
-          ),
-        )
+        // IconButton(
+        //   onPressed: onTap,
+        //   icon: const FaIcon(
+        //     FontAwesomeIcons.comment,
+        //   ),
+        // ),
       ],
     );
   }

@@ -46,7 +46,7 @@ dependencies:
   image_picker: ^0.8.4+4
   file_picker: ^4.3.3
   flutter_flavorizr: ^2.1.2
-  firebase_auth: ^3.3.6
+  firebase_auth: ^3.3.9
   google_sign_in: ^5.2.3
   flutter_facebook_auth: ^4.0.1
   firebase_core: ^1.12.0
@@ -69,7 +69,7 @@ dev_dependencies:
   # rules and activating additional ones.
   build_runner: ^2.1.7
   freezed: ^1.1.1
-  json_serializable: ^6.1.4
+  json_serializable: ^6.1.5
   very_good_analysis: ^2.4.0
   # I use repo url because github contains package version with some fixes, which
   # are not published on pubdev.
@@ -82,7 +82,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 dependency_overrides:
-  analyzer: '3.1.0'
+  analyzer: '3.3.1'
 
 # The following section is specific to Flutter.
 flutter:

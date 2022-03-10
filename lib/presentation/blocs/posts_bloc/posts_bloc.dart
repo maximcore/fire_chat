@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:fire_chat/domain/entities/comment_entity/comment_entity.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_bloc_state.dart';
 import 'package:fire_chat/presentation/blocs/posts_bloc/posts_events.dart';
@@ -80,6 +82,29 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
         log(error.toString());
       }
     });
+
+    on<CommentPostEvent>((event, emit) async {
+      try {
+        await repository.commentPost(
+          postId: event.postId,
+          comment: event.comment,
+        );
+        final posts = await repository.fetchPosts();
+        emit(
+          state.copyWith(
+            posts: posts,
+            status: PostsBlocStatus.ready,
+          ),
+        );
+      } catch (error) {
+        emit(
+          state.copyWith(
+            status: PostsBlocStatus.error,
+          ),
+        );
+        log(error.toString());
+      }
+    });
   }
 
   FutureOr<void> handleFetchDataEvent(
@@ -125,6 +150,17 @@ class PostsBloc extends Bloc<PostsEvent, PostsBlocState> {
   }) =>
       add(
         LikePostEvent(postId: postId, userId: userId),
+      );
+
+  void commentPost({
+    required String postId,
+    required CommentEntity comment,
+  }) =>
+      add(
+        CommentPostEvent(
+          postId: postId,
+          comment: comment,
+        ),
       );
 
   void fetchPosts() => add(FetchingDataEvent());

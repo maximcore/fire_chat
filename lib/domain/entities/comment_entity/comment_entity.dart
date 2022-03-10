@@ -8,9 +8,9 @@ part 'comment_entity.g.dart';
 @freezed
 class CommentEntity with _$CommentEntity {
   const factory CommentEntity({
-    @Default('') String description,
+    @Default('') String comment,
     @Default(UserEntity(id: '')) UserEntity user,
-  }) = _PostEntity;
+  }) = _CommentEntity;
 
   factory CommentEntity.fromJson(Map<String, dynamic> json) =>
       _$CommentEntityFromJson(json);

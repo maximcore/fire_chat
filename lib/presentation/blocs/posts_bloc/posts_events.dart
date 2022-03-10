@@ -1,3 +1,6 @@
+import 'package:fire_chat/domain/entities/comment_entity/comment_entity.dart';
+import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
+
 abstract class PostsEvent {}
 
 class FetchingDataEvent extends PostsEvent {}
@@ -20,4 +23,14 @@ class LikePostEvent extends PostsEvent {
 
   final String postId;
   final String userId;
+}
+
+class CommentPostEvent extends PostsEvent {
+  CommentPostEvent({
+    required this.postId,
+    required this.comment,
+  });
+
+  final String postId;
+  final CommentEntity comment;
 }

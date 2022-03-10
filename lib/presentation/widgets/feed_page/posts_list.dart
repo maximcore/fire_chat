@@ -12,11 +12,18 @@ class PostsList extends StatelessWidget {
 
   final PostsBlocState state;
 
-  void _goToChatPage(BuildContext context) =>
-      Navigator.of(context).pushNamed(AppRoutes.postDetailsPageRoute);
+  void _goToChatPage({
+    required BuildContext context,
+    required String postId,
+  }) =>
+      Navigator.of(context).pushNamed(
+        AppRoutes.postDetailsPageRoute,
+        arguments: {'postId': postId},
+      );
 
-  void _simulateError(BuildContext context) =>
-      context.read<PostsBloc>().add(ErrorEvent());
+  void _simulateError(BuildContext context) => context.read<PostsBloc>().add(
+        ErrorEvent(),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,10 @@ class PostsList extends StatelessWidget {
         return PostWidget(
           post: state.posts![index],
           onTap: () {
-            _goToChatPage(context);
+            _goToChatPage(
+              context: context,
+              postId: state.posts![index].postId,
+            );
           },
           onDoubleTap: () {
             if (index.isOdd) {

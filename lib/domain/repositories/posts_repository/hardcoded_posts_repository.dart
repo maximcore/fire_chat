@@ -1,3 +1,4 @@
+import 'package:fire_chat/domain/entities/comment_entity/comment_entity.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
@@ -94,6 +95,15 @@ class HardcodedPostsRepository implements PostsRepository {
     required String userId,
   }) {
     // TODO: implement fetchFollowingUsersPosts
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> commentPost({
+    required String postId,
+    required CommentEntity comment,
+  }) {
+    // TODO: implement commentPost
     throw UnimplementedError();
   }
 }

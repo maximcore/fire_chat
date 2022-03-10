@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const { firestore } = require("firebase-admin");
+const { firestore, auth } = require("firebase-admin");
 
 admin.initializeApp();
 
@@ -36,6 +36,44 @@ exports.likePost = functions.region("europe-west3").https.onRequest(async (reque
 	response.status(200).send({
 		"data": {
 
+		}
+	});
+
+});
+
+exports.commentPost = functions.region("europe-west3").https.onRequest(async (request, response) => {
+	var body = request.body;
+	var comment = body["data"]["comment"];
+	var user = body["data"]["user"];
+	var postId = body["data"]["postId"];
+
+	var newComment;
+
+	var comments = [];
+
+	var snapshot = await firestore().collection("posts").get();
+	snapshot.docs.map(doc => {
+		var currentPost = doc.data();
+		if (currentPost["postId"] == postId) {
+			comments.push(...currentPost["comments"]);
+			newComment = { "postId": postId, "user": user, "comment": comment, };
+			comments.push(newComment);
+
+			doc.ref.update({
+				"comments": comments,
+				"postLikedByUsers": currentPost["postLikedByUsers"],
+				"description": currentPost["description"],
+				"imageUrl": currentPost["imageUrl"],
+				"postId": currentPost["postId"],
+				"user": currentPost["user"],
+			}
+			);
+		}
+	});
+
+	response.status(200).send({
+		"data": {
+			'postId': comments,
 		}
 	});
 

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:fire_chat/domain/entities/comment_entity/comment_entity.dart';
 import 'package:fire_chat/domain/entities/post_entity/post_entity.dart';
 import 'package:fire_chat/domain/entities/user_entity/user_entity.dart';
 import 'package:fire_chat/domain/repositories/posts_repository/posts_repository.dart';
@@ -17,6 +18,7 @@ class FirestorePostsRepository implements PostsRepository {
     final index = list.length;
     await _postsRef.add(
       <String, dynamic>{
+        'comments': post.comments,
         'description': post.description,
         'user': post.user.toJson(),
         'postLikedByUsers': post.postLikedByUsers,
@@ -58,6 +60,21 @@ class FirestorePostsRepository implements PostsRepository {
     await callable.call<Map>(<String, dynamic>{
       'user': userId,
       'postId': postId,
+    });
+  }
+
+  @override
+  Future<void> commentPost({
+    required String postId,
+    required CommentEntity comment,
+  }) async {
+    final callable = FirebaseFunctions.instanceFor(
+      region: 'europe-west3',
+    ).httpsCallable('commentPost');
+    final response = await callable.call<Map>(<String, dynamic>{
+      'postId': postId,
+      'comment': comment.comment,
+      'user': comment.user.toJson(),
     });
   }
 

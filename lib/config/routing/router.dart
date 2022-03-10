@@ -19,7 +19,10 @@ class AppRouter {
       case AppRoutes.chatPageRoute:
         return MaterialPageRoute<void>(builder: (_) => const ChatPage());
       case AppRoutes.postDetailsPageRoute:
-        return MaterialPageRoute<void>(builder: (_) => const PostDetailsPage());
+        return MaterialPageRoute<void>(
+          builder: (_) => const PostDetailsPage(),
+          settings: settings,
+        );
       case AppRoutes.profilePageRoute:
         return MaterialPageRoute<void>(builder: (_) => const ProfilePage());
       case AppRoutes.addPostPage:
